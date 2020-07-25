@@ -21,8 +21,6 @@ enum RgbColors {
     Black = 0x000000
 }
 
-
-
 enum RgbUltrasonics {
 	//% block=left
 	Left = 0x00,
@@ -50,6 +48,25 @@ enum DHT11Type {
 	DHT11_humidity=1,
 }
 
+enum _selectpin{
+	//% block="Apin"
+	Apin=0,
+	//% block="Bpin"
+	Bpin=1,
+	//% block="Dpin"
+	Dpin=2,
+}
+
+enum _rockerpin{
+	//% block="Xpin"
+	Xpin=0,
+	//% block="Ypin"
+    Ypin = 1,
+    //% block="Bpin"
+    Bpin = 2,
+}
+
+
 const LED0_ON_L = 0x06
 const LED0_ON_H = 0x07
 const LED0_OFF_L = 0x08
@@ -61,7 +78,218 @@ const ALL_LED_OFF_H = 0xFD
 
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
+	//========================================华丽的分割线  基础输入模块=============================================
+	/**
+     * 触摸按键
+     */
+    
+    //% blockId=touchbutton block="touch |digital pin %pin" group="触摸按键"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function touchButton(pin: DigitalPin): boolean {
+		pins.digitalWritePin(pin, 0)
+		if (pins.digitalReadPin(pin) == 1) {
+			return false;
+		}else {
+		    return true;
+		}
+        //return pins.digitalReadPin(pin)
+    }
 	
+    /**
+     *  按键开关
+     */
+    
+    //% blockId=button block="Button |digital pin %pin" group="按键开关"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function Button(pin: DigitalPin): boolean {
+		pins.digitalWritePin(pin, 0)
+		if (pins.digitalReadPin(pin) == 1) {
+			return false;
+		}else {
+		    return true;
+		}
+        //return pins.digitalReadPin(pin)
+    }
+
+    /**
+     *  碰撞开关
+     */
+    
+    //% blockId=crashbutton block="crashButton |digital pin %pin" group="碰撞开关"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function crashButton(pin: DigitalPin): boolean {
+		pins.digitalWritePin(pin, 0)
+		if (pins.digitalReadPin(pin) == 1) {
+			return false;
+		}else {
+		    return true;
+		}
+        //return pins.digitalReadPin(pin)
+    }
+	    
+    /**
+     *  滑动变阻器
+     */
+    
+    //% blockId=slideRheostat block="slideRheostat |analog pin %pin" group="滑动变阻器"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function slideRheostat(pin: AnalogPin): number {
+        let row = pins.analogReadPin(pin)
+        return row
+    }
+    	    
+    /**
+     *  旋转电位器
+     */
+    
+    //% blockId=rotaryPotentiometer block="rotaryPotentiometer |analog pin %pin" group="旋转电位器"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function rotaryPotentiometer(pin: AnalogPin): number {
+        let row = pins.analogReadPin(pin)
+        return row
+    }
+	          
+    /**
+     *  旋转编码器
+     */
+
+    let _Apin = 0
+    let _Dpin = 0
+    let _Bpin = 0
+    
+    //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" group="旋转编码器"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
+        _Apin = pina
+        _Bpin = pinb
+        _Dpin = pind  
+    }
+
+    //% blockId=pinsRead block="select pin  %selectpin" group="旋转编码器"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function pinsRead(selectpin: _selectpin): number {
+        let a
+        if (selectpin == 0)
+            a = _Apin
+        else if (selectpin == 1)
+            a = _Bpin
+        else if (selectpin == 2)
+            a = _Dpin
+        pins.digitalWritePin(a, 0)
+		if (pins.digitalReadPin(a) == 1) {
+			return 1;
+		}else {
+		    return 0;
+		}
+        //return pins.digitalReadPin(a)
+	}
+	   	          
+    /**
+     *  摇杆模块
+     */
+
+    let Xpin = 0
+    let Ypin = 0
+    let Bpin = 0
+    
+    //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
+        Xpin = pinx
+        Ypin = piny
+        Bpin = pinb  
+    }
+
+    //% blockId=_analogRead block="select analog pin  %selectpin" group="摇杆模块"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function _analogRead(selectpin: _rockerpin): number {
+        let a
+        if (selectpin == 0)
+            a = Xpin
+        else if (selectpin == 1)
+            a = Ypin
+        
+        return pins.analogReadPin(a)
+    }
+    
+    //% blockId=_digitalRead block="from |%selectpin read" group="摇杆模块"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function _digitalRead(selectpin: _rockerpin): number {
+        let a
+        if (selectpin == 2)
+            a = Bpin;
+        pins.digitalWritePin(a, 0)
+		if (pins.digitalReadPin(a) == 1) {
+			return 1;
+		}else {
+		    return 0;
+		}
+        //return pins.digitalReadPin(a)
+    }
+	
+	/**
+	 *  钢琴模块
+	 */
+	
+	let _DIO = 0
+    let _CLK = 0
+    
+    //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK" group="钢琴模块"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function basic_piano_pin(DIO: DigitalPin, CLK: DigitalPin): void {
+        
+        _DIO = DIO
+        _CLK = CLK
+    }
+
+    //% blockId=basic_piano_play block="basic_piano_play" group="钢琴模块"
+    //% weight=70
+	//% subcategory="基础输入模块"
+    export function basic_piano_play(): void {
+
+        if (0 == pins.digitalReadPin(_DIO)) {
+            let list: number[] = []
+            for (let index = 0; index <= 15; index++) {
+                for (let index2 = 0; index2 < 4; index2++) {
+                    pins.digitalWritePin(_CLK, 0)
+                }
+                for (let index2 = 0; index2 < 4; index2++) {
+                    pins.digitalWritePin(_CLK, 1)
+                }
+                list[index] = pins.digitalReadPin(_DIO)
+            }
+            if (!(list[0])) {
+                music.playTone(262, music.beat(BeatFraction.Half))
+            } else if (!(list[1])) {
+                music.playTone(294, music.beat(BeatFraction.Half))
+            } else if (!(list[2])) {
+                music.playTone(330, music.beat(BeatFraction.Half))
+            } else if (!(list[3])) {
+                music.playTone(349, music.beat(BeatFraction.Half))
+            } else if (!(list[4])) {
+                music.playTone(392, music.beat(BeatFraction.Half))
+            } else if (!(list[5])) {
+                music.playTone(440, music.beat(BeatFraction.Half))
+            } else if (!(list[6])) {
+                music.playTone(494, music.beat(BeatFraction.Half))
+            } else if (!(list[7])) {
+                music.playTone(523, music.beat(BeatFraction.Half))
+            }
+        }
+    }
+	
+	//========================================华丽的分割线  传感器=============================================
 	
     /**
      * 温度传感器

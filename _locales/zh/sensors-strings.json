@@ -1,6 +1,39 @@
 {
 	"sensors|block": "Sensor:bit",
+	
+	"sensors.touchButton|block": "引脚%pin检测到触摸？",
 
+	"sensors.Button|block": "引脚%pin检测到按键被按下？",
+
+	"sensors.crashButton|block": "引脚%pin检测到碰撞？",
+
+	"sensors.slideRheostat|block": "引脚%pin获取滑动变阻器的模拟值",
+	
+	"sensors.rotaryPotentiometer|block": "引脚%pin获取旋转电位器的模拟值",
+
+	"_selectpin.Apin|block": "引脚A",
+	"_selectpin.Bpin|block": "引脚B",
+	"_selectpin.Dpin|block": "引脚D",
+
+
+	"sensors.rotaryEncoder|block": "旋转编码器初始化引脚A %pina B %pinb D %pind",
+	"sensors.pinsRead|block": "%selectpin获取数字值",
+
+
+	"_rockerpin.Xpin|block": "引脚X",
+	"_rockerpin.Ypin|block": "引脚Y",
+	"_rockerpin.Bpin|block": "引脚B",
+
+
+	"sensors.rockerPin|block": "摇杆初始化引脚X %pinx Y %piny B %pinb",
+	"sensors._analogRead|block": "%selectpin获取模拟值",
+	"sensors._digitalRead|block": "%selectpin获取数字值",
+	
+	
+	"sensors.basic_piano_pin|block": "钢琴模块初始化引脚DIO%DIO CLK%CLK",
+	"sensors.basic_piano_play|block": "弹奏钢琴"
+	
+	
 	"sensors.sensor_temperature|block": "引脚%pin获取温度的模拟值",
 	
     "sensors.sensor_flame|block": "引脚%pin检测到火焰？",
