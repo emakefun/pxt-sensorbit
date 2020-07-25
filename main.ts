@@ -63,9 +63,7 @@ enum _rockerpin{
 	//% block="Xpin"
 	Xpin=0,
 	//% block="Ypin"
-    Ypin = 1,
-    //% block="Bpin"
-    Bpin = 2,
+    Ypin = 1
 }
 
 
@@ -81,6 +79,7 @@ const ALL_LED_OFF_H = 0xFD
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
 	
+	//========================================华丽的分割线  基础输入模块=============================================
 	/**
      * 触摸按键
      */
@@ -138,8 +137,7 @@ namespace sensors {
 	//% subcategory="基础输入模块"
     export function slideRheostat(pin: AnalogPin): number {
         let row = pins.analogReadPin(pin)
-        let R = (1 - row / 1023) * 1000
-        return   R
+        return row
     }
     	    
     /**
@@ -151,8 +149,7 @@ namespace sensors {
 	//% subcategory="基础输入模块"
     export function rotaryPotentiometer(pin: AnalogPin): number {
         let row = pins.analogReadPin(pin)
-        let V = (row / 1023) * 5
-        return   V
+        return row
     }
 	          
     /**
@@ -286,8 +283,8 @@ namespace sensors {
             }
         }
     }
-	//========================================华丽的分割线  传感器=============================================
 	
+	//========================================华丽的分割线  传感器=============================================
     /**
      * 温度传感器
      */
