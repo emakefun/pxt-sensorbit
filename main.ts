@@ -63,9 +63,7 @@ enum _rockerpin{
 	//% block="Xpin"
 	Xpin=0,
 	//% block="Ypin"
-    Ypin = 1,
-    //% block="Bpin"
-    Bpin = 2,
+    Ypin = 1
 }
 
 
@@ -224,12 +222,9 @@ namespace sensors {
     //% blockId=_digitalRead block="from |%selectpin read" group="摇杆模块"
     //% weight=68
 	//% subcategory="基础输入模块"
-    export function _digitalRead(selectpin: _rockerpin): boolean {
-        let a
-        if (selectpin == 2)
-            a = Bpin
-        pins.digitalWritePin(a, 0)
-		if (pins.digitalReadPin(a) == 1) {
+    export function _digitalRead(): boolean {
+        pins.digitalWritePin(Bpin, 0)
+		if (pins.digitalReadPin(Bpin) == 1) {
 			return false;
 		}else {
 		    return true;
