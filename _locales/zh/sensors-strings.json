@@ -1,7 +1,7 @@
 {
-	"sensors|block": "传感器",
+	"sensors|block": "Sensor:bit",
 
-	"sensors.sensor_temperature|block": "温度传感器 |模拟读取引脚 %pin",
+	"sensors.sensor_temperature|block": "温度传感器 引脚 %pin读取温度模拟值",
 	
     "sensors.sensor_flame|block": "火焰传感器 引脚 %pin 检测到火焰？",
     
@@ -23,9 +23,9 @@
 
     "sensors.sensor_humanBody|block": "人体热释电传感器 引脚 %pin 检测到人体热源？",
 
-    "sensors.sensor_quake|block": "震动传感器 引脚 %pin 检测到震动？",
+    "sensors.sensor_quake|block": "震动传感器 引脚 %pin检测到震动？",
 
-    "sensors.sensor_grayLevel|block": "灰度传感器 引脚 %pin 读取颜色模拟值",
+    "sensors.sensor_grayLevel|block": "灰度传感器 引脚 %pin读取颜色模拟值",
 	
 	"sensors.sensor_sound_pin|block": "声音传感器初始化 |数字读取引脚 %DS|模拟读取引脚 %AS",
 	"sensors.sensor_sound_analogread|block": "声音传感器 读取的模拟值",
@@ -39,16 +39,28 @@
 	"sensors.sensor_gas_analogread|block": "气体传感器读取到的模拟值",
     "sensors.sensor_gas_digitalread|block": "气体传感器检测到气体？",
 	
-	
-	
-	"sensors.Ultrasonic|block": "读取RGB超声波距离|引脚 %pin|cm",
-  
-
+	"sensors.Ultrasonic|block": "引脚 %pin|读取RGB超声波距离(cm)",
+    "RgbColors.Red|block": "红",
+    "RgbColors.Orange|block": "橙",
+    "RgbColors.Yellow|block": "黄",
+    "RgbColors.Green|block": "绿",
+    "RgbColors.Blue|block": "蓝",
+    "RgbColors.Indigo|block": "靛蓝",
+    "RgbColors.Violet|block": "紫罗兰",
+    "RgbColors.Ourple|block": "紫",
+    "RgbColors.White|block": "白",
+    "RgbColors.Black|block": "黑",
+    "RgbUltrasonics.Left|block": "左边",
+    "RgbUltrasonics.Right|block": "右边",
+    "RgbUltrasonics.All|block": "全部",
+    "ColorEffect.None|block": "无",
+    "ColorEffect.Breathing|block": "呼吸灯",
+    "ColorEffect.Rotate|block": "旋转流星",
+    "ColorEffect.Flash|block": "闪烁",
+    "sensors.RUS_04|block": "选择引脚%pin|选择彩灯%index|选择颜色%rgb|选择效果%effect",
 
     "DHT11Type.DHT11_humidity|block": "湿度(0~100)",
     "DHT11Type.DHT11_temperature_C|block": "摄氏温度(℃)",
 
-    "sensors.dht11value|block": "温湿度传感器的 %dht11type|值 引脚 %dht11pin"
-	
-
+    "sensors.dht11value|block": "引脚 %dht11pin 获取温湿度传感器的 %dht11type"
 }
