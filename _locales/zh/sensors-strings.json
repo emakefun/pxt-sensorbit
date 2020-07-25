@@ -93,10 +93,6 @@
 	"sensors.setled|block": "设置LED灯引脚：%lpin|状态 %lstatus",
     
 	
-	"monitors.i2cLcdInit|block": "初始化I2C地址(默认为39) $addr",
-	"monitors.i2cLcdShowChar|block": "第$y行$x列显示字符$ch",
-	
-	
 	"ledon_off._on|block": "点亮",
 	"ledon_off._off|block": "熄灭",
 

@@ -143,7 +143,7 @@ namespace sensors {
     }
 
 	//% blockId=yledon block="set color pin  %selectpin|light %_status"   group="三色灯"
-    //% weight=70
+    //% weight=69
 	//% subcategory="显示器"
     export function selectcolor(selectpin: _selectcolor, _status: ledon_off): void {
         let a;
@@ -176,7 +176,7 @@ namespace sensors {
     }
 	
 	//% blockId=selectlight block="set light pin  %selectpin|light %_status"   group="交通灯"
-    //% weight=70
+    //% weight=69
 	//% subcategory="显示器"
     export function selectlight(selectpin: _selectlight, _status: ledon_off): void {
         let a;
@@ -192,70 +192,7 @@ namespace sensors {
     }
 	
 	
-	/**
-	 *  LCD 1602
-	*/		
-	let i2cAddr: number
-    let BK: number
-    let RS: number
-    function setreg(d: number) {
-        pins.i2cWriteNumber(i2cAddr, d, NumberFormat.Int8LE)
-        basic.pause(1)
-    }
-
-    function set(d: number) {
-        d = d & 0xF0
-        d = d + BK + RS
-        setreg(d)
-        setreg(d + 4)
-        setreg(d)
-    }
-
-    function lcdcmd(d: number) {
-        RS = 0
-        set(d)
-        set(d << 4)
-    }
-
-    function lcddat(d: number) {
-        RS = 1
-        set(d)
-        set(d << 4)
-    }
-
-    //% block="LcdInit $addr" addr.defl="39"  group="LCD1602显示屏"  
-	//% weight=81
-	//% subcategory="显示器"
-    export function i2cLcdInit(addr: number) {
-        i2cAddr = addr
-        BK = 8
-        RS = 0
-        lcdcmd(0x33)
-        basic.pause(5)
-        set(0x30)
-        basic.pause(5)
-        set(0x20)
-        basic.pause(5)
-        lcdcmd(0x28)
-        lcdcmd(0x0C)
-        lcdcmd(0x06)
-        lcdcmd(0x01)
-    }
-
-    //% block="col $x|row $y|showchar%ch"   group="LCD1602显示屏"  
-	//% weight=80
-	//% subcategory="显示器"
-    export function i2cLcdShowChar(x: number, y: number, ch: string): void {
-        let a: number
-        if (y > 0)
-            a = 0xC0
-        else
-            a = 0x80
-        a += x
-        lcdcmd(a)
-        lcddat(ch.charCodeAt(0))
-    }
-
+	
     
 	
 	
