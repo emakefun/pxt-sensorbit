@@ -67,11 +67,11 @@ namespace sensors {
      * 温度传感器
      */
     
-    //% blockId=sensor_temperature block="sensor_temperature pin |analogpin %pin" blockExternalInputs=false  group="温度传感器"
+    //% blockId=sensor_temperature block="Pin %pin reads the analog value of the LM35"  group="LM35温度传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_temperature(pin: AnalogPin): number {
-
         let temp = (pins.analogReadPin(pin) / 1023) * 3.3 * 100;
         return temp
         
@@ -81,33 +81,43 @@ namespace sensors {
      * 火焰传感器
      */
     
-    //% blockId=sensor_flame block="sensor_flame pin |digitalpin %pin" blockExternalInputs=false  group="火焰传感器"
+    //% blockId=sensor_flame block="Pin %pin reads the digital value of the flame sensor" group="火焰传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_flame(pin: DigitalPin): boolean {
         pins.digitalWritePin(pin, 0)
 	     if (pins.digitalReadPin(pin) == 1) {
-		    return false;
+			return false;
 		}else {
 		    return true;
 		}
-//         return pins.digitalReadPin(pin)
-        
+//         return pins.digitalReadPin(pin)   
+    }
+	
+	 //% blockId=sensor_flame_analog block="Pin %pin reads the analog value of the flame sensor" group="火焰传感器"
+    //% weight=70
+	//% inlineInputMode=inline
+	//% subcategory="传感器"
+    export function sensor_flame_analog(pin: AnalogPin): number {
+        return pins.analogReadPin(pin)
+//         return pins.digitalReadPin(pin)   
     }
     
     /**
      * 红外寻迹
      */
     
-    //% blockId=sensor_infraredTracking block="sensor_infraredTracking pin |digitalpin %pin" blockExternalInputs=false  group="红外寻迹传感器"
+    //% blockId=sensor_infraredTracking block="Pin %pin reads the digital value of the infraredTracking sensor" group="红外寻迹传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_infraredTracking(pin: DigitalPin): boolean {
         pins.digitalWritePin(pin, 0)
 	     if (pins.digitalReadPin(pin) == 1) {
-		    return false;
-		}else {
 		    return true;
+		}else {
+		    return false;
 		}
 //         return pins.digitalReadPin(pin)
         
@@ -117,8 +127,9 @@ namespace sensors {
      * 倾斜传感器
      */
     
-    //% blockId=sensor_incline block="sensor_incline pin |digitalpin %pin" blockExternalInputs=false  group="倾斜传感器"
+    //% blockId=sensor_incline block="sensor_incline pin |digitalpin %pin" group="倾斜传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_incline(pin: DigitalPin): boolean {
         pins.digitalWritePin(pin, 0)
@@ -135,60 +146,57 @@ namespace sensors {
      * 光敏传感器
      */
     
-    //% blockId=sensor_illumination block="sensor_illumination pin |analogpin %pin" blockExternalInputs=false  group="光敏传感器"
+    //% blockId=sensor_illumination block="sensor_illumination pin |analogpin %pin" group="光敏传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_illumination(pin: AnalogPin): number {
-
         return pins.analogReadPin(pin)
-        
     }
     
     /**
      * 热敏传感器
      */
     
-    //% blockId=sensor_thermosensitive block="sensor_thermosensitive pin |analogpin %pin" blockExternalInputs=false  group="热敏传感器"
+    //% blockId=sensor_thermosensitive block="sensor_thermosensitive pin |analogpin %pin" group="热敏传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_thermosensitive (pin: AnalogPin): number {
-
-        return pins.analogReadPin(pin)
-        
+        return pins.analogReadPin(pin)  
     }
 	    
     /**
      * 水位传感器
      */
     
-    //% blockId=sensor_waterLevel block="sensor_waterLevel pin |analogpin %pin" blockExternalInputs=false  group="水位传感器"
+    //% blockId=sensor_waterLevel block="sensor_waterLevel pin |analogpin %pin" group="水位传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_waterLevel(pin: AnalogPin): number {
-
         return pins.analogReadPin(pin)
-        
     }
     	    
     /**
      * 土壤湿度传感器
      */
     
-    //% blockId=sensor_soilMoisture block="sensor_soilMoisture pin |analogpin %pin" blockExternalInputs=false  group="土壤湿度传感器"
+    //% blockId=sensor_soilMoisture block="sensor_soilMoisture pin |analogpin %pin"  group="土壤湿度传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_soilMoisture(pin: AnalogPin): number {
-
         return pins.analogReadPin(pin)
-        
 	}
 	   	    
     /**
      * 避障传感器
      */
     
-    //% blockId=sensor_obstacleAvoid block="sensor_obstacleAvoid pin |digitalpin %pin" blockExternalInputs=false  group="避障传感器"
+    //% blockId=sensor_obstacleAvoid block="sensor_obstacleAvoid pin |digitalpin %pin" group="避障传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_obstacleAvoid(pin: DigitalPin): boolean {
 	  pins.digitalWritePin(pin, 0)
@@ -197,16 +205,16 @@ namespace sensors {
 		}else {
 		    return true;
 		}
-       // return pins.digitalReadPin(pin)
-        
+       // return pins.digitalReadPin(pin)   
 	}
 		   	    
     /**
      * 磁簧开关传感器
      */
     
-    //% blockId=sensor_reedSwitch block="sensor_reedSwitch pin |digitalpin %pin" blockExternalInputs=false  group="磁簧开关传感器"
+    //% blockId=sensor_reedSwitch block="sensor_reedSwitch pin |digitalpin %pin" group="磁簧开关传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_reedSwitch(pin: DigitalPin): boolean {
 	  pins.digitalWritePin(pin, 0)
@@ -214,16 +222,16 @@ namespace sensors {
 		    return false;
 		}else {
 		    return true;
-		}
-        
+		} 
 	}
 			   	    
     /**
      * 人体热释电传感器
      */
     
-    //% blockId=sensor_humanBody block="sensor_humanBody pin |digitalpin %pin" blockExternalInputs=false  group="人体热释电传感器"
+    //% blockId=sensor_humanBody block="sensor_humanBody pin |digitalpin %pin" group="人体热释电传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_humanBody(pin: DigitalPin): boolean {
 		pins.digitalWritePin(pin, 0)
@@ -238,61 +246,61 @@ namespace sensors {
      * 震动传感器
      */
     
-    //% blockId=sensor_quake block="sensor_quake pin |digitalpin %pin" blockExternalInputs=false  group="震动传感器"
+    //% blockId=sensor_quake block="sensor_quake pin |digitalpin %pin" group="震动传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_quake(pin: DigitalPin): boolean {
-	pins.digitalWritePin(pin, 0)
-     if (pins.digitalReadPin(pin) == 1) {
-	    return false;
-	}else {
-	    return true;
+		pins.digitalWritePin(pin, 0)
+		if (pins.digitalReadPin(pin) == 1) {
+			return false;
+		}else {
+			return true;
+		}
 	}
+	
+	/**
+     * 震动传感器
+     */
+    
+    //% blockId=sensor_quake block="sensor_quake pin |digitalpin %pin" group="震动传感器"
+    //% weight=70
+	//% inlineInputMode=inline
+	//% subcategory="传感器"
+    export function sensor_quake_analog(pin: AnalogPin): boolean {
+		return pins.analogReadPin(pin)
 	}
 	    	    
     /**
      * 灰度传感器
      */
     
-    //% blockId=sensor_grayLevel block="sensor_grayLevel pin |analogpin %pin" blockExternalInputs=false  group="灰度传感器"
+    //% blockId=sensor_grayLevel block="sensor_grayLevel pin |analogpin %pin" group="灰度传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
     export function sensor_grayLevel(pin: AnalogPin): number {
-
         return pins.analogReadPin(pin)
-        
     }
 	    	    
     /**
      * 声音传感器
      */
-    
-    let _DS = 0
-    let _AS = 0
-    
-    //% blockId=sensor_sound_pin block="sensor_sound_pin |digital pin %DS|analog pin %AS" blockExternalInputs=false  group="声音传感器"
+    //% blockId=sensor_sound_analogread  block="Pin %pin reads the analog value of the sound sensor" group="声音传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_sound_pin(DS: DigitalPin, AS: AnalogPin): void {
-        
-        _DS = DS
-        _AS = AS
-    }
-
-    //% blockId=sensor_sound_analogread  block="sensor_sound_analogread|value"  blockExternalInputs=false  group="声音传感器"
-    //% weight=70
-	//% subcategory="传感器"
-    export function sensor_sound_analogread(): number {
-
-            return pins.analogReadPin(_AS)
+    export function sensor_sound_analogread(_AS: AnalogPin): number {
+		return pins.analogReadPin(_AS)
 
     }
 	
-	//% blockId=sensor_sound_digitalread  block="sensor_sound_digitalread|value"  blockExternalInputs=false  group="声音传感器"
+	//% blockId=sensor_sound_digitalread  block="Pin %pin reads the digital value of the sound sensor" group="声音传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_sound_digitalread(): boolean {
-	pins.digitalWritePin(_DS, 0)
+    export function sensor_sound_digitalread(_DS: DigitalPin): boolean {
+		pins.digitalWritePin(_DS, 0)
 		if (pins.digitalReadPin(_DS) == 1) {
 			return false;
 		}else {
@@ -303,32 +311,19 @@ namespace sensors {
 	/**
      * 雨滴传感器
      */
-    
-    let _DR = 0
-    let _AR = 0
-    
-    //% blockId=sensor_rain_pin block="sensor_rain_pin |digital pin %DR|analog pin %AR" blockExternalInputs=false  group="雨滴传感器"
+    //% blockId=sensor_rain_analogread  block="Pin %pin reads the analog value of the rain sensor"  group="雨滴传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_rain_pin(DR: DigitalPin, AR: AnalogPin): void {
-        
-        _DR = DR
-        _AR = AR
-    }
-
-    //% blockId=sensor_rain_analogread  block="sensor_rain_analogread|value"  blockExternalInputs=false  group="雨滴传感器"
-    //% weight=70
-	//% subcategory="传感器"
-    export function sensor_rain_analogread(): number {
-
-            return pins.analogReadPin(_AR)
-
+    export function sensor_rain_analogread(AR: AnalogPin): number {
+		return pins.analogReadPin(_AR)
     }
 	
-	//% blockId=sensor_rain_digitalread  block="sensor_rain_digitalread|value"  blockExternalInputs=false  group="雨滴传感器"
+	//% blockId=sensor_rain_digitalread  block="Pin %pin reads the digital value of the rain sensor"   group="雨滴传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_rain_digitalread(): boolean {
+    export function sensor_rain_digitalread(DR: DigitalPin): boolean {
       pins.digitalWritePin(_DR, 0)
      if (pins.digitalReadPin(_DR) == 1) {
 	    return false;
@@ -340,37 +335,26 @@ namespace sensors {
 	/**
      * 气体传感器
      */
-    
-    let _DG = 0
-    let _AG = 0
-    
-    //% blockId=sensor_gas_pin block="sensor_gas_pin |digital pin %DG|analog pin %AG" blockExternalInputs=false  group="气体传感器"
+    //% blockId=sensor_gas_analogread  block="Pin %pin reads the analog value of the MQ4-gas sensor"  group="气体传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_gas_pin(DG: DigitalPin, AG: AnalogPin): void {
-        
-        _DG = DG
-        _AG = AG
-    }
-
-    //% blockId=sensor_gas_analogread  block="sensor_gas_analogread|value"  blockExternalInputs=false  group="气体传感器"
-    //% weight=70
-	//% subcategory="传感器"
-    export function sensor_gas_analogread(): number {
+    export function sensor_gas_analogread(AG: AnalogPin): number {
 
             return pins.analogReadPin(_AG)
 
     }
 	
-	//% blockId=sensor_gas_digitalread  block="sensor_gas_digitalread|value"  blockExternalInputs=false  group="气体传感器"
+	//% blockId=sensor_gas_digitalread  block="Pin %pin reads the digital value of the MQ4-gas sensor"  group="气体传感器"
     //% weight=70
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_gas_digitalread(): boolean {
+    export function sensor_gas_digitalread(DG: DigitalPin): boolean {
              pins.digitalWritePin(_DG, 0)
 	     if (pins.digitalReadPin(_DG) == 1) {
-		    return false;
-		}else {
 		    return true;
+		}else {
+		    return false;
 		}
     }
 	
@@ -383,8 +367,9 @@ namespace sensors {
 	 * Get RUS04 distance
 	 * @param pin Microbit ultrasonic pin; eg: P2
 	*/
-	//% blockId=motorbit_ultrasonic block="Read RgbUltrasonic Distance|pin %pin|cm"  group="RGB超声波"
+	//% blockId=motorbit_ultrasonic block="Read RgbUltrasonic Distance at pin %pin(cm)"  group="RGB超声波"
 	//% weight=76
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
 	function UltrasonicVer(pin: DigitalPin): number {
 		pins.setPull(pin, PinPullMode.PullNone);
@@ -417,8 +402,9 @@ namespace sensors {
  		neoStrip.show();
  	}
 
- 	//% blockId="motorbit_rus04" block="part %index|show color %rgb|effect %effect|rgbpin %pin"  group="RGB超声波"
+ 	//% blockId="motorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
  	//% weight=75
+	//% inlineInputMode=inline
 	//% subcategory="传感器"
  	export function RUS_04(index: RgbUltrasonics, rgb: RgbColors, effect: ColorEffect,pin:DigitalPin): void {
  		let start, end;
@@ -502,8 +488,9 @@ namespace sensors {
 	 * 温湿度传感器 
 	 */
 
-	//% blockId="readdht11" block="value of dht11 %dht11type| at pin %dht11pin"  group="温湿度传感器"
+	//% blockId="readdht11" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
 	//% subcategory="传感器"
+	//% inlineInputMode=inline
 	export function dht11value(dht11type: DHT11Type, dht11pin: DigitalPin): number {
 
 		pins.digitalWritePin(dht11pin, 0)
