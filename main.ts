@@ -21,6 +21,8 @@ enum RgbColors {
     Black = 0x000000
 }
 
+
+
 enum RgbUltrasonics {
 	//% block=left
 	Left = 0x00,
@@ -45,7 +47,7 @@ enum DHT11Type {
 	//% block="temperature(℃)" 
 	DHT11_temperature_C=0,
 	//% block="humidity(0~100)"
-	DHT11_humidity=1
+	DHT11_humidity=1,
 }
 
 enum _selectpin{
@@ -54,7 +56,7 @@ enum _selectpin{
 	//% block="Bpin"
 	Bpin=1,
 	//% block="Dpin"
-	Dpin=2
+	Dpin=2,
 }
 
 enum _rockerpin{
@@ -63,7 +65,7 @@ enum _rockerpin{
 	//% block="Ypin"
     Ypin = 1,
     //% block="Bpin"
-    Bpin = 2
+    Bpin = 2,
 }
 
 
@@ -78,81 +80,90 @@ const ALL_LED_OFF_H = 0xFD
 
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
+	
 	/**
      * 触摸按键
      */
     
-    //% blockId=touchbutton block="touch |digital pin %pin" group="触摸按键"
+    //% blockId=touchbutton block="touch |digital pin %pin" blockExternalInputs=false  group="触摸按键"
     //% weight=70
-	//% subcategory="基础输入模块"
-    export function touchButton(pin: DigitalPin): boolean {
-		pins.digitalWritePin(pin, 0)
-		if (pins.digitalReadPin(pin) == 1) {
-			return false;
-		}else {
-		    return true;
-		}
-        //return pins.digitalReadPin(pin)
+    export function touchButton(pin: DigitalPin): number {
+        return pins.digitalReadPin(pin)
     }
 	
+
+
+
+
+
     /**
      *  按键开关
      */
     
-    //% blockId=button block="Button |digital pin %pin" group="按键开关"
+    //% blockId=button block="Button |digital pin %pin" blockExternalInputs=false  group="按键开关"
     //% weight=70
-	//% subcategory="基础输入模块"
-    export function Button(pin: DigitalPin): boolean {
-		pins.digitalWritePin(pin, 0)
-		if (pins.digitalReadPin(pin) == 1) {
-			return false;
-		}else {
-		    return true;
-		}
-        //return pins.digitalReadPin(pin)
+    export function Button(pin: DigitalPin): number {
+        return pins.digitalReadPin(pin)
     }
 
+
+
+
+
+
+    
     /**
      *  碰撞开关
      */
     
-    //% blockId=crashbutton block="crashButton |digital pin %pin" group="碰撞开关"
+    //% blockId=crashbutton block="crashButton |digital pin %pin" blockExternalInputs=false  group="碰撞开关"
     //% weight=70
-	//% subcategory="基础输入模块"
-    export function crashButton(pin: DigitalPin): boolean {
-		pins.digitalWritePin(pin, 0)
-		if (pins.digitalReadPin(pin) == 1) {
-			return false;
-		}else {
-		    return true;
-		}
-        //return pins.digitalReadPin(pin)
+    export function crashButton(pin: DigitalPin): number {
+        return pins.digitalReadPin(pin)
     }
 	    
+
+
+
+
+
+    
     /**
      *  滑动变阻器
      */
     
-    //% blockId=slideRheostat block="slideRheostat |analog pin %pin" group="滑动变阻器"
+    //% blockId=slideRheostat block="slideRheostat |analog pin %pin" blockExternalInputs=false  group="滑动变阻器"
     //% weight=70
-	//% subcategory="基础输入模块"
     export function slideRheostat(pin: AnalogPin): number {
         let row = pins.analogReadPin(pin)
-        return row
+        let R = (1 - row / 1023) * 1000
+        return   R
     }
     	    
+
+
+
+
+
+    
     /**
      *  旋转电位器
      */
     
-    //% blockId=rotaryPotentiometer block="rotaryPotentiometer |analog pin %pin" group="旋转电位器"
+    //% blockId=rotaryPotentiometer block="rotaryPotentiometer |analog pin %pin" blockExternalInputs=false  group="旋转电位器"
     //% weight=70
-	//% subcategory="基础输入模块"
     export function rotaryPotentiometer(pin: AnalogPin): number {
         let row = pins.analogReadPin(pin)
-        return row
+        let V = (row / 1023) * 5
+        return   V
     }
 	          
+
+
+
+
+
+    
     /**
      *  旋转编码器
      */
@@ -161,18 +172,16 @@ namespace sensors {
     let _Dpin = 0
     let _Bpin = 0
     
-    //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" group="旋转编码器"
+    //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" blockExternalInputs=false  group="旋转编码器"
     //% weight=70
-	//% subcategory="基础输入模块"
     export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
         _Apin = pina
         _Bpin = pinb
         _Dpin = pind  
     }
 
-    //% blockId=pinsRead block="select pin  %selectpin" group="旋转编码器"
+    //% blockId=pinsRead block="select pin  %selectpin" blockExternalInputs=false  group="旋转编码器"
     //% weight=70
-	//% subcategory="基础输入模块"
     export function pinsRead(selectpin: _selectpin): number {
         let a
         if (selectpin == 0)
@@ -181,15 +190,16 @@ namespace sensors {
             a = _Bpin
         else if (selectpin == 2)
             a = _Dpin
-        pins.digitalWritePin(a, 0)
-		if (pins.digitalReadPin(a) == 1) {
-			return 1;
-		}else {
-		    return 0;
-		}
-        //return pins.digitalReadPin(a)
+        
+        return pins.digitalReadPin(a)
 	}
 	   	          
+
+
+
+
+
+    
     /**
      *  摇杆模块
      */
@@ -198,18 +208,16 @@ namespace sensors {
     let Ypin = 0
     let Bpin = 0
     
-    //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
+    //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" blockExternalInputs=false  group="摇杆模块"
     //% weight=70
-	//% subcategory="基础输入模块"
     export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
         Xpin = pinx
         Ypin = piny
         Bpin = pinb  
     }
 
-    //% blockId=_analogRead block="select analog pin  %selectpin" group="摇杆模块"
+    //% blockId=_analogRead block="select analog pin  %selectpin" blockExternalInputs=false  group="摇杆模块"
     //% weight=70
-	//% subcategory="基础输入模块"
     export function _analogRead(selectpin: _rockerpin): number {
         let a
         if (selectpin == 0)
@@ -220,21 +228,25 @@ namespace sensors {
         return pins.analogReadPin(a)
     }
     
-    //% blockId=_digitalRead block="from |%selectpin read" group="摇杆模块"
+    //% blockId=_digitalRead block="from |%selectpin read" blockExternalInputs=false  group="摇杆模块"
     //% weight=70
-	//% subcategory="基础输入模块"
     export function _digitalRead(selectpin: _rockerpin): number {
         let a
         if (selectpin == 2)
-            a = Bpin;
-        pins.digitalWritePin(a, 0)
-		if (pins.digitalReadPin(a) == 1) {
-			return 1;
-		}else {
-		    return 0;
-		}
-        //return pins.digitalReadPin(a)
+            a = Bpin
+        
+        return pins.digitalReadPin(a)
     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 *  钢琴模块
@@ -243,18 +255,16 @@ namespace sensors {
 	let _DIO = 0
     let _CLK = 0
     
-    //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK" group="钢琴模块"
+    //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK" blockExternalInputs=false  group="钢琴模块"
     //% weight=70
-	//% subcategory="基础输入模块"
     export function basic_piano_pin(DIO: DigitalPin, CLK: DigitalPin): void {
         
         _DIO = DIO
         _CLK = CLK
     }
 
-    //% blockId=basic_piano_play block="basic_piano_play" group="钢琴模块"
+    //% blockId=basic_piano_play block="basic_piano_play" blockExternalInputs=false  group="钢琴模块"
     //% weight=70
-	//% subcategory="基础输入模块"
     export function basic_piano_play(): void {
 
         if (0 == pins.digitalReadPin(_DIO)) {
@@ -287,7 +297,7 @@ namespace sensors {
             }
         }
     }
-	
+	//========================================华丽的分割线  传感器=============================================
 	
     /**
      * 温度传感器
