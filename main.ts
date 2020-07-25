@@ -242,47 +242,7 @@ namespace sensors {
         lcdcmd(0x01)
     }
 
-    //% block="col $x|row $y|showchar%ch"   group="LCD1602显示屏"  
-	//% weight=80
-	//% subcategory="显示器"
-    export function i2cLcdShowChar(x: number, y: number, ch: string): void {
-        let a: number
-        if (y > 0)
-            a = 0xC0
-        else
-            a = 0x80
-        a += x
-        lcdcmd(a)
-        lcddat(ch.charCodeAt(0))
-    }
-
-    //% block="col $x|row $y |showNumber $n"   group="LCD1602显示屏"  
-	//% weight=79
-	//% subcategory="显示器"
-    export function i2cLcdShowNumber(x: number, y: number, n: number): void {
-        let s = n.toString()
-        i2cLcdShowString(s, x, y)
-    }
-
-    /**
-     * TODO: describe your function here
-     * @param value describe value here, eg: 5
-     */
-    //% block="col $x|row $y showString %s"   group="LCD1602显示屏" 
-	//% weight=78	
-	//% subcategory="显示器"
-    export function i2cLcdShowString(x: number, y: number, s: string): void {
-        let a: number
-        if (y > 0)
-            a = 0xC0
-        else
-            a = 0x80
-        a += x
-        lcdcmd(a)
-        for (let i = 0; i < s.length; i++) {
-            lcddat(s.charCodeAt(i))
-        }
-    }
+    
 
     //% block="lcdon"   group="LCD1602显示屏"  
 	//% weight=76
