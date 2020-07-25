@@ -1,0 +1,17 @@
+{
+    "name": "sensors",
+    "version": "1.0.0",
+    "description": "PH2.0传感器",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts",
+		
+		"_locales/zh/sensors-strings.json"
+		
+    ],
+    "public": true
+}
