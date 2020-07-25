@@ -236,9 +236,9 @@ namespace sensors {
     export function sensor_humanBody(pin: DigitalPin): boolean {
 		pins.digitalWritePin(pin, 0)
 	     if (pins.digitalReadPin(pin) == 1) {
-		    return false;
-		}else {
 		    return true;
+		}else {
+		    return false;
 		}
 	}
 				   	    
@@ -404,7 +404,12 @@ namespace sensors {
  	//% weight=75
 	//% inlineInputMode=inline
 	//% subcategory="传感器"
- 	export function RUS_04(index: RgbUltrasonics, rgb: RgbColors, effect: ColorEffect,pin:DigitalPin): void {
+ 	export function RUS_04(pin: DigitalPin, index: RgbUltrasonics, rgb: RgbColors, effect: ColorEffect): void {
+		if(rgb == RgbColors.Red) {
+			rgb = RgbColors.Green;
+		}else if(rgb == RgbColors.Green) {
+	     	rgb = RgbColors.Red;
+		}
  		let start, end;
  		if (!neoStrip) {
  			neoStrip = neopixel.create(pin, 6, NeoPixelMode.RGB)
@@ -489,8 +494,7 @@ namespace sensors {
 	//% blockId="readdht11" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
 	//% subcategory="传感器"
 	//% inlineInputMode=inline
-	export function dht11value(dht11type: DHT11Type, dht11pin: DigitalPin): number {
-
+	export function dht11value(dht11pin: DigitalPin, dht11type: DHT11Type): number {
 		pins.digitalWritePin(dht11pin, 0)
 		basic.pause(18)
 		let i = pins.digitalReadPin(dht11pin)
