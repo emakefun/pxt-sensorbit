@@ -66,42 +66,6 @@ enum _rockerpin{
     Ypin = 1
 }
 
-enum rotation_direction {
-    //% block="none"
-    none = 0,
-    //% block="clockwise"
-    clockwise = 1,
-    //% block="counter-clockwise"
-    counterclockwise = 2,
-    //% block="180-degree"
-    one_eighty_degree = 3,
-}
-
-enum ledon_off{
-    //% block="on"
-    _on=1,
-    //% block="off"
-    _off=0,
-
-}
-
-enum _selectlight{
-	//% block="_yellow"
-	_yellow=0,
-	//% block="_red"
-	_red=1,
-	//% block="_green"
-	_green=2,
-}
-
-enum _selectcolor{
-	//% block="_blue"
-	_blue=0,
-	//% block="_red"
-	_red=1,
-	//% block="_green"
-	_green=2,
-}
 
 const LED0_ON_L = 0x06
 const LED0_ON_H = 0x07
@@ -114,13 +78,6 @@ const ALL_LED_OFF_H = 0xFD
 
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
-	
-	
-	
-	
-    
-	
-	
 	
 	//========================================华丽的分割线  基础输入模块=============================================
 	/**

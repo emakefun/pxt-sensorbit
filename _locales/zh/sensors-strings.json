@@ -88,7 +88,5 @@
     "DHT11Type.DHT11_humidity|block": "湿度(0~100)",
     "DHT11Type.DHT11_temperature_C|block": "摄氏温度(℃)",
 
-    "sensors.dht11value|block": "引脚 %dht11pin 获取温湿度传感器的 %dht11type",
-	
-	
+    "sensors.dht11value|block": "引脚 %dht11pin 获取温湿度传感器的 %dht11type"
 }
