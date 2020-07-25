@@ -79,8 +79,7 @@ const ALL_LED_OFF_H = 0xFD
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
 	
-	//========================================华丽的分割线  基础输入模块=============================================
-	/**
+     /**
      * 触摸按键
      */
     
