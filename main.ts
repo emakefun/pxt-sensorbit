@@ -263,11 +263,11 @@ namespace sensors {
      * 震动传感器
      */
     
-    //% blockId=sensor_quake block="sensor_quake pin |digitalpin %pin" group="震动传感器"
+    //% blockId=sensor_quake_analog block="sensor_quake pin |digitalpin %pin" group="震动传感器"
     //% weight=70
 	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_quake_analog(pin: AnalogPin): boolean {
+    export function sensor_quake_analog(pin: AnalogPin): number {
 		return pins.analogReadPin(pin)
 	}
 	    	    
@@ -315,21 +315,21 @@ namespace sensors {
     //% weight=70
 	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_rain_analogread(AR: AnalogPin): number {
-		return pins.analogReadPin(_AR)
+    export function sensor_rain_analogread(_DR: AnalogPin): number {
+		return pins.analogReadPin(_DR)
     }
 	
 	//% blockId=sensor_rain_digitalread  block="Pin %pin reads the digital value of the rain sensor"   group="雨滴传感器"
     //% weight=70
 	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_rain_digitalread(DR: DigitalPin): boolean {
-      pins.digitalWritePin(_DR, 0)
-     if (pins.digitalReadPin(_DR) == 1) {
-	    return false;
-	}else {
-	    return true;
-	}
+    export function sensor_rain_digitalread(_DR: DigitalPin): boolean {
+		pins.digitalWritePin(_DR, 0)
+		if (pins.digitalReadPin(_DR) == 1) {
+			return false;
+		}else {
+			return true;
+		}
    }
 		
 	/**
@@ -339,17 +339,15 @@ namespace sensors {
     //% weight=70
 	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_gas_analogread(AG: AnalogPin): number {
-
-            return pins.analogReadPin(_AG)
-
+    export function sensor_gas_analogread(_AG: AnalogPin): number {
+		return pins.analogReadPin(_AG)
     }
 	
 	//% blockId=sensor_gas_digitalread  block="Pin %pin reads the digital value of the MQ4-gas sensor"  group="气体传感器"
     //% weight=70
 	//% inlineInputMode=inline
 	//% subcategory="传感器"
-    export function sensor_gas_digitalread(DG: DigitalPin): boolean {
+    export function sensor_gas_digitalread(_DG: DigitalPin): boolean {
              pins.digitalWritePin(_DG, 0)
 	     if (pins.digitalReadPin(_DG) == 1) {
 		    return true;
@@ -367,11 +365,11 @@ namespace sensors {
 	 * Get RUS04 distance
 	 * @param pin Microbit ultrasonic pin; eg: P2
 	*/
-	//% blockId=motorbit_ultrasonic block="Read RgbUltrasonic Distance at pin %pin(cm)"  group="RGB超声波"
+	//% blockId=Ultrasonic block="Read RgbUltrasonic Distance at pin %pin(cm)"  group="RGB超声波"
 	//% weight=76
 	//% inlineInputMode=inline
 	//% subcategory="传感器"
-	function UltrasonicVer(pin: DigitalPin): number {
+	function Ultrasonic(pin: DigitalPin): number {
 		pins.setPull(pin, PinPullMode.PullNone);
 		pins.digitalWritePin(pin, 0);
 		control.waitMicros(2);
