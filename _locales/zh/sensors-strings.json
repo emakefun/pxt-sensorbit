@@ -103,11 +103,9 @@
 	"sensors.i2cLcdBacklightOn|block": "打开背光",
 	"sensors.i2cLcdBacklightOff|block": "关闭背光",
 	
-	
 	"ledon_off._on|block": "点亮",
 	"ledon_off._off|block": "熄灭",
 
-	
 	"_selectlight._yellow|block": "黄灯",
 	"_selectlight._red|block": "红灯",
 	"_selectlight._green|block": "绿灯",
@@ -116,12 +114,9 @@
 	"_selectcolor._red|block": "红色",
 	"_selectcolor._green|block": "绿色",
 	
-	
 	"sensors.setpin|block": "初始化引脚|绿(G) %GPin|黄(Y) %YPin|红(R) %RPin",
 	"sensors.selectlight|block": "选择LED灯  %selectpin|状态 %_status",
 	
-	
-
 	"sensors.setRGBpin|block": "初始化引脚|绿(G) %GPin|蓝(B) %YPin|红(R) %RPin",
 	"sensors.selectcolor|block": "选择颜色  %selectpin|状态 %_status"
 }

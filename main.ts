@@ -242,7 +242,7 @@ namespace sensors {
         lcdcmd(0x01)
     }
 
-    //% block="col $x|row $y|showchar $ch"   group="LCD1602显示屏"  
+    //% block="col $x|row $y|showchar%ch"   group="LCD1602显示屏"  
 	//% weight=80
 	//% subcategory="显示器"
     export function i2cLcdShowChar(x: number, y: number, ch: string): void {
@@ -268,7 +268,7 @@ namespace sensors {
      * TODO: describe your function here
      * @param value describe value here, eg: 5
      */
-    //% block="showString $s|col $x|row $y"   group="LCD1602显示屏" 
+    //% block="col $x|row $y showString %s"   group="LCD1602显示屏" 
 	//% weight=78	
 	//% subcategory="显示器"
     export function i2cLcdShowString(x: number, y: number, s: string): void {
