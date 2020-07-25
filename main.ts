@@ -224,12 +224,9 @@ namespace sensors {
     //% blockId=_digitalRead block="from |%selectpin read" group="摇杆模块"
     //% weight=68
 	//% subcategory="基础输入模块"
-    export function _digitalRead(selectpin: _rockerpin): boolean {
-        let a
-        if (selectpin == 2)
-            a = Bpin
-        pins.digitalWritePin(a, 0)
-		if (pins.digitalReadPin(a) == 1) {
+    export function _digitalRead(): boolean {
+        pins.digitalWritePin(Bpin, 0)
+		if (pins.digitalReadPin(Bpin) == 1) {
 			return false;
 		}else {
 		    return true;
