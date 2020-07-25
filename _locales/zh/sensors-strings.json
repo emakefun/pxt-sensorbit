@@ -94,12 +94,8 @@
     
 	
 	"monitors.i2cLcdInit|block": "初始化I2C地址(默认为39) $addr",
+	"monitors.i2cLcdShowChar|block": "第$y行$x列显示字符$ch",
 	
-	"sensors.i2cLcdOn|block": "打开显示",
-	"sensors.i2cLcdOff|block": "关闭显示",
-	"sensors.i2cLcdClear|block": "清除显示",
-	"sensors.i2cLcdBacklightOn|block": "打开背光",
-	"sensors.i2cLcdBacklightOff|block": "关闭背光",
 	
 	"ledon_off._on|block": "点亮",
 	"ledon_off._off|block": "熄灭",

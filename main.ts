@@ -256,70 +256,7 @@ namespace sensors {
         lcddat(ch.charCodeAt(0))
     }
 
-    //% block="col $x|row $y |showNumber $n"   group="LCD1602显示屏"  
-	//% weight=79
-	//% subcategory="显示器"
-    export function i2cLcdShowNumber(x: number, y: number, n: number): void {
-        let s = n.toString()
-        i2cLcdShowString( x, y, s)
-    }
-
-    /**
-     * TODO: describe your function here
-     * @param value describe value here, eg: 5
-     */
-    //% block="col $x|row $y showString %s"   group="LCD1602显示屏" 
-	//% weight=78	
-	//% subcategory="显示器"
-    export function i2cLcdShowString(x: number, y: number, s: string): void {
-        let a: number
-        if (y > 0)
-            a = 0xC0
-        else
-            a = 0x80
-        a += x
-        lcdcmd(a)
-        for (let i = 0; i < s.length; i++) {
-            lcddat(s.charCodeAt(i))
-        }
-    }
-
-    //% block="lcdon"   group="LCD1602显示屏"  
-	//% weight=76
-	//% subcategory="显示器"
-    export function i2cLcdOn(): void {
-        lcdcmd(0x0C)
-    }
-
-    //% block="lcdoff"   group="LCD1602显示屏"  
-	//% weight=75
-	//% subcategory="显示器"
-    export function i2cLcdOff(): void {
-        lcdcmd(0x08)
-    }
-
-    //% block="lcdclear"   group="LCD1602显示屏"
-	//% weight=74	
-	//% subcategory="显示器"
-    export function i2cLcdClear(): void {
-        lcdcmd(0x01)
-    }
-
-    //% block="lcdlighton"   group="LCD1602显示屏"  
-	//% weight=73
-	//% subcategory="显示器"
-    export function i2cLcdBacklightOn(): void {
-        BK = 8
-        lcdcmd(0)
-    }
-
-    //% block="lcdlightoff"   group="LCD1602显示屏"  
-	//% weight=72
-	//% subcategory="显示器"
-    export function i2cLcdBacklightOff(): void {
-        BK = 0
-        lcdcmd(0)
-    }
+    
 	
 	
 	
