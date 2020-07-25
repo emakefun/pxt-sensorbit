@@ -96,11 +96,6 @@ namespace sensors {
 		    return true;
 		}
     }
-	
-
-
-
-
 
     /**
      *  按键开关
@@ -118,12 +113,6 @@ namespace sensors {
 		}
     }
 
-
-
-
-
-
-    
     /**
      *  碰撞开关
      */
@@ -140,12 +129,6 @@ namespace sensors {
 		}
     }
 	    
-
-
-
-
-
-    
     /**
      *  滑动变阻器
      */
@@ -159,12 +142,6 @@ namespace sensors {
         return   R
     }
     	    
-
-
-
-
-
-    
     /**
      *  旋转电位器
      */
@@ -178,12 +155,6 @@ namespace sensors {
         return   V
     }
 	          
-
-
-
-
-
-    
     /**
      *  旋转编码器
      */
@@ -202,7 +173,7 @@ namespace sensors {
     }
 
     //% blockId=pinsRead block="select pin  %selectpin"  group="旋转编码器"
-    //% weight=70
+    //% weight=69
 	//% subcategory="基础输入模块"
     export function pinsRead(selectpin: _selectpin): number {
         let a
@@ -220,13 +191,7 @@ namespace sensors {
 		}
         //return pins.digitalReadPin(a)
 	}
-	   	          
-
-
-
-
-
-    
+	   	           
     /**
      *  摇杆模块
      */
@@ -235,7 +200,7 @@ namespace sensors {
     let Ypin = 0
     let Bpin = 0
     
-    //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb"   group="摇杆模块"
+    //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
     //% weight=70
 	//% subcategory="基础输入模块"
     export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
@@ -244,8 +209,8 @@ namespace sensors {
         Bpin = pinb  
     }
 
-    //% blockId=_analogRead block="select analog pin  %selectpin"   group="摇杆模块"
-    //% weight=70
+    //% blockId=_analogRead block="select analog pin  %selectpin" group="摇杆模块"
+    //% weight=69
 	//% subcategory="基础输入模块"
     export function _analogRead(selectpin: _rockerpin): number {
         let a
@@ -253,12 +218,11 @@ namespace sensors {
             a = Xpin
         else if (selectpin == 1)
             a = Ypin
-        
         return pins.analogReadPin(a)
     }
     
     //% blockId=_digitalRead block="from |%selectpin read" group="摇杆模块"
-    //% weight=70
+    //% weight=68
 	//% subcategory="基础输入模块"
     export function _digitalRead(selectpin: _rockerpin): boolean {
         let a
@@ -291,7 +255,7 @@ namespace sensors {
     }
 
     //% blockId=basic_piano_play block="basic_piano_play"   group="钢琴模块"
-    //% weight=70
+    //% weight=69
 	//% subcategory="基础输入模块"
     export function basic_piano_play(): void {
 
