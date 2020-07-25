@@ -45,7 +45,7 @@ enum DHT11Type {
 	//% block="temperature(℃)" 
 	DHT11_temperature_C=0,
 	//% block="humidity(0~100)"
-	DHT11_humidity=1,
+	DHT11_humidity=1
 }
 
 enum _selectpin{
@@ -54,7 +54,7 @@ enum _selectpin{
 	//% block="Bpin"
 	Bpin=1,
 	//% block="Dpin"
-	Dpin=2,
+	Dpin=2
 }
 
 enum _rockerpin{
@@ -63,7 +63,7 @@ enum _rockerpin{
 	//% block="Ypin"
     Ypin = 1,
     //% block="Bpin"
-    Bpin = 2,
+    Bpin = 2
 }
 
 
@@ -78,7 +78,6 @@ const ALL_LED_OFF_H = 0xFD
 
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
-	//========================================华丽的分割线  基础输入模块=============================================
 	/**
      * 触摸按键
      */
@@ -289,7 +288,6 @@ namespace sensors {
         }
     }
 	
-	//========================================华丽的分割线  传感器=============================================
 	
     /**
      * 温度传感器
