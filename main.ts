@@ -369,8 +369,8 @@ namespace sensors {
 	//% weight=76
 	//% inlineInputMode=inline
 	//% subcategory="传感器"
-	function Ultrasonic(pin: DigitalPin): number {
-		pins.setPull(pin, PinPullMode.PullDown); 
+	export function Ultrasonic(pin: DigitalPin): number {
+		pins.setPull(pin, PinPullMode.PullNone);
         pins.digitalWritePin(pin, 0);
         control.waitMicros(2);
         pins.digitalWritePin(pin, 1);
@@ -384,7 +384,7 @@ namespace sensors {
             ret = distanceBuf;
         }
         distanceBuf = d;
-        return Math.floor(ret / 40 + (ret / 800));
+        return Math.floor(ret * 9 / 6 / 58);
 		//return Math.floor(ret / 40 + (ret / 800));
 		// Correction
 	}
