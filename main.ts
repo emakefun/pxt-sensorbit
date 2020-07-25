@@ -370,25 +370,21 @@ namespace sensors {
 	//% inlineInputMode=inline
 	//% subcategory="传感器"
 	function Ultrasonic(pin: DigitalPin): number {
-		pins.setPull(pin, PinPullMode.PullNone);
-		pins.digitalWritePin(pin, 0);
-		control.waitMicros(2);
-		pins.digitalWritePin(pin, 1);
-		control.waitMicros(50);
-		pins.digitalWritePin(pin, 0);
-
-		// read pulse
-		let d = pins.pulseIn(pin, PulseValue.High, 25000);
-		let ret = d;
-		// filter timeout spikes
-		if (ret == 0 && distanceBuf != 0) {
-			ret = distanceBuf;
-		}
-		distanceBuf = d;
-		//if (v == SonarVersion.V1) {
-		//	return Math.floor(ret * 9 / 6 / 58);
-		//}
-		return Math.floor(ret * 9 / 6 / 58);
+		pins.setPull(pin, PinPullMode.PullDown); 
+        pins.digitalWritePin(pin, 0);
+        control.waitMicros(2);
+        pins.digitalWritePin(pin, 1);
+        control.waitMicros(50);
+        pins.digitalWritePin(pin, 0);
+        // read pulse
+        let d = pins.pulseIn(pin, PulseValue.High, 25000);
+        let ret = d;
+        // filter timeout spikes
+        if (ret == 0 && distanceBuf != 0) {
+            ret = distanceBuf;
+        }
+        distanceBuf = d;
+        return Math.floor(ret / 40 + (ret / 800));
 		//return Math.floor(ret / 40 + (ret / 800));
 		// Correction
 	}
@@ -490,7 +486,6 @@ namespace sensors {
 	/**
 	 * 温湿度传感器 
 	 */
-
 	//% blockId="readdht11" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
 	//% subcategory="传感器"
 	//% inlineInputMode=inline
