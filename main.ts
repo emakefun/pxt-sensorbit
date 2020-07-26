@@ -305,6 +305,19 @@ namespace sensors {
             //})
         }
     }
+	
+	   /**
+     * send message from IR LED. You must set the message encoding type, send how many times, and the message.
+     */
+    //% blockId=sendMyMessage2 block="send message: %msg| ,%times| times, encoding type:%myType"  group="红外发射"
+    //% weight=75 blockGap=10
+    export function sendMyMessage2(msg: string, times: number, myType: string): void {
+        if (send_init) {
+            if (myType == "NEC") {
+                sendMessage(convertHexStrToNum(msg), times, encodingType.NEC);
+            }
+        }
+    }
 
     function encode(myCode: number, bits: number, trueHigh: number, trueLow: number, falseHigh: number, falseLow: number): void {
         const MESSAGE_BITS = bits;
