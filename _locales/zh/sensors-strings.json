@@ -165,7 +165,7 @@
     "sensors.actuator_keyborad_read|block": "读取到的键盘值",
 	
 	   "sensors.Init|block": "红外遥控器初始化引脚|%pin",
-    "sensors.OnPressEvent|block": "当红外遥控器按键|%btn|按下",
+    "sensors.OnPressEvent|block": "当红外遥控器按键|%btn|按下"
 	
 	
     
