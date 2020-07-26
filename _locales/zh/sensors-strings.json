@@ -90,10 +90,6 @@
 
     "sensors.dht11value|block": "引脚 %dht11pin 获取温湿度传感器的 %dht11type",
 
-    
-
-
-
     "ledon_off._on|block": "点亮",
 	"ledon_off._off|block": "熄灭",
 
@@ -167,8 +163,7 @@
 
     "sensors.actuator_keyborad_pin|block": "触摸键盘初始化|SDO引脚 %SDO|SCL引脚 %SCL",
     "sensors.actuator_keyborad_read|block": "读取到的键盘值",
-
-    "sensors|block": "显示器",
+	
 	"sensors.setup|block": "初始化|矩阵数(一般为1) $num|CS引脚 $cs|DIN引脚 $mosi|CLK引脚 $sck",
 	"sensors.scrollText|block": "滚动字符 $text|延时(ms) $delay|最后停留时间(ms) $endDelay",
 	"sensors.brightnessAll|block": "设置亮度 $level",
