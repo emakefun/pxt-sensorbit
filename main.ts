@@ -57,6 +57,74 @@ enum _selectpin{
 	Dpin=2,
 }
 
+enum RemoteButton {
+	//% block=A
+	A = 0x45,
+	//% block=B
+	B = 0x46,
+	//% block=C
+	C = 0x47,
+	//% block=D
+	D = 0x44,
+	//% block=UP
+	UP = 0x40,
+	//% block=+
+	Add = 0x43,
+	//% block=LEFT
+	Left = 0x07,
+	//% block=OK
+	Ok = 0x15,
+	//% block=RIGHT
+	Right = 0x09,
+	//% block=DOWN
+	Down = 0x19,
+	//% block=-
+	EQ = 0x0d,
+	//% block=0
+	NUM0 = 0x16,
+	//% block=1
+	NUM1 = 0x0c,
+	//% block=2
+	NUM2 = 0x18,
+	//% block=3
+	NUM3 = 0x5e,
+	//% block=4
+	NUM4 = 0x8,
+	//% block=5
+	NUM5 = 0x1c,
+	//% block=6
+	NUM6 = 0x5a,
+	//% block=7
+	NUM7 = 0x42,
+	//% block=8
+	NUM8 = 0x52,
+	//% block=9
+	NUM9 = 0x4A,
+}
+
+
+enum IrPins {
+	P0 = 3,
+	P1 = 2,
+	P2 = 1,
+	P3 = 4,
+	P4 = 5,
+	P5 = 17,
+	P6 = 12,
+	P7 = 11,
+	P8 = 18,
+	P9 = 10,
+	P10 = 6,
+	P11 = 26,
+	P12 = 20,
+	P13 = 23,
+	P14 = 22,
+	P15 = 21,
+	P16 = 16,
+	P19 = 0,
+	P20 = 30,
+}
+
 enum _rockerpin{
 	//% block="Xpin"
 	Xpin=0,
@@ -166,7 +234,7 @@ namespace sensors {
     //% weight=70
 	//% speed.min=0 speed.max=255
 	//% subcategory="执行器"
-    export function actuator_motor_run(INA: AnalogPin, INB: AnalogPin, turn: run_turn, speed: number): void {
+    export function actuator_motor_run(_INA: AnalogPin, _INB: AnalogPin, turn: run_turn, speed: number): void {
 
         if (turn == 0){
 			pins.analogWritePin(_INA,0)
@@ -585,8 +653,8 @@ namespace sensors {
     //% blockId=setled block="set led ：%lpin|status %lstatus"   group="LED灯"
 	//% weight=70
 	//% subcategory="显示器"
-    export function setled(lpin: DigitalPin,lstatus: ledon_off): void {
-        pins.digitalWritePin(lpin,lstatus)
+    export function setled(lpin: DigitalPin, lstatus: ledon_off): void {
+        pins.digitalWritePin(lpin, lstatus)
     }
 
 	/*
@@ -730,7 +798,7 @@ namespace sensors {
 
     /**
      * TODO: describe your function here
-     * @param value describe value here, eg: 5
+     * 
      */
 	//% block="showString $s|col $x|row $y"   group="LCD1602显示屏"  
 	//% subcategory="显示器"
@@ -872,7 +940,7 @@ namespace sensors {
              * set TM1637 intensity, range is [0-8], 0 is off.
              * @param val the brightness of the TM1637, eg: 7
              */
-            //% blockId="TM1637_set_intensity" block="set intensity %val"  group="TM1637数码管"
+            //% blockId="TM1637_set_intensity" block="%tm| set intensity %val"  group="TM1637数码管"
             //% weight=88 
 			//% parts="TM1637"
 			//% subcategory="显示器"
@@ -907,7 +975,7 @@ namespace sensors {
              * @param num number will show, eg: 5
              * 
              */
-            //% blockId="TM1637_showbit" block="show digit %num |at %bit"  group="TM1637数码管"
+            //% blockId="TM1637_showbit" block="%tm| show digit %num |at %bit"  group="TM1637数码管"
             //% weight=90 blockGap=8
 			//% parts="TM1637"
 			//% bit.max=3 bit.min=0
@@ -921,7 +989,7 @@ namespace sensors {
               * show a number. 
               * @param num is a number, eg: 0
               */
-            //% blockId="TM1637_shownum" block="show number %num"  group="TM1637数码管"
+            //% blockId="TM1637_shownum" block="%tm| show number %num"  group="TM1637数码管"
             //% weight=91 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
@@ -941,7 +1009,7 @@ namespace sensors {
               * show a hex number. 
               * @param num is a hex number, eg: 0
               */
-            //% blockId="TM1637_showhex" block="show hex number %num"   group="TM1637数码管"
+            //% blockId="TM1637_showhex" block="%tm| show hex number %num"   group="TM1637数码管"
             //% weight=90 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
@@ -962,14 +1030,14 @@ namespace sensors {
              * @param bit is the position,eg: 0
              * 
              */
-            //% blockId="TM1637_showDP" block="DotPoint at %bit|show %status"  group="TM1637数码管"
+            //% blockId="TM1637_showDP" block="%tm| DotPoint at %bit|show %_status"  group="TM1637数码管"
             //% weight=70 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
 			//% bit.max=3 bit.min=0
-            showDP(status: ledon_off, bit: number) {
+            showDP(_status: ledon_off, bit: number) {
 				bit = bit % this.count
-				let show = status==1?true:false;
+				let show = _status==1?true:false;
                 if (show) this._dat(bit, this.buf[bit] | 0x80)
                 else this._dat(bit, this.buf[bit] & 0x7F)
             }
@@ -977,7 +1045,7 @@ namespace sensors {
             /**
              * clear LED. 
              */
-            //% blockId="TM1637_clear" block="clear"  group="TM1637数码管"
+            //% blockId="TM1637_clear" block="clear %tm"  group="TM1637数码管"
             //% weight=80 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
@@ -991,7 +1059,7 @@ namespace sensors {
             /**
              * turn on LED. 
              */
-            //% blockId="TM1637_on" block="turn on"  group="TM1637数码管"
+            //% blockId="TM1637_on" block="turn on %tm"  group="TM1637数码管"
             //% weight=86 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
@@ -1004,7 +1072,7 @@ namespace sensors {
             /**
              * turn off LED. 
              */
-            //% blockId="TM1637_off" block="turn off"  group="TM1637数码管"
+            //% blockId="TM1637_off" block="turn off %tm"  group="TM1637数码管"
             //% weight=85 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
@@ -1028,7 +1096,7 @@ namespace sensors {
 		//% subcategory="显示器"
 		//% intensity.max=8 intensity.min=0
 		//% bit.max=4 bit.min=1
-        export function TMcreate(clk: DigitalPin, dio: DigitalPin, intensity: number, count: number): void {
+        export function TMcreate(clk: DigitalPin, dio: DigitalPin, intensity: number, count: number): TM1637LEDs {
             let tm = new TM1637LEDs()
             tm.clk = clk
             tm.dio = dio
@@ -1036,7 +1104,7 @@ namespace sensors {
             tm.count = count
             tm.brightness = intensity
             tm.init()
-            //return tm
+            return tm
         }
 
 
