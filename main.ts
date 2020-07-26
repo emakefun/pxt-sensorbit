@@ -208,7 +208,8 @@ namespace sensors {
     }
 		   	
 	//% blockId=actuator_motor_run block="actuator_motor_run  %turn"  group="直流电机"
-    //% weight=70
+   	 //% weight=70
+	 //% inlineInputMode=inline
 	//% speed.min=0 speed.max=255
 	//% subcategory="执行器"
     export function actuator_motor_run(_INA: AnalogPin, _INB: AnalogPin, turn: run_turn, speed: number): void {
