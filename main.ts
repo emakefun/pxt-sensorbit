@@ -191,39 +191,6 @@ namespace sensors {
         pins.digitalWritePin(a, _status)
     }
 
-	/*
-	 * RGB light
-	 */
- 
-    
-    let _Rpins = 0
-    let _Gpins = 0
-    let _Bpins = 0
-    //% blockId=setrgbpin block="set RGBlight pin|g %_GPin|b %_BPin|r %_RPin"   group="三色灯"
-	//% weight=70
-	//% subcategory="显示器"
-    export function setRGBpin(_GPin: DigitalPin, _BPin: DigitalPin, _RPin: DigitalPin): void {
-        _Gpins= _GPin
-		_Bpins = _BPin
-		_Rpins= _RPin
-    }
-
-	//% blockId=yledon block="set color pin  %selectpin|light %_status"   group="三色灯"
-	//% weight=70
-	//% subcategory="显示器"
-    export function selectcolor(selectpin: _selectcolor, _status: ledon_off): void {
-        let a;
-        if (selectpin == 0)
-            a = _Bpins
-        else if (selectpin == 1){ 
-            a = _Rpins
-        }
-        else if (selectpin == 2) {
-            a = _Gpins
-        }
-        pins.digitalWritePin(a, _status)
-	}
-
 
 	/**
 	 *  LCD 1602
