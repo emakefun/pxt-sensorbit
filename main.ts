@@ -447,7 +447,8 @@ namespace sensors {
             //% weight=90 blockGap=8
 			//% parts="TM1637"
 			//% bit.max=3 intensity.min=0
-            showbit(bit: number = 0, num: number ) {
+			//% subcategory="显示器"
+            showbit(bit: number, num: number) {
                 this.buf[bit % this.count] = _SEGMENTS[num % 16]
                 this._dat(bit, _SEGMENTS[num % 16])
             }
@@ -466,10 +467,10 @@ namespace sensors {
                     num = -num
                 }
                 else
-                    this.showbit((num / 1000) % 10)
-                this.showbit(num % 10, 3)
-                this.showbit((num / 10) % 10, 2)
-                this.showbit((num / 100) % 10, 1)
+                    this.showbit(0, (num / 1000) % 10)
+                this.showbit(3, num % 10)
+                this.showbit(2, (num / 10) % 10)
+                this.showbit(1, (num / 100) % 10)
             }
     
             /**
@@ -486,10 +487,10 @@ namespace sensors {
                     num = -num
                 }
                 else
-                    this.showbit((num >> 12) % 16)
-                this.showbit(num % 16, 3)
-                this.showbit((num >> 4) % 16, 2)
-                this.showbit((num >> 8) % 16, 1)
+                    this.showbit(0, (num >> 12) % 16)
+                this.showbit(3, num % 16)
+                this.showbit(2, (num >> 4) % 16)
+                this.showbit(1, (num >> 8) % 16)
             }
     
             /**

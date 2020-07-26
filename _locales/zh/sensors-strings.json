@@ -104,7 +104,7 @@
 	"_selectcolor._blue|block": "蓝色",
 	"_selectcolor._red|block": "红色",
 	"_selectcolor._green|block": "绿色",
-    
+    "sensors.setled|block": "设置LED灯引脚：%lpin|状态 %lstatus",
 	"sensors.setpin|block": "初始化引脚|绿(G) %GPin|黄(Y) %YPin|红(R) %RPin",
 	"sensors.selectlight|block": "选择LED灯  %selectpin|状态 %_status",
 	
