@@ -80,7 +80,14 @@ enum ledon_off{
     _on=1,
     //% block="off"
     _off=0,
+}
 
+enum on_off{
+    
+    //% block="on"
+    _on=1,
+    //% block="off"
+    _off=0,
 }
 
 enum _selectlight{
@@ -491,6 +498,28 @@ namespace sensors {
         return messageStr
     }
 	
+	 /**
+     * button pushed.
+     */
+    //% blockId=ir_received_left_event
+    //% block="on |%btn| button pressed" shim=Sensors::onPressEvent group="红外接收"
+    //% subcategory="执行器"
+    export function OnPressEvent(btn: RemoteButton, body: () => void): void {
+        return;
+    }
+
+    /**
+     * initialises local variablesssss
+     *  @param pin describe parameter here, eg: IrPins.P5  
+     */
+    //% blockId=ir_init 
+    //% block="connect ir receiver to %pin" shim=Sensors::init group="红外接收"
+    //% subcategory="执行器"
+    export function Init(pin: IrPins): void {
+        return;
+    }
+
+
 	/**
 	 * 触摸键盘
 	 */

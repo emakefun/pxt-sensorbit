@@ -10,7 +10,12 @@
     "files": [
         "README.md",
         "main.ts",
-		
+		"sensors.cpp",
+        "ReceiverIR.cpp",
+        "ReceiverIR.h",
+        "RemoteIR.h",
+        "TransmitterIR.cpp",
+        "TransmitterIR.h",
 		"_locales/zh/sensors-strings.json"
 		
     ],

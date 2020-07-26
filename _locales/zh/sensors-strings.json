@@ -146,7 +146,6 @@
 	"run_turn.forward|block": "正转",
 	"run_turn.reverse|block": "反转",
 	
-	
 	"sensors.setIR_pin|block": "红外线发射脚位: %myPin",
     "sensors.setREC_pin|block": "红外线接收脚位: %myPin",
     "sensors.sendMyMessage1|block": "发射红外线信号: %msg| ,发射次数： %times| 次, 编码:%myType",
@@ -164,7 +163,7 @@
 	
 	"sensors.actuator_laser|block": "激光控制引脚 ：%pin|状态 %status",
 	
-	"sensors.actuator_motor_run|block": "直流电机初始化INA引脚%INAINB引脚 %INB运行模式 %turn 速度：%speed",
+	"sensors.actuator_motor_run|block": "直流电机初始化INA引脚%INAINB引脚 %INB运行模式%turn速度:%speed",
 
     "sensors.actuator_keyborad_pin|block": "触摸键盘初始化|SDO引脚 %SDO|SCL引脚 %SCL",
     "sensors.actuator_keyborad_read|block": "读取到的键盘值"
