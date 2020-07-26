@@ -413,7 +413,8 @@ namespace sensors {
             //% weight=88 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
-            intensity(val: number = 7) {
+			//% intensity.max=7 intensity.min=0
+            intensity(val: number) {
                 if (val < 1) {
                     this.off()
                     return
@@ -445,8 +446,8 @@ namespace sensors {
             //% blockId="TM1637_showbit" block="show digit %num |at %bit"  group="TM1637数码管"
             //% weight=90 blockGap=8
 			//% parts="TM1637"
-			//% subcategory="显示器"
-            showbit(bit: number = 0, num: number = 5 ) {
+			//% bit.max=3 intensity.min=0
+            showbit(bit: number = 0, num: number ) {
                 this.buf[bit % this.count] = _SEGMENTS[num % 16]
                 this._dat(bit, _SEGMENTS[num % 16])
             }
@@ -494,13 +495,14 @@ namespace sensors {
             /**
              * show or hide dot point. 
              * @param bit is the position, eg: 1
-             * @param show is show/hide dp, eg: true
+             * @param show is show/hide dp
              */
             //% blockId="TM1637_showDP" block="DotPoint at %bit|show %status"  group="TM1637数码管"
             //% weight=70 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
-            showDP(bit: number = 1, status: ledon_off) {
+			//% bit.max=3 intensity.min=0
+            showDP(bit: number, status: ledon_off) {
 				bit = bit % this.count
 				let show = status==1?true:false;
                 if (show) this._dat(bit, this.buf[bit] | 0x80)
@@ -559,6 +561,8 @@ namespace sensors {
 		//% blockId="TM1637_create" block="CLK %clk|DIO %dio|intensity %intensity|LED count %count"  group="TM1637数码管"
 		//% inlineInputMode=inline
 		//% subcategory="显示器"
+		//% intensity.max=7 intensity.min=0
+		//% bit.max=4 intensity.min=1
         export function TMcreate(clk: DigitalPin, dio: DigitalPin, intensity: number, count: number): TM1637LEDs {
             let tm = new TM1637LEDs()
             tm.clk = clk
@@ -601,7 +605,8 @@ namespace sensors {
          * turn on display
          */
         //% blockId="TM650_ON" block="turn on display" group="TM1650数码管"
-        //% weight=50 blockGap=8
+		//% weight=50 blockGap=8
+		//% subcategory="显示器"
         export function on() {
             cmd(_intensity * 16 + 1)
         }
@@ -610,7 +615,8 @@ namespace sensors {
          * turn off display
          */
         //% blockId="TM650_OFF" block="turn off display" group="TM1650数码管"
-        //% weight=50 blockGap=8
+		//% weight=50 blockGap=8
+		//% subcategory="显示器"
         export function off() {
             _intensity = 0
             cmd(0)
@@ -620,7 +626,8 @@ namespace sensors {
          * clear display content
          */
         //% blockId="TM650_CLEAR" block="clear display" group="TM1650数码管"
-        //% weight=40 blockGap=8
+		//% weight=40 blockGap=8
+		//% subcategory="显示器"
         export function clear() {
             dat(0, 0)
             dat(1, 0)
@@ -636,7 +643,9 @@ namespace sensors {
          */
         //% blockId="TM650_DIGIT" block="show digit %num|at %bit"  group="TM1650数码管"
         //% weight=80 blockGap=8
-        //% num.max=15 num.min=0
+		//% num.max=15 num.min=0
+		//% subcategory="显示器"
+		//% bit.max=3 intensity.min=0
         export function digit(bit: number, num: number) {
             dbuf[bit % 4] = _SEG[num % 16]
             dat(bit, _SEG[num % 16])
@@ -647,7 +656,8 @@ namespace sensors {
          * @param num is number will be shown, eg: 100
          */
         //% blockId="TM650_SHOW_NUMBER" block="show number %num"  group="TM1650数码管"
-        //% weight=100 blockGap=8
+		//% weight=100 blockGap=8
+		//% subcategory="显示器"
         export function showNumber(num: number) {
             if (num < 0) {
                 dat(0, 0x40) // '-'
@@ -665,7 +675,8 @@ namespace sensors {
          * @param num is number will be shown, eg: 123
          */
         //% blockId="TM650_SHOW_HEX_NUMBER" block="show hex number %num"  group="TM1650数码管"
-        //% weight=90 blockGap=8
+		//% weight=90 blockGap=8
+		//% subcategory="显示器"
         export function showHex(num: number) {
             if (num < 0) {
                 dat(0, 0x40) // '-'
@@ -684,7 +695,9 @@ namespace sensors {
          * @param show is true/false, eg: true
          */
         //% blockId="TM650_SHOW_DP" block="show dot point %bit|show %num" group="TM1650数码管"
-        //% weight=80 blockGap=8
+		//% weight=80 blockGap=8
+		//% subcategory="显示器"
+		//% bit.max=3 intensity.min=0
         export function showDpAt(bit: number, status: ledon_off) {
 			let show = status==1?true:false;
             if (show) dat(bit, dbuf[bit % 4] | 0x80)
@@ -696,7 +709,9 @@ namespace sensors {
          * @param dat is intensity of the display, eg: 3
          */
         //% blockId="TM650_INTENSITY" block="set intensity %dat" group="TM1650数码管"
-        //% weight=70 blockGap=8
+		//% weight=70 blockGap=8
+		//% subcategory="显示器"
+		//% dat.max=7 dat.min=0
         export function setIntensity(dat: number) {
             if ((dat < 0) || (dat > 8))
                 return 
