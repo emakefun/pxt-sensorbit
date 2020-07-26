@@ -112,24 +112,24 @@
     "sensors.selectcolor|block": "选择颜色  %selectpin|状态 %_status",
     
     "sensors.i2cLcdInit|block": "初始化I2C地址(默认为39) $addr",
-	"sensors.i2cLcdShowChar|block": "第$y行$x列显示字符$ch",
-	"sensors.i2cLcdShowNumber|block": "第$y行$x列显示数字$n",
-	"sensors.i2cLcdShowString|block": "第$y行$x列显示字符串$s",
+	"sensors.i2cLcdShowChar|block": "第$y行第$x列显示字符$ch",
+	"sensors.i2cLcdShowNumber|block": "第$y行第$x列显示数字$n",
+	"sensors.i2cLcdShowString|block": "第$y行第$x列显示字符串$s",
 	"sensors.i2cLcdOn|block": "打开显示",
 	"sensors.i2cLcdOff|block": "关闭显示",
 	"sensors.i2cLcdClear|block": "清除显示",
 	"sensors.i2cLcdBacklightOn|block": "打开背光",
     "sensors.i2cLcdBacklightOff|block": "关闭背光",
     
-    "monitors.TMcreate|block": "CLK引脚%clk DIO引脚%dio亮度%intensityLED数量(1到4)%count",
-    "monitors.TM1637LEDs.intensity|block": " %tm设置亮度 %val",
-    "monitors.TM1637LEDs.showNumber|block": " %tm显示数字 %num",
-    "monitors.TM1637LEDs.clear|block": "清除显示 %tm",
-	"monitors.TM1637LEDs.on|block": "打开显示 %tm",
-	"monitors.TM1637LEDs.off|block": "关闭显示 %tm",
-    "monitors.TM1637LEDs.showDP|block": "%tm 第%bit位 %show 点",
-    "monitors.TM1637LEDs.showHex|block": "%tm 显示十六进制数据%num",
-    "monitors.TM1637LEDs.showbit|block": "%tm第%bit位显示数 %num"
+    "sensors.TMcreate|block": "CLK引脚%clk DIO引脚%dio亮度%intensityLED数量(1到4)%count",
+    "sensors.TM1637LEDs.intensity|block": " %tm设置亮度%val",
+    "sensors.TM1637LEDs.showNumber|block": " %tm显示数字%num",
+    "sensors.TM1637LEDs.clear|block": "清除显示%tm",
+	"sensors.TM1637LEDs.on|block": "打开显示%tm",
+	"sensors.TM1637LEDs.off|block": "关闭显示%tm",
+    "sensors.TM1637LEDs.showDP|block": "%tm第%bit位%show点",
+    "sensors.TM1637LEDs.showHex|block": "%tm显示十六进制数据%num",
+    "sensors.TM1637LEDs.showbit|block": "%tm第%bit位显示数%num"
     
     
 }

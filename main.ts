@@ -410,7 +410,7 @@ namespace sensors {
              * @param val the brightness of the TM1637, eg: 7
              */
             //% blockId="TM1637_set_intensity" block="%tm|set intensity %val"  group="TM1637数码管"
-            //% weight=50 blockGap=8
+            //% weight=88 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
             intensity(val: number = 7) {
@@ -446,7 +446,7 @@ namespace sensors {
             //% weight=90 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
-            showbit(num: number = 5, bit: number = 0) {
+            showbit(bit: number = 0, num: number = 5 ) {
                 this.buf[bit % this.count] = _SEGMENTS[num % 16]
                 this._dat(bit, _SEGMENTS[num % 16])
             }
@@ -555,8 +555,9 @@ namespace sensors {
          * @param intensity the brightness of the LED, eg: 7
          * @param count the count of the LED, eg: 4
          */
-        //% weight=200 blockGap=8
+        //% weight=87 blockGap=8
 		//% blockId="TM1637_create" block="CLK %clk|DIO %dio|intensity %intensity|LED count %count"  group="TM1637数码管"
+		//% inlineInputMode=inline
 		//% subcategory="显示器"
         export function TMcreate(clk: DigitalPin, dio: DigitalPin, intensity: number, count: number): TM1637LEDs {
             let tm = new TM1637LEDs()
