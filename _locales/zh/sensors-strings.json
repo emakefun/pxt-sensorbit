@@ -19,7 +19,7 @@
 	"sensors.pinsRead|block": " %selectpin获取数字值",
 
 	"_rockerpin.Xpin|block": "引脚X",
-	"_rockerpin.Ypin|block": "引脚Y"
+	"_rockerpin.Ypin|block": "引脚Y",
 
 	"sensors.rockerPin|block": "摇杆初始化引脚X%pinx引脚Y%piny引脚B%pinb",
 	"sensors._analogRead|block": " %selectpin获取模拟值",
