@@ -162,14 +162,8 @@
 	"sensors.actuator_motor_run|block": "直流电机初始化INA引脚%INAINB引脚 %INB运行模式%turn速度:%speed",
 
     "sensors.actuator_keyborad_pin|block": "触摸键盘初始化|SDO引脚 %SDO|SCL引脚 %SCL",
-    "sensors.actuator_keyborad_read|block": "读取到的键盘值",
+    "sensors.actuator_keyborad_read|block": "读取到的键盘值"
 	
-	"sensors.setup|block": "初始化|矩阵数(一般为1) $num|CS引脚 $cs|DIN引脚 $mosi|CLK引脚 $sck",
-	"sensors.scrollText|block": "滚动字符 $text|延时(ms) $delay|最后停留时间(ms) $endDelay",
-	"sensors.brightnessAll|block": "设置亮度 $level",
-	"sensors.fillAll|block": "全屏点亮",
-	"sensors.clearAll|block": "全屏熄灭",
-	"sensors.randomizeAll|block": "随机点亮"
 	
     
 }
