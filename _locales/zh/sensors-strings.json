@@ -88,5 +88,37 @@
     "DHT11Type.DHT11_humidity|block": "湿度(0~100)",
     "DHT11Type.DHT11_temperature_C|block": "摄氏温度(℃)",
 
-    "sensors.dht11value|block": "引脚 %dht11pin 获取温湿度传感器的 %dht11type"
+    "sensors.dht11value|block": "引脚 %dht11pin 获取温湿度传感器的 %dht11type",
+
+    
+
+
+
+    "ledon_off._on|block": "点亮",
+	"ledon_off._off|block": "熄灭",
+
+	"_selectlight._yellow|block": "黄灯",
+	"_selectlight._red|block": "红灯",
+	"_selectlight._green|block": "绿灯",
+
+	"_selectcolor._blue|block": "蓝色",
+	"_selectcolor._red|block": "红色",
+	"_selectcolor._green|block": "绿色",
+    
+	"monitors.setpin|block": "初始化引脚|绿(G) %GPin|黄(Y) %YPin|红(R) %RPin",
+	"monitors.selectlight|block": "选择LED灯  %selectpin|状态 %_status",
+	
+	"monitors.setRGBpin|block": "初始化引脚|绿(G) %GPin|蓝(B) %YPin|红(R) %RPin",
+    "monitors.selectcolor|block": "选择颜色  %selectpin|状态 %_status",
+    
+    "monitors.i2cLcdInit|block": "初始化I2C地址(默认为39) $addr",
+	"monitors.i2cLcdShowChar|block": "第$y行$x列显示字符$ch",
+	"monitors.i2cLcdShowNumber|block": "第$y行$x列显示数字$n",
+	"monitors.i2cLcdShowString|block": "第$y行$x列显示字符串$s",
+	"monitors.i2cLcdOn|block": "打开显示",
+	"monitors.i2cLcdOff|block": "关闭显示",
+	"monitors.i2cLcdClear|block": "清除显示",
+	"monitors.i2cLcdBacklightOn|block": "打开背光",
+	"monitors.i2cLcdBacklightOff|block": "关闭背光"
+
 }

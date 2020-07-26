@@ -21,8 +21,6 @@ enum RgbColors {
     Black = 0x000000
 }
 
-
-
 enum RgbUltrasonics {
 	//% block=left
 	Left = 0x00,
@@ -66,6 +64,42 @@ enum _rockerpin{
     Ypin = 1
 }
 
+enum rotation_direction {
+    //% block="none"
+    none = 0,
+    //% block="clockwise"
+    clockwise = 1,
+    //% block="counter-clockwise"
+    counterclockwise = 2,
+    //% block="180-degree"
+    one_eighty_degree = 3,
+}
+
+enum ledon_off{
+    //% block="on"
+    _on=1,
+    //% block="off"
+    _off=0,
+
+}
+
+enum _selectlight{
+	//% block="_yellow"
+	_yellow=0,
+	//% block="_red"
+	_red=1,
+	//% block="_green"
+	_green=2,
+}
+
+enum _selectcolor{
+	//% block="_blue"
+	_blue=0,
+	//% block="_red"
+	_red=1,
+	//% block="_green"
+	_green=2,
+}
 
 const LED0_ON_L = 0x06
 const LED0_ON_H = 0x07
@@ -78,7 +112,257 @@ const ALL_LED_OFF_H = 0xFD
 
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
+
+	//========================================华丽的分割线  显示器模块=============================================
 	
+	/**
+     * LED
+     */
+    
+    //% blockId=setled block="set led ：%lpin|status %lstatus"   group="LED灯"
+	//% weight=70
+	//% subcategory="显示器"
+    export function setled(lpin: DigitalPin,lstatus: ledon_off): void {
+        pins.digitalWritePin(lpin,lstatus)
+    }
+
+	/*
+	 * RGB light
+	 */
+ 
+    
+    let _Rpins = 0
+    let _Gpins = 0
+    let _Bpins = 0
+
+    //% blockId=setrgbpin block="set RGBlight pin|g %_GPin|b %_BPin|r %_RPin"   group="三色灯"
+	//% weight=70
+	//% subcategory="显示器"
+    export function setRGBpin(_GPin: DigitalPin, _BPin: DigitalPin, _RPin: DigitalPin): void {
+        _Gpins= _GPin
+		_Bpins = _BPin
+		_Rpins= _RPin
+    }
+
+	//% blockId=yledon block="set color pin  %selectpin|light %_status"   group="三色灯"
+	//% weight=70
+	//% subcategory="显示器"
+    export function selectcolor(selectpin: _selectcolor, _status: ledon_off): void {
+        let a;
+        if (selectpin == 0)
+            a = _Bpins
+        else if (selectpin == 1){ 
+            a = _Rpins
+        }
+        else if (selectpin == 2) {
+            a = _Gpins
+        }
+        pins.digitalWritePin(a, _status)
+	}  
+	
+	/*
+	 * traffic light
+	 */
+    let rpins = 0
+    let gpins = 0
+    let ypins = 0
+    //% blockId=setpin block="set light pin|g %GPin|y %YPin|r %RPin"   group="交通灯"
+	//% weight=70
+	//% subcategory="显示器"
+    export function setpin(GPin: DigitalPin, YPin: DigitalPin, RPin: DigitalPin): void {
+        gpins= GPin
+		ypins = YPin
+		rpins= RPin
+    }
+	
+	//% blockId=selectlight block="set light pin  %selectpin|light %_status"   group="交通灯"
+	//% weight=70
+	//% subcategory="显示器"
+    export function selectlight(selectpin: _selectlight, _status: ledon_off): void {
+        let a;
+        if (selectpin == 0)
+            a = ypins
+        else if (selectpin == 1){ 
+            a = rpins 
+        }
+        else if (selectpin == 2) {
+            a = gpins
+        }
+        pins.digitalWritePin(a, _status)
+    }
+
+	/*
+	 * RGB light
+	 */
+ 
+    
+    let _Rpins = 0
+    let _Gpins = 0
+    let _Bpins = 0
+    //% blockId=setrgbpin block="set RGBlight pin|g %_GPin|b %_BPin|r %_RPin"   group="三色灯"
+	//% weight=70
+	//% subcategory="显示器"
+    export function setRGBpin(_GPin: DigitalPin, _BPin: DigitalPin, _RPin: DigitalPin): void {
+        _Gpins= _GPin
+		_Bpins = _BPin
+		_Rpins= _RPin
+    }
+
+	//% blockId=yledon block="set color pin  %selectpin|light %_status"   group="三色灯"
+	//% weight=70
+	//% subcategory="显示器"
+    export function selectcolor(selectpin: _selectcolor, _status: ledon_off): void {
+        let a;
+        if (selectpin == 0)
+            a = _Bpins
+        else if (selectpin == 1){ 
+            a = _Rpins
+        }
+        else if (selectpin == 2) {
+            a = _Gpins
+        }
+        pins.digitalWritePin(a, _status)
+	}
+
+
+	/**
+	 *  LCD 1602
+	 */	
+		
+	let i2cAddr: number
+    let BK: number
+    let RS: number
+
+    function setreg(d: number) {
+        pins.i2cWriteNumber(i2cAddr, d, NumberFormat.Int8LE)
+        basic.pause(1)
+    }
+
+    function set(d: number) {
+        d = d & 0xF0
+        d = d + BK + RS
+        setreg(d)
+        setreg(d + 4)
+        setreg(d)
+    }
+
+    function lcdcmd(d: number) {
+        RS = 0
+        set(d)
+        set(d << 4)
+    }
+
+    function lcddat(d: number) {
+        RS = 1
+        set(d)
+        set(d << 4)
+    }
+
+	//% block="LcdInit $addr" addr.defl="39"  group="LCD1602显示屏"  
+	//% subcategory="显示器"
+	//% weight=70
+    export function i2cLcdInit(addr: number) {
+        i2cAddr = addr
+        BK = 8
+        RS = 0
+        lcdcmd(0x33)
+        basic.pause(5)
+        set(0x30)
+        basic.pause(5)
+        set(0x20)
+        basic.pause(5)
+        lcdcmd(0x28)
+        lcdcmd(0x0C)
+        lcdcmd(0x06)
+        lcdcmd(0x01)
+    }
+
+	//% block="showchar $ch|col $x|row $y"   group="LCD1602显示屏"  
+	//% subcategory="显示器"
+	//% weight=69
+    export function i2cLcdShowChar( y: number, x: number, ch: string): void {
+        let a: number
+
+        if (y > 0)
+            a = 0xC0
+        else
+            a = 0x80
+        a += x
+        lcdcmd(a)
+        lcddat(ch.charCodeAt(0))
+    }
+
+	//% block="showNumber $n|col $x|row $y"   group="LCD1602显示屏"  
+	//% subcategory="显示器"
+	//% weight=68
+    export function i2cLcdShowNumber(y: number, x: number,  n: number): void {
+        let s = n.toString()
+        i2cLcdShowString(y, x, s)
+    }
+
+    /**
+     * TODO: describe your function here
+     * @param value describe value here, eg: 5
+     */
+	//% block="showString $s|col $x|row $y"   group="LCD1602显示屏"  
+	//% subcategory="显示器"
+	//% weight=67
+    export function i2cLcdShowString(y: number, x: number,  s: string): void {
+        let a: number
+
+        if (y > 0)
+            a = 0xC0
+        else
+            a = 0x80
+        a += x
+        lcdcmd(a)
+
+        for (let i = 0; i < s.length; i++) {
+            lcddat(s.charCodeAt(i))
+        }
+    }
+
+	//% block="lcdon"   group="LCD1602显示屏"  
+	//% subcategory="显示器"
+	//% weight=66
+    export function i2cLcdOn(): void {
+        lcdcmd(0x0C)
+    }
+
+	//% block="lcdoff"   group="LCD1602显示屏"  
+	//% subcategory="显示器"
+	//% weight=65
+    export function i2cLcdOff(): void {
+        lcdcmd(0x08)
+    }
+
+	//% block="lcdclear"   group="LCD1602显示屏"  
+	//% subcategory="显示器"
+	//% weight=64
+    export function i2cLcdClear(): void {
+        lcdcmd(0x01)
+    }
+
+	//% block="lcdlighton"   group="LCD1602显示屏"  
+	//% subcategory="显示器"
+	//% weight=63
+    export function i2cLcdBacklightOn(): void {
+        BK = 8
+        lcdcmd(0)
+    }
+
+	//% block="lcdlightoff"   group="LCD1602显示屏"  
+	//% subcategory="显示器"
+	//% weight=62
+    export function i2cLcdBacklightOff(): void {
+        BK = 0
+        lcdcmd(0)
+    }
+	
+
+	
+
+	//========================================华丽的分割线  基础输入模块=============================================
      /**
      * 触摸按键
      */
