@@ -873,10 +873,10 @@ namespace sensors {
              * @param val the brightness of the TM1637, eg: 7
              */
             //% blockId="TM1637_set_intensity" block="set intensity %val"  group="TM1637数码管"
-            //% weight=88 blockGap=8
+            //% weight=88 
 			//% parts="TM1637"
 			//% subcategory="显示器"
-			//% intensity.max=7 intensity.min=0
+			//% val.max=8 val.min=0
             intensity(val: number) {
                 if (val < 1) {
                     this.off()
@@ -903,13 +903,14 @@ namespace sensors {
     
             /**
              * show a number in given position. 
+			 * @param bit the position of the LED, eg: 0
              * @param num number will show, eg: 5
-             * @param bit the position of the LED, eg: 0
+             * 
              */
             //% blockId="TM1637_showbit" block="show digit %num |at %bit"  group="TM1637数码管"
             //% weight=90 blockGap=8
 			//% parts="TM1637"
-			//% bit.max=3 intensity.min=0
+			//% bit.max=3 bit.min=0
 			//% subcategory="显示器"
             showbit(bit: number, num: number) {
                 this.buf[bit % this.count] = _SEGMENTS[num % 16]
@@ -958,15 +959,15 @@ namespace sensors {
     
             /**
              * show or hide dot point. 
-             * @param bit is the position, eg: 1
-             * @param show is show/hide dp
+             * @param bit is the position,eg: 0
+             * 
              */
             //% blockId="TM1637_showDP" block="DotPoint at %bit|show %status"  group="TM1637数码管"
             //% weight=70 blockGap=8
 			//% parts="TM1637"
 			//% subcategory="显示器"
-			//% bit.max=3 intensity.min=0
-            showDP(bit: number, status: ledon_off) {
+			//% bit.max=3 bit.min=0
+            showDP(status: ledon_off, bit: number) {
 				bit = bit % this.count
 				let show = status==1?true:false;
                 if (show) this._dat(bit, this.buf[bit] | 0x80)
@@ -1025,8 +1026,8 @@ namespace sensors {
 		//% blockId="TM1637_create" block="CLK %clk|DIO %dio|intensity %intensity|LED count %count"  group="TM1637数码管"
 		//% inlineInputMode=inline
 		//% subcategory="显示器"
-		//% intensity.max=7 intensity.min=0
-		//% bit.max=4 intensity.min=1
+		//% intensity.max=8 intensity.min=0
+		//% bit.max=4 bit.min=1
         export function TMcreate(clk: DigitalPin, dio: DigitalPin, intensity: number, count: number): void {
             let tm = new TM1637LEDs()
             tm.clk = clk
@@ -1109,7 +1110,7 @@ namespace sensors {
         //% weight=80 blockGap=8
 		//% num.max=15 num.min=0
 		//% subcategory="显示器"
-		//% bit.max=3 intensity.min=0
+		//% bit.max=3 bit.min=0
         export function digit(bit: number, num: number) {
             dbuf[bit % 4] = _SEG[num % 16]
             dat(bit, _SEG[num % 16])
@@ -1161,8 +1162,8 @@ namespace sensors {
         //% blockId="TM650_SHOW_DP" block="show dot point %bit|show %num" group="TM1650数码管"
 		//% weight=80 blockGap=8
 		//% subcategory="显示器"
-		//% bit.max=3 intensity.min=0
-        export function showDpAt(bit: number, status: ledon_off) {
+		//% bit.max=3 bit.min=0
+        export function showDpAt(status: ledon_off, bit: number) {
 			let show = status==1?true:false;
             if (show) dat(bit, dbuf[bit % 4] | 0x80)
             else dat(bit, dbuf[bit % 4] & 0x7F)
