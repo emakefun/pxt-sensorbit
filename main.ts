@@ -1278,15 +1278,16 @@ namespace sensors {
     * Setup/reset MAX7219s. If you are using 4-in-1 module you'll need to set rotation as true. If your chain are consisted of single modules set it as false (default).
     */
     //% block="Setup MAX7219:|Number of matrixs $num|CS(LOAD) = $cs|MOSI(DIN) = $mosi|MISO(not used) = $miso|SCK(CLK) = $sck"
-    //% num.min=1 num.defl=1 cs.defl=DigitalPin.P16 mosi.defl=DigitalPin.P15 miso.defl=DigitalPin.P14 sck.defl=DigitalPin.P13 rotate.defl=false group="8X8点阵屏"
+    //% num.min=1 num.defl=1 cs.defl=DigitalPin.P16 mosi.defl=DigitalPin.P15 sck.defl=DigitalPin.P13 rotate.defl=false group="8X8点阵屏"
     //% subcategory="显示器"
-	export function setup(num: number, cs: DigitalPin, mosi: DigitalPin, miso: DigitalPin, sck: DigitalPin) {
+	export function setup(num: number, cs: DigitalPin,  miso: DigitalPin, sck: DigitalPin) {
         // set internal variables        
         _pinCS = cs
         _matrixNum = num
         // prepare display array (for displaying texts  add extra 8 columns at each side as buffers)
         for (let i = 0; i < (num + 2) * 8; i++)  _displayArray.push(0)
-        // set micro:bit SPI
+		// set micro:bit SPI
+		let mosi = DigitalPin.P14
         pins.spiPins(mosi, miso, sck)
         pins.spiFormat(8, 3)
         pins.spiFrequency(1000000)
