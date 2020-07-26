@@ -144,11 +144,11 @@
 	
 	"sensors.setIR_pin|block": "红外线发射脚位: %myPin",
     "sensors.setREC_pin|block": "红外线接收脚位: %myPin",
-    "sensors.sendMyMessage1|block": "发射红外线信号: %msg| ,发射次数： %times| 次, 编码:%myType",
-    "sensors.sendMyMessage2|block": "发射红外线信号: %msg| ,发射次数： %times| 次, 编码:%myType",
-    "sensors.onReceivedIR|block": "当接收到红外线信号时",
-    "sensors.getRecType|block": "接收到的红外线编码",
-    "sensors.getMessage|block": "接收到的红外线信号",
+    "sensors.sendMyMessage1|block": "发射红外信号: %msg| ,发射次数： %times| 次, 编码:%myType",
+    "sensors.sendMyMessage2|block": "发射红外信号: %msg| ,发射次数： %times| 次, 编码:%myType",
+    "sensors.onReceivedIR|block": "当接收到红外信号时",
+    "sensors.getRecType|block": "接收到的红外编码",
+    "sensors.getMessage|block": "接收到的红外信号",
 	
 	
 	"sensors.actuator_buzzer0|block": "无源蜂鸣器控制引脚 ：%pin|状态 %status",
