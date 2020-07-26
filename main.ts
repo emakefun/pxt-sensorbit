@@ -558,13 +558,13 @@ namespace sensors {
          * @param intensity the brightness of the LED, eg: 7
          * @param count the count of the LED, eg: 4
          */
-        //% weight=87 blockGap=8
+        //% weight=99 blockGap=8
 		//% blockId="TM1637_create" block="CLK %clk|DIO %dio|intensity %intensity|LED count %count"  group="TM1637数码管"
 		//% inlineInputMode=inline
 		//% subcategory="显示器"
 		//% intensity.max=7 intensity.min=0
 		//% bit.max=4 intensity.min=1
-        export function TMcreate(clk: DigitalPin, dio: DigitalPin, intensity: number, count: number): TM1637LEDs {
+        export function TMcreate(clk: DigitalPin, dio: DigitalPin, intensity: number, count: number): void {
             let tm = new TM1637LEDs()
             tm.clk = clk
             tm.dio = dio
@@ -572,7 +572,7 @@ namespace sensors {
             tm.count = count
             tm.brightness = intensity
             tm.init()
-            return tm
+            //return tm
         }
 
 
