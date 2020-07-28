@@ -1,1 +1,1 @@
-# sensors
+# Emakefun micorbit sensorbit extensions
