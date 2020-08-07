@@ -165,7 +165,7 @@
 
     "sensors.actuator_keyborad_pin|block": "触摸键盘初始化|SDO引脚 %SDO|SCL引脚 %SCL",
     "sensors.actuator_keyborad_read|block": "读取到的键盘值",
-	"sensors.ping|block": "普通超声波初始化trig引脚 %trig |echo引脚 %echo |单位 %unit",
+	"sensors.ping|block": "普通超声波初始化trig引脚 %trig |echo引脚 %echo 获取距离|单位 %unit",
 	   "sensors.Init|block": "红外遥控器初始化引脚|%pin",
     "sensors.OnPressEvent|block": "当红外遥控器按键|%btn|按下"
 	
