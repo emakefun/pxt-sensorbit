@@ -1685,7 +1685,10 @@ namespace sensors {
      * @param unit desired conversion unit
      * @param maxCmDistance maximum distance in centimeters (default is 500)
      */
-    //% blockId=sonar_ping block="ping trig %trig|echo %echo|unit %unit"
+    //% blockId=sonar_ping block="ping trig %trig|echo %echo|unit %unit" group="普通超声波"
+	//% weight=75
+	//% inlineInputMode=inline
+	//% subcategory="传感器"
     export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 500): number {
         // send pulse
         pins.setPull(trig, PinPullMode.PullNone);
