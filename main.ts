@@ -186,14 +186,14 @@ enum run_turn{
 
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors { 
-    //% blockId=actuator_buzzer0 block="actuator_buzzer0 pin ：%pin|status %status"   group="无源蜂鸣器"
+    //% blockId=actuator_buzzer0 block="actuator_buzzer0 pin ：%pin|status %status"   group="有源蜂鸣器"
 	//% weight=70
 	//% subcategory="执行器"
     export function actuator_buzzer0(pin: DigitalPin,status: on_off): void {
         pins.digitalWritePin(pin,status)
     }
   
-    //% blockId=actuator_buzzer1 block="actuator_buzzer1 pin ：%pin|status %status"   group="有源蜂鸣器"
+    //% blockId=actuator_buzzer1 block="actuator_buzzer1 pin ：%pin|status %status"   group="无源蜂鸣器"
 	//% weight=70
 	//% subcategory="执行器"
     export function actuator_buzzer1(pin: AnalogPin,freq: number): void {
