@@ -28,7 +28,7 @@
 	"sensors.basic_piano_pin|block": "钢琴模块初始化引脚 DIO %DIO CLK %CLK",
 	"sensors.basic_piano_play|block": "弹奏钢琴",
 	
-	"sensors.sensor_temperature|block": "引脚%pin获取温度的模拟值",
+	"sensors.sensor_temperature|block": "引脚%pin获取环境温度",
 	
     "sensors.sensor_flame|block": "引脚%pin检测到火焰？",
 	"sensors.sensor_flame_analog|block": "引脚%pin读取火焰的模拟值",
