@@ -711,6 +711,7 @@ namespace sensors {
             a = 0xC0
         else
             a = 0x80
+	x = x - 1
         a += x
         lcdcmd(a)
         lcddat(ch.charCodeAt(0))
@@ -738,6 +739,7 @@ namespace sensors {
             a = 0xC0
         else
             a = 0x80
+	x = x - 1
         a += x
         lcdcmd(a)
 
