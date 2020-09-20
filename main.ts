@@ -706,7 +706,7 @@ namespace sensors {
 	//% weight=69
     export function i2cLcdShowChar( y: number, x: number, ch: string): void {
         let a: number
-
+	y = y - 1
         if (y > 0)
             a = 0xC0
         else
@@ -733,7 +733,7 @@ namespace sensors {
 	//% weight=67
     export function i2cLcdShowString(y: number, x: number,  s: string): void {
         let a: number
-
+	y = y - 1
         if (y > 0)
             a = 0xC0
         else
