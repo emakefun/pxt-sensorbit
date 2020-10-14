@@ -191,6 +191,13 @@ enum run_turn{
     reverse = 1,
 }
 
+enum LcdBacklight{
+    //% block="on"
+    _on = 1,
+    //% block="off"
+    _off = 0,
+}
+
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors { 
     //% blockId=actuator_buzzer0 block="actuator_buzzer0 pin ：%pin|status %status"   group="有源蜂鸣器"
@@ -772,21 +779,34 @@ namespace sensors {
         lcdcmd(0x01)
     }
 
-	//% block="lcdlighton"   group="LCD1602显示屏"  
-	//% subcategory="显示器"
-	//% weight=63
-    export function i2cLcdBacklightOn(): void {
+	// //% block="lcdlighton"   group="LCD1602显示屏"  
+	// //% subcategory="显示器"
+	// //% weight=63
+    // export function i2cLcdBacklightOn(): void {
+    //     BK = 8
+    //     lcdcmd(0)
+    // }
+
+	// //% block="lcdlightoff"   group="LCD1602显示屏"  
+	// //% subcategory="显示器"
+	// //% weight=62
+    // export function i2cLcdBacklightOff(): void {
+    //     BK = 0
+    //     lcdcmd(0)
+    // }
+  //% subcategory="显示器"   group="LCD1602显示屏"
+  //% blockId="Backlight switch control"
+  //% weight=79
+  export function seti2cLcdBacklight(backlight: LcdBacklight): void {
+    if(backlight==1){
         BK = 8
         lcdcmd(0)
     }
-
-	//% block="lcdlightoff"   group="LCD1602显示屏"  
-	//% subcategory="显示器"
-	//% weight=62
-    export function i2cLcdBacklightOff(): void {
+    if(backlight==0){
         BK = 0
         lcdcmd(0)
     }
+  }
 	
 		
 	

@@ -121,5 +121,8 @@
     "sensors.ping|block": "普通超声波初始化trig引脚 %trig |echo引脚 %echo 获取距离|单位 %unit",
     "sensors.Init|block": "红外遥控器初始化引脚|%pin",
     "sensors.circulation|block": "红外传感器接收信号",
-    "sensors.OnPressEvent|block": "当红外遥控器按键|%btn|按下"
+    "sensors.OnPressEvent|block": "当红外遥控器按键|%btn|按下",
+    "LcdBacklight._on|block": "打开",
+    "LcdBacklight._off|block": "关闭",
+    "sensors.seti2cLcdBacklight|block": "背光灯%backlight状态"
 }
