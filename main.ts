@@ -417,23 +417,6 @@ namespace sensors {
         received = false
     }
 
-    control.inBackground(function () {
-        basic.forever(function () {
-            if ((!received) && (rec_init)) {
-                if (arr.length > 20) {
-                    if ((input.runningTimeMicros() - arr[arr.length - 1]) > 120000) {
-                        if (first) {
-                            resetReceiver()
-                            first = false
-                        } else {
-                            received = true
-                            decodeIR();
-                        }
-                    }
-                }
-            }
-        })
-    })
 
     function decodeIR() {
         let addr = 0
