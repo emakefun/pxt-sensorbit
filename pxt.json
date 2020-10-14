@@ -5,11 +5,12 @@
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "neopixel": "github:Kittenbot/pxt-neopixel#v0.6.13"
     },
     "files": [
         "README.md",
         "main.ts",
+        "EMRGBLight.ts",
+		"sendbuffer.asm",
 		"sensors.cpp",
         "ReceiverIR.cpp",
         "ReceiverIR.h",
