@@ -1,71 +1,44 @@
 {
-	"sensors|block": "Sensor:bit",
-	
-	"sensors.touchButton|block": "引脚%pin检测到触摸？",
-
-	"sensors.Button|block": "引脚%pin检测到按键被按下？",
-
-	"sensors.crashButton|block": "引脚%pin检测到碰撞？",
-
-	"sensors.slideRheostat|block": "引脚%pin获取滑动变阻器的模拟值",
-		
-	"sensors.rotaryPotentiometer|block": "引脚%pin获取旋转电位器的模拟值",
-
-	"_selectpin.Apin|block": "引脚A",
-	"_selectpin.Bpin|block": "引脚B",
-	"_selectpin.Dpin|block": "引脚D",
-
-	"sensors.rotaryEncoder|block": "旋转编码器初始化引脚A %pina引脚B%pinb引脚D%pind",
-	"sensors.pinsRead|block": " %selectpin获取数字值",
-
-	"_rockerpin.Xpin|block": "引脚X",
-	"_rockerpin.Ypin|block": "引脚Y",
-
-	"sensors.rockerPin|block": "摇杆初始化引脚X%pinx引脚Y%piny引脚B%pinb",
-	"sensors._analogRead|block": " %selectpin获取模拟值",
-	"sensors._digitalRead|block": "摇杆模块按键被按下？",
-		
-	"sensors.basic_piano_pin|block": "钢琴模块初始化引脚 DIO %DIO CLK %CLK",
-	"sensors.basic_piano_play|block": "弹奏钢琴",
-	
-	"sensors.sensor_temperature|block": "引脚%pin获取环境温度",
-	
+    "sensors|block": "Sensor:bit",
+    "sensors.touchButton|block": "引脚%pin检测到触摸？",
+    "sensors.Button|block": "引脚%pin检测到按键被按下？",
+    "sensors.crashButton|block": "引脚%pin检测到碰撞？",
+    "sensors.slideRheostat|block": "引脚%pin获取滑动变阻器的模拟值",
+    "sensors.rotaryPotentiometer|block": "引脚%pin获取旋转电位器的模拟值",
+    "_selectpin.Apin|block": "引脚A",
+    "_selectpin.Bpin|block": "引脚B",
+    "_selectpin.Dpin|block": "引脚D",
+    "sensors.rotaryEncoder|block": "旋转编码器初始化引脚A %pina引脚B%pinb引脚D%pind",
+    "sensors.pinsRead|block": " %selectpin获取数字值",
+    "_rockerpin.Xpin|block": "引脚X",
+    "_rockerpin.Ypin|block": "引脚Y",
+    "sensors.rockerPin|block": "摇杆初始化引脚X%pinx引脚Y%piny引脚B%pinb",
+    "sensors._analogRead|block": " %selectpin获取模拟值",
+    "sensors._digitalRead|block": "摇杆模块按键被按下？",
+    "sensors.basic_piano_pin|block": "钢琴模块初始化引脚 DIO %DIO CLK %CLK",
+    "sensors.basic_piano_play|block": "弹奏钢琴",
+    "sensors.sensor_temperature|block": "引脚%pin获取环境温度",
     "sensors.sensor_flame|block": "引脚%pin检测到火焰？",
-	"sensors.sensor_flame_analog|block": "引脚%pin读取火焰的模拟值",
-	
+    "sensors.sensor_flame_analog|block": "引脚%pin读取火焰的模拟值",
     "sensors.sensor_infraredTracking|block": "引脚%pin检测到黑线？",
-
     "sensors.sensor_incline|block": "引脚%pin检测到倾斜？",
-
     "sensors.sensor_illumination|block": "引脚%pin获取光照强度模拟值",
-    
     "sensors.sensor_thermosensitive|block": "引脚%pin获取热度模拟值",
-
     "sensors.sensor_waterLevel|block": "引脚%pin获取水位模拟值",
-
     "sensors.sensor_soilMoisture|block": "引脚%pin获取湿度模拟值",
-	
     "sensors.sensor_obstacleAvoid|block": "引脚%pin检测到前方有障碍物？",
-    
     "sensors.sensor_reedSwitch|block": "引脚%pin检测到磁场？",
-
     "sensors.sensor_humanBody|block": "引脚%pin检测到人体热源？",
-
     "sensors.sensor_quake|block": "引脚%pin检测到震动？",
-	"sensors.sensor_quake_analog|block": "引脚%pin获取震动模拟值",
-
+    "sensors.sensor_quake_analog|block": "引脚%pin获取震动模拟值",
     "sensors.sensor_grayLevel|block": "引脚%pin获取颜色模拟值",
-										
-	"sensors.sensor_sound_analogread|block": "引脚%AS获取声音的模拟值",
-	"sensors.sensor_sound_digitalread|block": "引脚%DS检测到声音？",
-	
-	"sensors.sensor_rain_analogread|block": "引脚%AR获取雨滴的模拟值",
+    "sensors.sensor_sound_analogread|block": "引脚%AS获取声音的模拟值",
+    "sensors.sensor_sound_digitalread|block": "引脚%DS检测到声音？",
+    "sensors.sensor_rain_analogread|block": "引脚%AR获取雨滴的模拟值",
     "sensors.sensor_rain_digitalread|block": "引脚%DR雨滴传感器检测到雨滴?",
-
-	"sensors.sensor_gas_analogread|block": "引脚%AG获取到气体的模拟值",
+    "sensors.sensor_gas_analogread|block": "引脚%AG获取到气体的模拟值",
     "sensors.sensor_gas_digitalread|block": "引脚%DG检测到气体？",
-	
-	"sensors.Ultrasonic|block": "引脚%pin读取RGB超声波距离(cm)",
+    "sensors.Ultrasonic|block": "引脚%pin读取RGB超声波距离(cm)",
     "RgbColors.Red|block": "红",
     "RgbColors.Orange|block": "橙",
     "RgbColors.Yellow|block": "黄",
@@ -84,91 +57,69 @@
     "ColorEffect.Rotate|block": "旋转流星",
     "ColorEffect.Flash|block": "闪烁",
     "sensors.RUS_04|block": "选择引脚%pin选择彩灯%index选择颜色%rgb选择效果%effect",
-
     "DHT11Type.DHT11_humidity|block": "湿度(0~100)",
     "DHT11Type.DHT11_temperature_C|block": "摄氏温度(℃)",
-
     "sensors.dht11value|block": "引脚 %dht11pin 获取温湿度传感器的 %dht11type",
-
     "ledon_off._on|block": "点亮",
-	"ledon_off._off|block": "熄灭",
-
-	"_selectlight._yellow|block": "黄灯",
-	"_selectlight._red|block": "红灯",
-	"_selectlight._green|block": "绿灯",
-
-	"_selectcolor._blue|block": "蓝色",
-	"_selectcolor._red|block": "红色",
-	"_selectcolor._green|block": "绿色",
+    "ledon_off._off|block": "熄灭",
+    "_selectlight._yellow|block": "黄灯",
+    "_selectlight._red|block": "红灯",
+    "_selectlight._green|block": "绿灯",
+    "_selectcolor._blue|block": "蓝色",
+    "_selectcolor._red|block": "红色",
+    "_selectcolor._green|block": "绿色",
     "sensors.setled|block": "设置LED灯引脚：%lpin|状态 %lstatus",
-	"sensors.setpin|block": "初始化引脚|绿(G) %GPin|黄(Y) %YPin|红(R) %RPin",
-	"sensors.selectlight|block": "选择LED灯  %selectpin|状态 %_status",
-	
-	"sensors.setRGBpin|block": "初始化引脚|绿(G) %GPin|蓝(B) %YPin|红(R) %RPin",
+    "sensors.setpin|block": "初始化引脚|绿(G) %GPin|黄(Y) %YPin|红(R) %RPin",
+    "sensors.selectlight|block": "选择LED灯  %selectpin|状态 %_status",
+    "sensors.setRGBpin|block": "初始化引脚|绿(G) %GPin|蓝(B) %YPin|红(R) %RPin",
     "sensors.selectcolor|block": "选择颜色  %selectpin|状态 %_status",
-    
     "sensors.i2cLcdInit|block": "初始化I2C地址(默认为39) $addr",
-	"sensors.i2cLcdShowChar|block": "第$y行第$x列显示字符$ch",
-	"sensors.i2cLcdShowNumber|block": "第$y行第$x列显示数字$n",
-	"sensors.i2cLcdShowString|block": "第$y行第$x列显示字符串$s",
-	"sensors.i2cLcdOn|block": "打开显示",
-	"sensors.i2cLcdOff|block": "关闭显示",
-	"sensors.i2cLcdClear|block": "清除显示",
-	"sensors.i2cLcdBacklightOn|block": "打开背光",
+    "sensors.i2cLcdShowChar|block": "第$y行第$x列显示字符$ch",
+    "sensors.i2cLcdShowNumber|block": "第$y行第$x列显示数字$n",
+    "sensors.i2cLcdShowString|block": "第$y行第$x列显示字符串$s",
+    "sensors.i2cLcdOn|block": "打开显示",
+    "sensors.i2cLcdOff|block": "关闭显示",
+    "sensors.i2cLcdClear|block": "清除显示",
+    "sensors.i2cLcdBacklightOn|block": "打开背光",
     "sensors.i2cLcdBacklightOff|block": "关闭背光",
-    
     "sensors.TMcreate|block": "TM1637初始化CLK引脚%clk DIO引脚%dio亮度%intensityLED数量(1到4)%count",
     "sensors.TM1637LEDs.intensity|block": "%tm设置亮度 %val",
     "sensors.TM1637LEDs.showNumber|block": "%tm显示数字 %num",
     "sensors.TM1637LEDs.clear|block": "%tm清除显示",
-	"sensors.TM1637LEDs.on|block": "%tm打开显示",
-	"sensors.TM1637LEDs.off|block": "%tm关闭显示",
+    "sensors.TM1637LEDs.on|block": "%tm打开显示",
+    "sensors.TM1637LEDs.off|block": "%tm关闭显示",
     "sensors.TM1637LEDs.showDP|block": " %tm%show第 %bit 位的点",
     "sensors.TM1637LEDs.showHex|block": "%tm显示十六进制数字%num",
     "sensors.TM1637LEDs.showbit|block": "%tm第 %bit 位显示数字 %num",
-
     "sensors.setIntensity|block": "设置亮度 %dat",
     "sensors.showNumber|block": "显示数字 %num",
     "sensors.clear|block": "清除显示",
-	"sensors.on|block": "打开显示",
+    "sensors.on|block": "打开显示",
     "sensors.off|block": "关闭显示",
     "sensors.showHex|block": "显示十六进制数据%num",
     "sensors.digit|block": "第%bit位显示数据%num",
     "sensors.showDpAt|block": " %show第%bit位的点",
-
     "on_off._on|block": "打开",
-	"on_off._off|block": "关闭",
-	
-	"run_turn.forward|block": "正转",
-	"run_turn.reverse|block": "反转",
-	
-	"sensors.setIR_pin|block": "红外线发射脚位: %myPin",
+    "on_off._off|block": "关闭",
+    "run_turn.forward|block": "正转",
+    "run_turn.reverse|block": "反转",
+    "sensors.setIR_pin|block": "红外线发射脚位: %myPin",
     "sensors.setREC_pin|block": "红外线接收脚位: %myPin",
     "sensors.sendMyMessage1|block": "发射红外信号: %msg| ,发射次数： %times| 次, 编码:%myType",
     "sensors.sendMyMessage2|block": "发射红外信号: %msg| ,发射次数： %times| 次, 编码:%myType",
     "sensors.onReceivedIR|block": "当接收到红外信号时",
     "sensors.getRecType|block": "接收到的红外编码",
     "sensors.getMessage|block": "接收到的红外信号",
-	
-	
-	"sensors.actuator_buzzer0|block": "有源蜂鸣器控制引脚 ：%pin|状态 %status",
-	
+    "sensors.actuator_buzzer0|block": "有源蜂鸣器控制引脚 ：%pin|状态 %status",
     "sensors.actuator_buzzer1|block": "无源蜂鸣器控制引脚 ：%pin|频率 %freq",
-
     "sensors.actuator_relay|block": "继电器控制引脚 ：%pin|状态 %status",
-	
-	"sensors.actuator_laser|block": "激光控制引脚 ：%pin|状态 %status",
-	
-	"sensors.actuator_motor_run|block": "直流电机初始化INA引脚%INA |INB引脚 %INB运行模式%turn速度:%speed",
-	
-	"sensors.actuator_servo|block": "舵机初始化引脚%pin| 角度 %angle",
-
+    "sensors.actuator_laser|block": "激光控制引脚 ：%pin|状态 %status",
+    "sensors.actuator_motor_run|block": "直流电机初始化INA引脚%INA |INB引脚 %INB运行模式%turn速度:%speed",
+    "sensors.actuator_servo|block": "舵机初始化引脚%pin| 角度 %angle",
     "sensors.actuator_keyborad_pin|block": "触摸键盘初始化|SDO引脚 %SDO|SCL引脚 %SCL",
     "sensors.actuator_keyborad_read|block": "读取到的键盘值",
-	"sensors.ping|block": "普通超声波初始化trig引脚 %trig |echo引脚 %echo 获取距离|单位 %unit",
-	   "sensors.Init|block": "红外遥控器初始化引脚|%pin",
+    "sensors.ping|block": "普通超声波初始化trig引脚 %trig |echo引脚 %echo 获取距离|单位 %unit",
+    "sensors.Init|block": "红外遥控器初始化引脚|%pin",
+    "sensors.circulation|block": "红外传感器接收信号",
     "sensors.OnPressEvent|block": "当红外遥控器按键|%btn|按下"
-	
-	
-    
 }
