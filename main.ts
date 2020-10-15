@@ -198,6 +198,24 @@ enum LcdBacklight{
     _off = 0,
 }
 
+enum Item{
+    //% block="on"
+    _on = 1,
+    //% block="off"
+    _off = 2,
+    //% block="clear"
+    _clear = 3,
+}
+
+enum Select{
+    //% block="on"
+    _on = 0,
+    //% block="off"
+    _off = 1,
+    //% block="clear"
+    _clear = 2,
+}
+
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors { 
     //% blockId=actuator_buzzer0 block="actuator_buzzer0 pin ：%pin|status %status"   group="有源蜂鸣器"
@@ -758,55 +776,71 @@ namespace sensors {
         }
     }
 
-	//% block="lcdon"   group="LCD1602显示屏"  
-	//% subcategory="显示器"
-	//% weight=66
-    export function i2cLcdOn(): void {
-        lcdcmd(0x0C)
-    }
+	// //% block="lcdon"   group="LCD1602显示屏"  
+	// //% subcategory="显示器"
+	// //% weight=66
+    // export function i2cLcdOn(): void {
+    //     lcdcmd(0x0C)
+    // }
 
-	//% block="lcdoff"   group="LCD1602显示屏"  
-	//% subcategory="显示器"
-	//% weight=65
-    export function i2cLcdOff(): void {
-        lcdcmd(0x08)
-    }
+	// //% block="lcdoff"   group="LCD1602显示屏"  
+	// //% subcategory="显示器"
+	// //% weight=65
+    // export function i2cLcdOff(): void {
+    //     lcdcmd(0x08)
+    // }
 
-	//% block="lcdclear"   group="LCD1602显示屏"  
+	// //% block="lcdclear"   group="LCD1602显示屏"  
+	// //% subcategory="显示器"
+	// //% weight=64
+    // export function i2cLcdClear(): void {
+    //     lcdcmd(0x01)
+    // }
+
+    //% block="i2cLcdDisplay_Control"   group="LCD1602显示屏"  
 	//% subcategory="显示器"
 	//% weight=64
-    export function i2cLcdClear(): void {
-        lcdcmd(0x01)
+    export function i2cLcdDisplay_Control(item: Item): void {
+        if(item==1){
+            lcdcmd(0x0C)
+        }
+        if(item==2){
+            lcdcmd(0x08)
+        }
+        if(item==3){
+            lcdcmd(0x01)
+        }
     }
 
-	//% block="lcdlighton"   group="LCD1602显示屏"  
-	//% subcategory="显示器"
-	//% weight=63
-    export function i2cLcdBacklightOn(): void {
+
+	// //% block="lcdlighton"   group="LCD1602显示屏"  
+	// //% subcategory="显示器"
+	// //% weight=63
+    // export function i2cLcdBacklightOn(): void {
+    //     BK = 8
+    //     lcdcmd(0)
+    // }
+
+	// //% block="lcdlightoff"   group="LCD1602显示屏"  
+	// //% subcategory="显示器"
+	// //% weight=62
+    // export function i2cLcdBacklightOff(): void {
+    //     BK = 0
+    //     lcdcmd(0)
+    // }
+  //% subcategory="显示器"   group="LCD1602显示屏"
+  //% blockId="Backlight switch control"
+  //% weight=79
+  export function seti2cLcdBacklight(backlight: LcdBacklight): void {
+    if(backlight==1){
         BK = 8
         lcdcmd(0)
     }
-
-	//% block="lcdlightoff"   group="LCD1602显示屏"  
-	//% subcategory="显示器"
-	//% weight=62
-    export function i2cLcdBacklightOff(): void {
+    if(backlight==0){
         BK = 0
         lcdcmd(0)
     }
-//   //% subcategory="显示器"   group="LCD1602显示屏"
-//   //% blockId="Backlight switch control"
-//   //% weight=79
-//   export function seti2cLcdBacklight(backlight: LcdBacklight): void {
-//     if(backlight==1){
-//         BK = 8
-//         lcdcmd(0)
-//     }
-//     if(backlight==0){
-//         BK = 0
-//         lcdcmd(0)
-//     }
-//   }
+  }
 	
 		
 	
@@ -1027,7 +1061,7 @@ namespace sensors {
             }
         }
 
-        //% weight=99 blockGap=8
+        //% weight=99 
 		//% blockId="TM1637_create" block="CLK %clk|DIO %dio|intensity %intensity|LED count %count"  group="TM1637数码管"
 		//% inlineInputMode=inline
 		//% subcategory="显示器"
@@ -1059,30 +1093,49 @@ namespace sensors {
             pins.i2cWriteNumber(DISPLAY_I2C_ADDRESS + (bit % 4), d, NumberFormat.Int8BE)
         }
     
-        //% blockId="TM650_ON" block="turn on display" group="TM1650数码管"
-		//% weight=50 blockGap=8
-		//% subcategory="显示器"
-        export function on() {
-            cmd(_intensity * 16 + 1)
-        }
+        // //% blockId="TM650_ON" block="turn on display" group="TM1650数码管"
+		// //% weight=50 blockGap=8
+		// //% subcategory="显示器"
+        // export function on() {
+        //     cmd(_intensity * 16 + 1)
+        // }
     
-        //% blockId="TM650_OFF" block="turn off display" group="TM1650数码管"
-		//% weight=50 blockGap=8
-		//% subcategory="显示器"
-        export function off() {
-            _intensity = 0
-            cmd(0)
-        }
+        // //% blockId="TM650_OFF" block="turn off display" group="TM1650数码管"
+		// //% weight=50 blockGap=8
+		// //% subcategory="显示器"
+        // export function off() {
+        //     _intensity = 0
+        //     cmd(0)
+        // }
 
-        //% blockId="TM650_CLEAR" block="clear display" group="TM1650数码管"
+        // //% blockId="TM650_CLEAR" block="clear display" group="TM1650数码管"
+		// //% weight=40 blockGap=8
+		// //% subcategory="显示器"
+        // export function clear() {
+        //     dat(0, 0)
+        //     dat(1, 0)
+        //     dat(2, 0)
+        //     dat(3, 0)
+        //     dbuf = [0, 0, 0, 0]
+        // }
+        //% blockId="TM650_Control" block="display control" group="TM1650数码管"
 		//% weight=40 blockGap=8
 		//% subcategory="显示器"
-        export function clear() {
-            dat(0, 0)
-            dat(1, 0)
-            dat(2, 0)
-            dat(3, 0)
-            dbuf = [0, 0, 0, 0]
+        export function TM650_Control(option:Select) {
+            if(option==0){
+                cmd(_intensity * 16 + 1)
+            }
+            if(option==1){
+                _intensity = 0
+                cmd(0)
+            }
+            if(option==2){
+                dat(0, 0)
+                dat(1, 0)
+                dat(2, 0)
+                dat(3, 0)
+                dbuf = [0, 0, 0, 0]
+            }
         }
 
         //% blockId="TM650_DIGIT" block="show digit %num|at %bit"  group="TM1650数码管"
@@ -1140,10 +1193,12 @@ namespace sensors {
 		//% subcategory="显示器"
 		//% dat.max=7 dat.min=0
         export function setIntensity(dat: number) {
-            if ((dat < 0) || (dat > 8))
-                return 
-            if (dat == 0)
-                off()
+            if ((dat < 0) || (dat > 8)){
+                return }
+            if (dat == 0){
+                _intensity = 0
+                cmd(0)
+            }
             else {
                 _intensity = dat
                 cmd((dat << 4) | 0x01)
@@ -1595,7 +1650,8 @@ namespace sensors {
     }
 	
 	let initialized = false
- 	let neoStrip: neopixel.Strip;
+     //let neoStrip: neopixel.Strip;
+    let emRGBLight: EMRGBLight.EmakefunRGBLight;
 	let matBuf = pins.createBuffer(17);
 	let distanceBuf = 0;
 
@@ -1629,83 +1685,78 @@ namespace sensors {
 
  	function RgbDisplay(indexstart: number, indexend: number, rgb: RgbColors): void {
  		for (let i = indexstart; i <= indexend; i++) {
- 			neoStrip.setPixelColor(i, rgb);
+            emRGBLight.setPixelColor(i, rgb);
  		}
- 		neoStrip.show();
+ 		emRGBLight.show();
  	}
 
  	//% blockId="motorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
  	//% weight=75
 	//% inlineInputMode=inline
 	//% subcategory="传感器"
- 	export function RUS_04(pin: DigitalPin, index: RgbUltrasonics, rgb: RgbColors, effect: ColorEffect): void {
-		if(rgb == RgbColors.Red) {
-			rgb = RgbColors.Green;
-		}else if(rgb == RgbColors.Green) {
-	     	rgb = RgbColors.Red;
-		}
- 		let start, end;
- 		if (!neoStrip) {
- 			neoStrip = neopixel.create(pin, 6, NeoPixelMode.RGB)
- 		}
- 		if (index == RgbUltrasonics.Left) {
- 			start = 0;
- 			end = 2;
- 		} else if (index == RgbUltrasonics.Right) {
- 			start = 3;
- 			end = 5;
- 		} else if (index == RgbUltrasonics.All) {
- 			start = 0;
- 			end = 5;
- 		}
+ 	export function sensorbit_rus04(pin: DigitalPin, index: RgbUltrasonics, rgb: RgbColors, effect: ColorEffect): void {
+		let start, end;
+        if (!emRGBLight) {
+            emRGBLight = EMRGBLight.create(pin, 6, EMRGBPixelMode.RGB)
+        }
+        if (index == RgbUltrasonics.Left) {
+            start = 0;
+            end = 2;
+        } else if (index == RgbUltrasonics.Right) {
+            start = 3;
+            end = 5;
+        } else if (index == RgbUltrasonics.All) {
+            start = 0;
+            end = 5;
+        }
  		switch(effect) {
  			case ColorEffect.None:
  				RgbDisplay(start, end, rgb);
  				break;
  			case ColorEffect.Breathing:
  			for (let i = 0; i < 255; i+=2) {
- 				neoStrip.setBrightness(i);
+ 				emRGBLight.setBrightness(i);
  				RgbDisplay(start, end, rgb);
  				//basic.pause((255 - i)/2);
  				basic.pause((i < 20)? 80 :(255/i));
  			}
  			for (let i = 255; i > 0; i-=2) {
- 				neoStrip.setBrightness(i);
+ 				emRGBLight.setBrightness(i);
  				RgbDisplay(start, end, rgb);
  				basic.pause((i < 20)? 80 :(255/i));
  			}
  			break;
  			case ColorEffect.Rotate:
  				for (let i = 0; i < 4; i++) {
- 					neoStrip.setPixelColor(start, rgb);
- 					neoStrip.setPixelColor(start+1, 0);
- 					neoStrip.setPixelColor(start+2, 0);
+ 					emRGBLight.setPixelColor(start, rgb);
+ 					emRGBLight.setPixelColor(start+1, 0);
+ 					emRGBLight.setPixelColor(start+2, 0);
  					if (index == RgbUltrasonics.All) {
- 						neoStrip.setPixelColor(end-2, rgb);
- 						neoStrip.setPixelColor(end-1, 0);
- 						neoStrip.setPixelColor(end, 0);
+ 						emRGBLight.setPixelColor(end-2, rgb);
+ 						emRGBLight.setPixelColor(end-1, 0);
+ 						emRGBLight.setPixelColor(end, 0);
  					}
- 					neoStrip.show();
+ 					emRGBLight.show();
  					basic.pause(150);
- 					neoStrip.setPixelColor(start, 0);
- 					neoStrip.setPixelColor(start+1, rgb);
- 					neoStrip.setPixelColor(start+2, 0);
+ 					emRGBLight.setPixelColor(start, 0);
+ 					emRGBLight.setPixelColor(start+1, rgb);
+ 					emRGBLight.setPixelColor(start+2, 0);
  					if (index == RgbUltrasonics.All) {
- 						neoStrip.setPixelColor(end-2, 0);
- 						neoStrip.setPixelColor(end-1, rgb);
- 						neoStrip.setPixelColor(end, 0);
+ 						emRGBLight.setPixelColor(end-2, 0);
+ 						emRGBLight.setPixelColor(end-1, rgb);
+ 						emRGBLight.setPixelColor(end, 0);
  					}
- 					neoStrip.show();
+ 					emRGBLight.show();
  					basic.pause(150);
- 					neoStrip.setPixelColor(start, 0);
- 					neoStrip.setPixelColor(start+1, 0);
- 					neoStrip.setPixelColor(start+2, rgb);
+ 					emRGBLight.setPixelColor(start, 0);
+ 					emRGBLight.setPixelColor(start+1, 0);
+ 					emRGBLight.setPixelColor(start+2, rgb);
  					if (index == RgbUltrasonics.All) {
- 						neoStrip.setPixelColor(end-2, 0);
- 						neoStrip.setPixelColor(end-1, 0);
- 						neoStrip.setPixelColor(end, rgb);
+ 						emRGBLight.setPixelColor(end-2, 0);
+ 						emRGBLight.setPixelColor(end-1, 0);
+ 						emRGBLight.setPixelColor(end, rgb);
  					}
- 					neoStrip.show();
+ 					emRGBLight.show();
  					basic.pause(150);
  				}
  				RgbDisplay(4, 9, 0);

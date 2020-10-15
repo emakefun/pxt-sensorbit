@@ -56,7 +56,7 @@
     "ColorEffect.Breathing|block": "呼吸灯",
     "ColorEffect.Rotate|block": "旋转流星",
     "ColorEffect.Flash|block": "闪烁",
-    "sensors.RUS_04|block": "选择引脚%pin选择彩灯%index选择颜色%rgb选择效果%effect",
+    "sensors.sensorbit_rus04|block": "选择引脚%pin选择彩灯%index选择颜色%rgb选择效果%effect",
     "DHT11Type.DHT11_humidity|block": "湿度(0~100)",
     "DHT11Type.DHT11_temperature_C|block": "摄氏温度(℃)",
     "sensors.dht11value|block": "引脚 %dht11pin 获取温湿度传感器的 %dht11type",
@@ -124,5 +124,13 @@
     "sensors.OnPressEvent|block": "当红外遥控器按键|%btn|按下",
     "LcdBacklight._on|block": "打开",
     "LcdBacklight._off|block": "关闭",
-    "sensors.seti2cLcdBacklight|block": "背光灯%backlight状态"
+    "Item._on|block": "打开",
+    "Item._off|block": "关闭",
+    "Item._clear|block": "清除",
+    "Select._on|block": "打开",
+    "Select._off|block": "关闭",
+    "Select._clear|block": "清除",
+    "sensors.seti2cLcdBacklight|block": "背光灯%backlight状态",
+    "sensors.i2cLcdDisplay_Control|block": "%item显示",
+    "sensors.TM650_Control|block": "%option显示"
 }
