@@ -546,6 +546,16 @@ namespace sensors {
 
     let _SDO = 0
     let _SCL = 0
+
+    //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="触摸键盘"
+    //% weight=71
+    //% subcategory="执行器"
+    export function actuator_keyborad_pin(SDO: DigitalPin, SCL: DigitalPin): void {
+
+        _SDO = SDO
+        _SCL = SCL
+    }
+
     //% blockId=circulation block="receipt signal"  group="红外接收"
     //% weight=69
     //% subcategory="执行器"
@@ -565,7 +575,45 @@ namespace sensors {
         }
     }
 
-    
+
+    //% blockId=actuator_keyborad_read block="actuator_keyborad_read"   group="触摸键盘"
+    //% weight=70
+    //% subcategory="执行器"
+    export function actuator_keyborad_read(): string {
+        let DATA = 0
+        pins.digitalWritePin(_SDO, 1)
+        control.waitMicros(93)
+
+        pins.digitalWritePin(_SDO, 0)
+        control.waitMicros(10)
+
+        for (let i = 0; i < 16; i++) {
+            pins.digitalWritePin(_SCL, 1)
+            pins.digitalWritePin(_SCL, 0)
+            DATA |= pins.digitalReadPin(_SDO) << i
+        }
+        control.waitMicros(2 * 1000)
+        switch (DATA & 0xFFFF) {
+            case 0xFFFE: return "1"
+            case 0xFFFD: return "2"
+            case 0xFFFB: return "3"
+            case 0xFFEF: return "4"
+            case 0xFFDF: return "5"
+            case 0xFFBF: return "6"
+            case 0xFEFF: return "7"
+            case 0xFDFF: return "8"
+            case 0xFBFF: return "9"
+            case 0xDFFF: return "0"
+            case 0xFFF7: return "A"
+            case 0xFF7F: return "B"
+            case 0xF7FF: return "C"
+            case 0x7FFF: return "D"
+            case 0xEFFF: return "*"
+            case 0xBFFF: return "#"
+            default: return " "
+        }
+    }
+
     //% blockId=setled block="set led ：%lpin|status %lstatus"   group="LED灯"
     //% weight=70
     //% subcategory="显示器"
@@ -1327,56 +1375,6 @@ namespace sensors {
         }
     }
 
-    //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="触摸键盘"
-    //% weight=71
-    //% subcategory="基础输入模块"
-    export function actuator_keyborad_pin(SDO: DigitalPin, SCL: DigitalPin): void {
-
-        _SDO = SDO
-        _SCL = SCL
-    }
-
-    
-    //% blockId=actuator_keyborad_read block="actuator_keyborad_read"   group="触摸键盘"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function actuator_keyborad_read(): string {
-        let DATA = 0
-        pins.digitalWritePin(_SDO, 1)
-        control.waitMicros(93)
-
-        pins.digitalWritePin(_SDO, 0)
-        control.waitMicros(10)
-
-        for (let i = 0; i < 16; i++) {
-            pins.digitalWritePin(_SCL, 1)
-            pins.digitalWritePin(_SCL, 0)
-            DATA |= pins.digitalReadPin(_SDO) << i
-        }
-        control.waitMicros(2 * 1000)
-        switch (DATA & 0xFFFF) {
-            case 0xFFFE: return "1"
-            case 0xFFFD: return "2"
-            case 0xFFFB: return "3"
-            case 0xFFEF: return "4"
-            case 0xFFDF: return "5"
-            case 0xFFBF: return "6"
-            case 0xFEFF: return "7"
-            case 0xFDFF: return "8"
-            case 0xFBFF: return "9"
-            case 0xDFFF: return "0"
-            case 0xFFF7: return "A"
-            case 0xFF7F: return "B"
-            case 0xF7FF: return "C"
-            case 0x7FFF: return "D"
-            case 0xEFFF: return "*"
-            case 0xBFFF: return "#"
-            default: return " "
-        }
-    }
-
-
-
     //% blockId=sensor_temperature block="Pin %pin reads the analog value of the LM35"  group="LM35温度传感器"
     //% weight=70
     //% inlineInputMode=inline
@@ -1856,6 +1854,74 @@ namespace sensors {
                 return 0;
         }
     }
+
+
+/**
+     * 循迹传感器
+     */
+    //% blockId=sensor_tracking block="sensor_tracking pin |digitalpin %pin"  group="循迹传感器"
+    //% weight=74
+    //% subcategory="传感器"
+    //% inlineInputMode=inline
+    export function sensor_tracking(pin: DigitalPin): boolean {
+        pins.digitalWritePin(pin, 0)
+           if (pins.digitalReadPin(pin) == 1) {
+              return false;
+          }else {
+              return true;
+          }
+      }
+      
+      let outPin1 = 0;
+      let outPin2 = 0;
+      let outPin3 = 0;
+      let outPin4 = 0;
+      /**
+       * 四路循迹传感器初始化
+       */
+      //% blockId=four_sensor_tracking block="four_sensor_tracking pin1 |digitalpin %pin1 pin2 |digitalpin %pin2 |pin3 |digitalpin %pin3 |pin4 |digitalpin %pin4"  group="循迹传感器"
+      //% inlineInputMode=inline
+      //% weight=73
+      //% subcategory="传感器"
+      export function four_sensor_tracking(pin1: DigitalPin, pin2: DigitalPin, pin3: DigitalPin, pin4: DigitalPin): void {
+        outPin1 = pin1;
+        outPin2 = pin2;
+        outPin3 = pin3;
+        outPin4 = pin4;
+      }
+      
+      //% blockId=four_sensor_trackingValue block="four_sensor_tracking get sensor value"  group="循迹传感器"
+      //% inlineInputMode=inline
+      //% weight=72
+      //% subcategory="传感器"
+      export function four_sensor_trackingValue(): number {
+        let result = 0;
+        pins.digitalWritePin(outPin1, 0)
+        pins.digitalWritePin(outPin2, 0)
+        pins.digitalWritePin(outPin3, 0)
+        pins.digitalWritePin(outPin4, 0)
+        if (pins.digitalReadPin(outPin1) == 1) {
+          result = 1 | result;
+        }else {
+          result = 0 | result;
+        }
+        if (pins.digitalReadPin(outPin2) == 1) {
+          result = 2 | result;
+        }else {
+          result = 0 | result;
+        }
+        if (pins.digitalReadPin(outPin3) == 1) {
+          result = 4 | result;
+        }else {
+          result = 0 | result;
+        }
+         if (pins.digitalReadPin(outPin4) == 1) {
+          result = 8 | result;
+        }else {
+          result = 0 | result;
+        }
+        return result;
+      }
 
 
 }

@@ -132,5 +132,8 @@
     "Select._clear|block": "清除",
     "sensors.seti2cLcdBacklight|block": "背光灯%backlight状态",
     "sensors.i2cLcdDisplay_Control|block": "%item显示",
-    "sensors.TM650_Control|block": "%option显示"
+    "sensors.TM650_Control|block": "%option显示",
+    "sensors.sensor_tracking|block": "引脚 %pin 检测到黑线？",
+	"sensors.four_sensor_tracking|block": "四路循迹初始化引脚OUT0|%pin1|引脚OUT1|%pin2|引脚OUT2|%pin3|引脚OUT3|%pin4",
+	"sensors.four_sensor_trackingValue|block": "四路循迹传感器获取的值"
 }
