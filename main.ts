@@ -7,13 +7,13 @@ enum PingUnit {
 
 enum RgbColors {
     //% block=red
-    Red = 0x00FF00,
+    Red = 0xFF0000,
     //% block=orange
     Orange = 0xFFA500,
     //% block=yellow
     Yellow = 0xFFFF00,
     //% block=green
-    Green = 0xFF0000,
+    Green = 0x00FF00,
     //% block=blue
     Blue = 0x0000FF,
     //% block=indigo
