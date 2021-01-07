@@ -11,13 +11,6 @@
         "README.md",
         "main.ts",
         "EMRGBLight.ts",
-		"sendbuffer.asm",
-		"sensors.cpp",
-        "ReceiverIR.cpp",
-        "ReceiverIR.h",
-        "RemoteIR.h",
-        "TransmitterIR.cpp",
-        "TransmitterIR.h",
 		"_locales/zh/sensors-strings.json"
 		
     ],
