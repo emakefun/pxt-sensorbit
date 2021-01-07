@@ -556,24 +556,24 @@ namespace sensors {
         _SCL = SCL
     }
 
-    //% blockId=circulation block="receipt signal"  group="红外接收"
-    //% weight=69
-    //% subcategory="执行器"
-    export function circulation(): void {
-        if ((!received) && (rec_init)) {
-            if (arr.length > 20) {
-                if ((input.runningTimeMicros() - arr[arr.length - 1]) > 120000) {
-                    if (first) {
-                        resetReceiver()
-                        first = false
-                    } else {
-                        received = true
-                        decodeIR();
-                    }
-                }
-            }
-        }
-    }
+    // //% blockId=circulation block="receipt signal"  group="红外接收"
+    // //% weight=69
+    // //% subcategory="执行器"
+    // export function circulation(): void {
+    //     if ((!received) && (rec_init)) {
+    //         if (arr.length > 20) {
+    //             if ((input.runningTimeMicros() - arr[arr.length - 1]) > 120000) {
+    //                 if (first) {
+    //                     resetReceiver()
+    //                     first = false
+    //                 } else {
+    //                     received = true
+    //                     decodeIR();
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
 
     //% blockId=actuator_keyborad_read block="actuator_keyborad_read"   group="触摸键盘"
