@@ -1548,6 +1548,9 @@ namespace sensors {
                     if (i > 15) {
                         if (dhtcounter1 > 2) {
                             dhtvalue1 = dhtvalue1 + (1 << (31 - i));
+                            console.log(1)
+                        }else{
+                            console.log(0)
                         }
                     }
                 }
