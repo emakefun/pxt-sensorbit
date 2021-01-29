@@ -931,7 +931,7 @@ namespace sensors {
     //% weight=70
     //% subcategory="基础输入模块"
     export function touchButton(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 1)
+        pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return true;
         } else {
