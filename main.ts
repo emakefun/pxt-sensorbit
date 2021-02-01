@@ -1646,5 +1646,60 @@ namespace sensors {
         return result;
       }
 
+            //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
+    //% subcategory="micro:bit(V2)"
+    //% inlineInputMode=inline
+    export function dht11value_v2(dht11pin: DigitalPin, dht11type: DHT11Type): number {
+        pins.digitalWritePin(dht11pin, 0)
+        basic.pause(18)
+        let i = pins.digitalReadPin(dht11pin)
+        pins.setPull(dht11pin, PinPullMode.PullUp);
+        switch (dht11type) {
+            case 0:
+                let dhtvalue1 = 0;
+                let dhtcounter1 = 0;
+                while (pins.digitalReadPin(dht11pin) == 1);
+                while (pins.digitalReadPin(dht11pin) == 0);
+                while (pins.digitalReadPin(dht11pin) == 1);
+                for (let i = 0; i <= 32 - 1; i++) {
+                    while (pins.digitalReadPin(dht11pin) == 0);
+                    dhtcounter1 = 0
+                    while (pins.digitalReadPin(dht11pin) == 1) {
+                        dhtcounter1 += 1;
+                    }
+                    if (i > 15) {
+                        if (dhtcounter1 > 10) {
+                            dhtvalue1 = dhtvalue1 + (1 << (31 - i));
+                        }
+                    }
+                }
+                return ((dhtvalue1 & 0x0000ffff)>> 8);
+                break;
+
+            case 1:
+                while (pins.digitalReadPin(dht11pin) == 1);
+                while (pins.digitalReadPin(dht11pin) == 0);
+                while (pins.digitalReadPin(dht11pin) == 1);
+
+                let value = 0;
+                let counter = 0;
+
+                for (let i = 0; i <= 8 - 1; i++) {
+                    while (pins.digitalReadPin(dht11pin) == 0);
+                    counter = 0
+                    while (pins.digitalReadPin(dht11pin) == 1) {
+                        counter += 1;
+                    }
+                    if (counter > 10) {
+                        value = value + (1 << (7 - i));
+                    }
+                }
+                return value;
+            default:
+                return 0;
+        }
+    }
+
+
 
 }
