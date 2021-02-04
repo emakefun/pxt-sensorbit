@@ -356,20 +356,16 @@ namespace sensors {
         _Rpins = _RPin
     }
 
-    //% blockId=yledon block="set color pin  %selectpin|light %_status"   group="三色灯"
+    //% blockId=yledon block="set color pin|r_color %r_color|g_color %g_color|b_color %b_color"   group="三色灯"
+    //% r_color.min=0  r_color.max=255
+    //% g_color.min=0  g_color.max=255
+    //% b_color.min=0  b_color.max=255
     //% weight=70
     //% subcategory="显示器"
-    export function selectcolor(selectpin: _selectcolor, _status: ledon_off): void {
-        let a;
-        if (selectpin == 0)
-            a = _Bpins
-        else if (selectpin == 1) {
-            a = _Rpins
-        }
-        else if (selectpin == 2) {
-            a = _Gpins
-        }
-        pins.digitalWritePin(a, _status)
+    export function selectcolor(r_color: number,g_color: number,b_color: number): void {
+        pins.analogWritePin(_Rpins,r_color)
+        pins.analogWritePin(_Gpins,g_color)
+        pins.analogWritePin(_Bpins,b_color)
     }
 
     /*
