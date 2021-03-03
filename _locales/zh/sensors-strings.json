@@ -136,5 +136,15 @@
     "sensors.TM650_Control|block": "%option显示",
     "sensors.sensor_tracking|block": "引脚 %pin 检测到黑线？",
 	"sensors.four_sensor_tracking|block": "四路循迹初始化引脚OUT0|%pin1|引脚OUT1|%pin2|引脚OUT2|%pin3|引脚OUT3|%pin4",
-	"sensors.four_sensor_trackingValue|block": "四路循迹传感器获取的值"
+	"sensors.four_sensor_trackingValue|block": "四路循迹传感器获取的值",
+    "sensors.Speech_recognition_reset|block": "语音识别模块进行复位",
+    "Mode.LOOP_MODE|block": "循环模式",
+    "Mode.BUTTON_MODE|block": "按键模式",
+    "Mode.KEYWORDS_MODE|block": "关键字模式",
+    "Mode.KEYWORDS_AND_BUTTON|block": "关键字加按键模式",
+    "sensors.Speech_recognition_mode|block": "语音识别模式设置为%Mode",
+    "sensors.Speech_recognition_glossary|block": "语音识别设置词条编号%word_number|词条内容 %word_content",
+    "sensors.Speech_recognition_start|block": "语音识别开始识别",
+    "sensors.Speech_recognition_get_result|block": "语音识别获取识别到的词条的对应编号",
+    "sensors.Speech_recognition_time|block": "语音识别设置唤醒时间 %time"
 }

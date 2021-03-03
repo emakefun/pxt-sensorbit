@@ -216,6 +216,17 @@ enum Select {
     _clear = 2,
 }
 
+enum Mode {
+    //% block="LOOP"
+    LOOP_MODE = 0,        // 循环模式
+    //% block="BUTTON"
+    BUTTON_MODE = 1,      // 按键模式
+    //% block="KEYWORDS"
+    KEYWORDS_MODE = 2,    // 关键字模式
+    //% block="KEYWORDS_AND"
+    KEYWORDS_AND_BUTTON = 3, //关键字加按键模式
+}
+
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
     //% blockId=actuator_buzzer0 block="actuator_buzzer0 pin ：%pin|status %status"   group="有源蜂鸣器"
@@ -1695,6 +1706,117 @@ namespace sensors {
                 return 0;
         }
     }
+
+    let VOICE_RESET_REG = 0x5;
+    let VOICE_IIC_ADDR = 0x79;
+    let VOICE_ADD_WORDS_REG = 0x04;
+    let VOICE_ASR_START_REG = 0x6;
+    let VOICE_RESULT_REG = 0;
+    let VOICE_CONFIG_TIME_REG = 0x3;
+
+    function i2cwrite(addr: number, reg: number, value: number) {
+        let buf = pins.createBuffer(2)
+        buf[0] = reg
+        buf[1] = value
+        pins.i2cWriteBuffer(addr, buf)
+    }
+
+    function i2cwrite1(addr: number, reg: number, value: number ,value1: string) {
+        let lengths = value1.length
+        let buf = pins.createBuffer(2+lengths)
+        //let arr = value1.split('')
+        buf[0] = reg 
+        buf[1] = value
+        let betys = []
+        betys = stringToBytes(value1)
+        for (let i = 0; i < betys.length; i++) {
+            buf[2+i] = betys[i]
+        }
+        pins.i2cWriteBuffer(addr, buf)
+    }
+    
+    function i2ccmd(addr: number, value: number) {
+        let buf = pins.createBuffer(1)
+        buf[0] = value
+        pins.i2cWriteBuffer(addr, buf)
+    }
+    
+    function i2cread(addr: number, reg: number) {
+        pins.i2cWriteNumber(addr, reg, NumberFormat.UInt8BE);
+        let val = pins.i2cReadNumber(addr, NumberFormat.UInt8BE);
+        return val;
+    }
+
+    //% blockId="Speech_recognition_reset" block="Voice recognition module for reset"  group="语音识别模块"
+    //% subcategory="智能模块"
+    //% inlineInputMode=inline
+    export function Speech_recognition_reset(): void {
+        i2ccmd(VOICE_IIC_ADDR,VOICE_RESET_REG)
+        basic.pause(300)
+    }
+
+    //% blockId="Speech_recognition_mode" block="The voice recognition mode is set to %Mode"  group="语音识别模块"
+    //% subcategory="智能模块"
+    //% inlineInputMode=inline
+    export function Speech_recognition_mode(Mode : Mode): void {
+        i2cwrite(VOICE_IIC_ADDR,VOICE_RESET_REG,Mode)
+        basic.pause(300)
+    }
+
+    //% blockId="Speech_recognition_glossary" block="Voice recognition to set the word number %word_number|Word content %word_content"  group="语音识别模块"
+    //% subcategory="智能模块"
+    //% inlineInputMode=inline
+    export function Speech_recognition_glossary(word_number : number, word_content : string): void {
+        i2cwrite1(VOICE_IIC_ADDR, VOICE_ADD_WORDS_REG, word_number,word_content)
+        basic.pause(300)
+    }
+
+    //% blockId="Speech_recognition_start" block="Voice recognition starts to recognize"  group="语音识别模块"
+    //% subcategory="智能模块"
+    //% inlineInputMode=inline
+    export function Speech_recognition_start(): void {
+        i2ccmd(VOICE_IIC_ADDR,VOICE_ASR_START_REG)
+        basic.pause(300)
+    }
+
+    //% blockId="Speech_recognition_get_result" block="Speech recognition to get the corresponding number of the recognized words"   group="语音识别模块"
+    //% subcategory="智能模块"
+    //% inlineInputMode=inline
+    export function Speech_recognition_get_result(): number {
+       let result =i2cread(VOICE_IIC_ADDR,VOICE_RESULT_REG)
+       return result;
+    }
+
+    //% blockId="Speech_recognition_time" block="Voice recognition to set wake-up time %time"  group="语音识别模块"
+    //% subcategory="智能模块"
+    //% inlineInputMode=inline
+    export function Speech_recognition_time(time : number): void {
+        i2cwrite(VOICE_IIC_ADDR,VOICE_CONFIG_TIME_REG,time)
+        basic.pause(300)
+    }
+
+    function stringToBytes (str : string) {  
+
+        
+        let ch = 0;
+        let st = 0;
+        let gm:number[]; 
+        gm = [];
+        for (let i = 0; i < str.length; i++ ) { 
+            ch = str.charCodeAt(i);  
+            st = 0 ;                 
+
+           do {  
+                st = ( ch & 0xFF );  
+                ch = ch >> 8;   
+                gm.push(st);        
+            }    
+
+            while ( ch );  
+            
+        }  
+        return gm;  
+    } 
 
 
 
