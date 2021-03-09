@@ -146,5 +146,22 @@
     "sensors.Speech_recognition_glossary|block": "语音识别设置词条编号%word_number|词条内容 %word_content",
     "sensors.Speech_recognition_start|block": "语音识别开始识别",
     "sensors.Speech_recognition_get_result|block": "语音识别获取识别到的词条的对应编号",
-    "sensors.Speech_recognition_time|block": "语音识别设置唤醒时间 %time"
+    "sensors.Speech_recognition_time|block": "语音识别设置唤醒时间 %time",
+    "sensors.Gamepad_Press|block": "游戏手柄按键 %button 是否被按下？",
+    "barb_fitting.BUTOON_LEFT|block": "D",
+    "barb_fitting.BUTOON_RIGHT|block": "B",
+    "barb_fitting.BUTOON_UP|block": "A",
+    "barb_fitting.BUTOON_DOWN|block": "C",
+    "barb_fitting.JOYSTICK_BUTTON|block": "摇杆按键",
+    "key_status.PRESS_DOWN|block": "按下",
+    "key_status.PRESS_UP|block": "释放",
+    "key_status.SINGLE_CLICK|block": "单击",
+    "key_status.DOUBLE_CLICK|block": "双击",
+    "key_status.LONG_PRESS_HOLD|block": "长按",
+    "key_status.NONE_PRESS|block": "未按",
+    "sensors.Gamepad_Release|block": "游戏手柄按键 %button 是否被释放？",
+    "sensors.Gamepad_Shaft|block": "游戏手柄获取 %shaft 的值",
+    "Shaft.X_Shaft|block": "X轴",
+    "Shaft.Y_Shaft|block": "Y轴",
+    "sensors.Gamepad_Status|block": "按键 %button 是否是 %status 状态"
 }
