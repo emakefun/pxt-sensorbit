@@ -1434,6 +1434,8 @@ namespace sensors {
         pins.digitalWritePin(pin, 1);
         control.waitMicros(50);
         pins.digitalWritePin(pin, 0);
+	    control.waitMicros(1000);
+        while(!pins.digitalReadPin(pin));
         // read pulse
         let d = pins.pulseIn(pin, PulseValue.High, 25000);
         let ret = d;
@@ -1442,9 +1444,11 @@ namespace sensors {
             ret = distanceBuf;
         }
         distanceBuf = d;
+        //return d;
         return Math.floor(ret * 9 / 6 / 58);
         //return Math.floor(ret / 40 + (ret / 800));
         // Correction
+
     }
 
     function RgbDisplay(indexstart: number, indexend: number, rgb: RgbColors): void {
