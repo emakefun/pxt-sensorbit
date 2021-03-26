@@ -10,7 +10,7 @@
         "README.md",
         "main.ts",
         "EMRGBLight.ts",
-		"sendbuffer.asm",
+		"emSendBuffer.asm",
 		"_locales/zh/sensors-strings.json"
 		
     ],
