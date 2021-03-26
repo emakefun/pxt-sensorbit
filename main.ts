@@ -1454,25 +1454,25 @@ namespace sensors {
         emRGBLight.show();
     }
 
-    //% blockId="motorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
-    //% weight=75
-    //% inlineInputMode=inline
-    //% subcategory="传感器"
-    export function sensorbit_rus04(pin: DigitalPin, index: RgbUltrasonics, rgb: RgbColors, effect: ColorEffect): void {
-        let start, end;
+    export function rus04_rgb(pin: DigitalPin, offset: number, index: number, rgb: number, effect: number): void {
+        let start = 0, end = 0;
         if (!emRGBLight) {
-            emRGBLight = EMRGBLight.create(pin, 6, EMRGBPixelMode.RGB)
+            emRGBLight = EMRGBLight.create(pin, offset+6, EMRGBPixelMode.RGB)
         }
-        if (index == RgbUltrasonics.Left) {
-            start = 0;
-            end = 2;
-        } else if (index == RgbUltrasonics.Right) {
-            start = 3;
-            end = 5;
-        } else if (index == RgbUltrasonics.All) {
-            start = 0;
-            end = 5;
+        if(offset>=4){
+            if (index == RgbUltrasonics.Left) {
+                start = 0;
+                end = 2;
+            } else if (index == RgbUltrasonics.Right) {
+                start = 3;
+                end = 5;
+            } else if (index == RgbUltrasonics.All) {
+                start = 0;
+                end = 5;
+            }
         }
+        start += offset;
+        end += offset;
         switch (effect) {
             case ColorEffect.None:
                 RgbDisplay(start, end, rgb);
@@ -1534,6 +1534,14 @@ namespace sensors {
                 }
                 break;
         }
+    }
+
+    //% blockId="motorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
+    //% weight=75
+    //% inlineInputMode=inline
+    //% subcategory="传感器"
+    export function sensorbit_rus04(pin: DigitalPin, index: RgbUltrasonics, rgb: RgbColors, effect: ColorEffect): void {
+        rus04_rgb(pin, 0, index, rgb, effect);
     }
 
     /**
