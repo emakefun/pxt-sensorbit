@@ -4,7 +4,8 @@
     "description": "PH2.0传感器",
     "license": "MIT",
     "dependencies": {
-        "core": "*"
+        "core": "*",
+        "neopixel": "github:microsoft/pxt-neopixel/tree/v0.7.3"
     },
     "files": [
         "README.md",
