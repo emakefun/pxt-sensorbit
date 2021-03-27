@@ -1021,38 +1021,38 @@ namespace sensors {
         return row
     }
 
-    let _Apin = 0
-    let _Dpin = 0
-    let _Bpin = 0
+    // let _Apin = 0
+    // let _Dpin = 0
+    // let _Bpin = 0
 
-    //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind"   group="旋转编码器"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
-        _Apin = pina
-        _Bpin = pinb
-        _Dpin = pind
-    }
+    // //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind"   group="旋转编码器"
+    // //% weight=70
+    // //% subcategory="基础输入模块"
+    // export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
+    //     _Apin = pina
+    //     _Bpin = pinb
+    //     _Dpin = pind
+    // }
 
-    //% blockId=pinsRead block="select pin  %selectpin"  group="旋转编码器"
-    //% weight=69
-    //% subcategory="基础输入模块"
-    export function pinsRead(selectpin: _selectpin): number {
-        let a
-        if (selectpin == 0)
-            a = _Apin
-        else if (selectpin == 1)
-            a = _Bpin
-        else if (selectpin == 2)
-            a = _Dpin
-        pins.digitalWritePin(a, 0)
-        if (pins.digitalReadPin(a) == 1) {
-            return 1;
-        } else {
-            return 0;
-        }
-        //return pins.digitalReadPin(a)
-    }
+    // //% blockId=pinsRead block="select pin  %selectpin"  group="旋转编码器"
+    // //% weight=69
+    // //% subcategory="基础输入模块"
+    // export function pinsRead(selectpin: _selectpin): number {
+    //     let a
+    //     if (selectpin == 0)
+    //         a = _Apin
+    //     else if (selectpin == 1)
+    //         a = _Bpin
+    //     else if (selectpin == 2)
+    //         a = _Dpin
+    //     pins.digitalWritePin(a, 0)
+    //     if (pins.digitalReadPin(a) == 1) {
+    //         return 1;
+    //     } else {
+    //         return 0;
+    //     }
+    //     //return pins.digitalReadPin(a)
+    // }
 
 
     let Xpin = 0
