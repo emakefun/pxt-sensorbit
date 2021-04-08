@@ -1540,7 +1540,7 @@ namespace sensors {
         }
     }
 
-    //% blockId="motorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
+    //% blockId="sensorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
     //% weight=75
     //% inlineInputMode=inline
     //% subcategory="传感器"
