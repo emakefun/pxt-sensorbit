@@ -973,7 +973,7 @@ namespace sensors {
     //% weight=70
     //% subcategory="基础输入模块"
     export function touchButton(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+       // pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return true;
         } else {
@@ -985,7 +985,7 @@ namespace sensors {
     //% weight=70
     //% subcategory="基础输入模块"
     export function Button(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+     //   pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -997,7 +997,7 @@ namespace sensors {
     //% weight=70
     //% subcategory="基础输入模块"
     export function crashButton(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+       // pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -1084,7 +1084,7 @@ namespace sensors {
     //% weight=68
     //% subcategory="基础输入模块"
     export function _digitalRead(): boolean {
-        pins.digitalWritePin(Bpin, 0)
+       // pins.digitalWritePin(Bpin, 0)
         if (pins.digitalReadPin(Bpin) == 1) {
             return false;
         } else {
@@ -1155,7 +1155,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function sensor_flame(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+       // pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -1176,7 +1176,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function sensor_infraredTracking(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+     //   pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return true;
         } else {
@@ -1189,7 +1189,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function sensor_incline(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+      //  pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -1256,7 +1256,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function sensor_obstacleAvoid(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+       // pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -1274,7 +1274,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function sensor_reedSwitch(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+       // pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -1291,7 +1291,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function sensor_humanBody(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+     //   pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return true;
         } else {
@@ -1308,7 +1308,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function sensor_quake(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+     //   pins.digitalWritePin(pin, 0)
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -1357,7 +1357,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function sensor_sound_digitalread(_DS: DigitalPin): boolean {
-        pins.digitalWritePin(_DS, 0)
+     //   pins.digitalWritePin(_DS, 0)
         if (pins.digitalReadPin(_DS) == 1) {
             return false;
         } else {
@@ -1381,7 +1381,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function sensor_rain_digitalread(_DR: DigitalPin): boolean {
-        pins.digitalWritePin(_DR, 0)
+      //  pins.digitalWritePin(_DR, 0)
         if (pins.digitalReadPin(_DR) == 1) {
             return false;
         } else {
@@ -1405,7 +1405,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function sensor_gas_digitalread(_DG: DigitalPin): boolean {
-        pins.digitalWritePin(_DG, 0)
+      //  pins.digitalWritePin(_DG, 0)
         if (pins.digitalReadPin(_DG) == 1) {
             return true;
         } else {
@@ -1540,7 +1540,7 @@ namespace sensors {
         }
     }
 
-    //% blockId="motorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
+    //% blockId="sensorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
     //% weight=75
     //% inlineInputMode=inline
     //% subcategory="传感器"
@@ -1641,7 +1641,7 @@ namespace sensors {
     //% subcategory="传感器"
     //% inlineInputMode=inline
     export function sensor_tracking(pin: DigitalPin): boolean {
-        pins.digitalWritePin(pin, 0)
+        //pins.digitalWritePin(pin, 0)
            if (pins.digitalReadPin(pin) == 1) {
               return false;
           }else {
@@ -1673,10 +1673,10 @@ namespace sensors {
       //% subcategory="传感器"
       export function four_sensor_trackingValue(): number {
         let result = 0;
-        pins.digitalWritePin(outPin1, 0)
-        pins.digitalWritePin(outPin2, 0)
-        pins.digitalWritePin(outPin3, 0)
-        pins.digitalWritePin(outPin4, 0)
+//         pins.digitalWritePin(outPin1, 0)
+//         pins.digitalWritePin(outPin2, 0)
+//         pins.digitalWritePin(outPin3, 0)
+//         pins.digitalWritePin(outPin4, 0)
         if (pins.digitalReadPin(outPin1) == 1) {
           result = 1 | result;
         }else {
@@ -1949,12 +1949,12 @@ namespace sensors {
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
     export function Gamepad_Status(button : barb_fitting,status : key_status): boolean {
-        if(Get_Button_Status(button) == status)
-    {
-        return true;
-    }else{
-        return false;
-    }
+	    if(Get_Button_Status(button) == status)
+	    {
+		return true;
+	    }else{
+		return false;
+	    }
     }
       
 
