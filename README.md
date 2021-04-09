@@ -1,4 +1,5 @@
 # Emakefun micorbit ph2.0 sensorbit extensions
+# [详细介绍请看官网](https://emakefun-docs.readthedocs.io/zh_CN/latest/)
 # Sensor:bit 简介
 
 什么是 Sensor:bit ？Sensor:bit 是一套为 Micro:bit 量身打造基于 PH2.0 接口的扩展板，Sensor:bit 扩展功能多样，包含八个 3pin 接口、六个 4pin 接口、三个 5pin 接口、一个 6pin 接口，对Micro:bit 可扩展接口进行了优化设计，使得 Sensor:bit 在 PH2.0 接口情况下可以连接更多的传感器。Sensor:bit 设计有一个  3.5mm 耳机插座，当把耳机插头插入、可以通过对音乐模块的编程收听歌曲。在电源设计方面，Sensor:bit 设计有两种供电方式：第一种是通过 micro usb 接口供电；另一种是通过连接在电源的杜邦线供电。Sensor:bit 设计有两种可选电压：5V 和 3V3，可以通过跳线帽选择不同的电压给扩展板接口供电。
@@ -28,6 +29,51 @@
 - 电压选择接口：当跳线帽连接 5V 与 VCC 引脚时、扩展板的引脚(VCC)输出电压为 5V；当跳线帽连接 3V3 与 VCC 引脚时、扩展板的引脚(VCC)输出电压为 3.3V。
 - 电压输出/输入接口：Sensor:bit 设计有一个多功能电压引脚，当采用 micro usb 接口供电时、该引脚可以输出 5V 为其它扩展板供电；另一方面、该引脚也可以通过杜邦线连接电源(5V)，为Sensor:bit 扩展板供电。<font color=red>**注意: 不能同时使用该接口与 micro usb 接口供电，以免造成损坏！**</font>
 - Micro:bit 主板设计有音乐类积木包和程序库，可以通过对 P0 引脚的编程播放音乐。Sensor:bit 的耳机孔连接在 Micro:bit 主板的 P0 引脚、当使用官方音乐积木库或音乐函数库时，把耳机插到 Sensor:bit 耳机孔，就可以在耳机内听到程序中设计的音乐。
+
+
+
+# Sensor:bit模块示例
+- seneor:bit 模块有功能模块，输入模块和判断模块这几种类型，其中，功能模块为主体，积木的执行必须依赖于功能模块，输入模块可以得到数字或者字符串，用于进行数据获取或输出，判断模块返回布尔值，用来进行判断，来决定之后模块是否执行。
+- 功能块示例
+![gn.png](sensorbit/gn.png)
+- 输入块示例
+![sr.png](sensorbit/sr.png)
+- 判断块示例
+![pd.png](sensorbit/pd.png)
+  
+  
+## 执行器
+![zxq.png](sensorbit/zxq.png)
+
+## 显示器
+![xsq.png](sensorbit/xsq.png)
+![xsq1.png](sensorbit/xsq1.png)
+
+## 基础输入模块
+![jcsr.png](sensorbit/jcsr.png)
+![jcsr1.png](sensorbit/jcsr1.png)
+
+- 钢琴模块调试
+- - 设置钢琴初始化引脚DIO,CLK,选择连接对应在sensor:bit上的接口。
+![gq.png](sensorbit/gq.png)
+  
+## 传感器
+![cgq.png](sensorbit/cgq.png)
+![cgq1.png](sensorbit/cgq1.png)
+![cgq2.png](sensorbit/cgq2.png)
+
+## micro:bit(v2)
+![mb2.png](sensorbit/mb2.png)
+
+## 智能模块
+![znmk.png](sensorbit/znmk.png)
+
+- 语音识别模块调试
+- - 当语音识别模块识别到我们说的词汇时，串口监视器会打印识别到的是预设好的第几条语音信息。例如如果识别到“小易小易”，就会在串口显示“asr result is:1”。
+![yysb.png](sensorbit/yysb.png)
+
+
+
 
 # Sensor:bit 与 PH2.0接口传感器
 
