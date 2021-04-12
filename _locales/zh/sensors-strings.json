@@ -163,7 +163,7 @@
     "sensors.Gamepad_Shaft|block": "游戏手柄获取 %shaft 的值",
     "Shaft.X_Shaft|block": "X轴",
     "Shaft.Y_Shaft|block": "Y轴",
-    "sensors.Gamepad_Status|block": "按键 %button 是否是 %status 状态",
+    "sensors.Gamepad_Status|block": "按键 %button 是否是 %status 状态"
     
     
 }
