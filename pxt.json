@@ -5,7 +5,8 @@
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "neopixel": "github:microsoft/pxt-neopixel/tree/v0.7.3"
+        "neopixel": "github:microsoft/pxt-neopixel/tree/v0.7.3",
+        "DS1302": "github.com/makecode-extensions/DS1302"
     },
     "files": [
         "README.md",
