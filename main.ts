@@ -1157,12 +1157,13 @@ namespace sensors {
 
 
 
-    //% blockId=sensor_water block="Water vapor sensor pin %pins"  group="水蒸气传感器"
+    //% blockId=sensor_water block="Water vapor sensor pin %pines"  group="水蒸气传感器"
     //% weight=70
     //% inlineInputMode=inline
     //% subcategory="传感器"
-    export function sensor_water(pins: AnalogPin): number{
-        return pins.analogReadPin(pins);
+    export function sensor_water(pines: AnalogPin): number{
+         return pins.analogReadPin(pines);
+         
     }
 
 
