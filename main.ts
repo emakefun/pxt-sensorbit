@@ -109,6 +109,14 @@ enum _selectpin {
 //     NUM9 = 0x4A,
 // }
 
+enum waterpin {
+    P0,
+    P1,
+    P2,
+    P3,
+    P4,
+    P10,
+}
 
 enum IrPins {
     P0 = 3,
@@ -1145,6 +1153,18 @@ namespace sensors {
             }
         }
     }
+
+
+
+
+    //% blockId=sensor_water block="Water vapor sensor pin %pins"  group="水蒸气传感器"
+    //% weight=70
+    //% inlineInputMode=inline
+    //% subcategory="传感器"
+    export function sensor_water(pins: AnalogPin): number{
+        return pins.analogReadPin(pins);
+    }
+
 
     //% blockId=sensor_temperature block="Pin %pin reads the analog value of the LM35"  group="LM35温度传感器"
     //% weight=70
