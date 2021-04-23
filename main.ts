@@ -1,3 +1,21 @@
+
+enum times {
+    //% block=year
+    time1 = 0,
+    //% block=month
+    time2 = 1,
+    //% block=day
+    time3 = 2,
+    //% block=hour
+    time4 = 3,
+    //% block=minute
+    time5 = 4,
+    //% block=second
+    time6 = 5,
+}
+
+
+
 enum PingUnit {
     //% block="cm"
     Centimeters,
@@ -268,6 +286,23 @@ enum Shaft{
     X_Shaft = 0,
     //% block="Y"
     Y_Shaft = 1,
+}
+
+enum GESTURE_TYPE {
+    //% block=无
+    None = 0,
+    //% block=向下
+    Right = 1,
+    //% block=向上
+    Left = 2,
+    //% block=向右
+    Up = 3,
+    //% block=向左
+    Down = 4,
+    //% block=向前
+    Forward = 5,
+    //% block=向后
+    Backward = 6
 }
 
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
@@ -1985,6 +2020,258 @@ namespace sensors {
     }
       
 
+    let DS1302_REG_SECOND = 0x80
+    let DS1302_REG_MINUTE = 0x82
+    let DS1302_REG_HOUR = 0x84
+    let DS1302_REG_DAY = 0x86
+    let DS1302_REG_MONTH = 0x88
+    let DS1302_REG_YEAR = 0x8C
+    let DS1302_REG_WP = 0x8E
 
+
+    let tys = 0;
+    let tms = 0;
+    let tds = 0;
+    let th = 0;
+    let tm = 0;
+    let ts = 0;
+    let btns = 0;
+    let looks = 0;
+
+
+    /**
+     * convert a Hex data to Dec
+     */
+    function HexToDec(dat: number): number {
+        return (dat >> 4) * 10 + (dat % 16);
+    }
+
+    /**
+     * convert a Dec data to Hex
+     */
+    function DecToHex(dat: number): number {
+        return Math.idiv(dat, 10) * 16 + (dat % 10)
+    }
+
+    /**
+     * DS1302CLOCK RTC class
+     */
+    export class DS1302RTC {
+        clk: DigitalPin;
+        dio: DigitalPin;
+        cs: DigitalPin;
+
+        /**
+         * write a byte to DS1302CLOCK
+         */
+        write_byte(dat: number) {
+            for (let i = 0; i < 8; i++) {
+                pins.digitalWritePin(this.dio, (dat >> i) & 1);
+                pins.digitalWritePin(this.clk, 1);
+                pins.digitalWritePin(this.clk, 0);
+            }
+        }
+
+        /**
+         * read a byte from DS1302CLOCK
+         */
+        read_byte(): number {
+            let d = 0;
+            for (let i = 0; i < 8; i++) {
+                d = d | (pins.digitalReadPin(this.dio) << i);
+                pins.digitalWritePin(this.clk, 1);
+                pins.digitalWritePin(this.clk, 0);
+            }
+            return d;
+        }
+
+        /**
+         * read reg
+         */
+        getReg(reg: number): number {
+            let t = 0;
+            pins.digitalWritePin(this.cs, 1);
+            this.write_byte(reg);
+            t = this.read_byte();
+            pins.digitalWritePin(this.cs, 0);
+            return t;
+        }
+
+        /**
+         * write reg
+         */
+        setReg(reg: number, dat: number) {
+            pins.digitalWritePin(this.cs, 1);
+            this.write_byte(reg);
+            this.write_byte(dat);
+            pins.digitalWritePin(this.cs, 0);
+        }
+
+        /**
+         * write reg with WP protect
+         */
+        wr(reg: number, dat: number) {
+            this.setReg(DS1302_REG_WP, 0)
+            this.setReg(reg, dat)
+            this.setReg(DS1302_REG_WP, 0)
+        }
+
+
+        /**
+         * get Year
+         */
+        //% blockId="DS1302_get_year" block="%ds|get time %TIME" group="DS1602时钟模块"
+        //% subcategory="智能模块"
+        //% weight=80 blockGap=8
+        //% parts="DS1302CLOCK"
+        getYear(TIME: times): number {
+            if (btns == 1) {
+                ts = Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59)
+                this.wr(DS1302_REG_SECOND, DecToHex(ts & 0x7f % 60));
+                this.setYear(tys, tms, tds);
+                this.setHour(th, tm, ts);
+                switch (TIME) {
+                    case 0:
+                        looks = tys;
+                        return looks;
+                    // return Math.min(HexToDec(this.getReg(DS1302_REG_YEAR + 1)), 99) + 2000;
+                    case 1:
+                        looks = tms;
+                        return looks;
+                    // return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_MONTH + 1)), 12), 1);
+                    case 2:
+                        looks = tds;
+                        return looks;
+                    // return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_DAY + 1)), 31), 1);
+                    case 3:
+                        looks = th;
+                        return looks;
+                    // return Math.min(HexToDec(this.getReg(DS1302_REG_HOUR + 1)), 23);
+                    case 4:
+                        looks = tm;
+                        return looks;
+                    // return Math.min(HexToDec(this.getReg(DS1302_REG_MINUTE + 1)), 59);
+                    default:
+                        // return Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59);
+                        looks = ts;
+                        return looks;
+                }
+            } else {
+                switch (TIME) {
+                    case 0:
+                        this.setYear(looks, tms, tds)
+                    // return Math.min(HexToDec(this.getReg(DS1302_REG_YEAR + 1)), 99) + 2000;
+                    case 1:
+                        this.setYear(tys, looks, tds)
+                    // return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_MONTH + 1)), 12), 1);
+                    case 2:
+                        this.setYear(tys, tms, looks)
+                    // return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_DAY + 1)), 31), 1);
+                    case 3:
+                        this.setHour(looks, tm, ts)
+                    // return Math.min(HexToDec(this.getReg(DS1302_REG_HOUR + 1)), 23);
+                    case 4:
+                        this.setHour(th, looks, ts)
+                    // return Math.min(HexToDec(this.getReg(DS1302_REG_MINUTE + 1)), 59);
+                    default:
+                        // return Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59);
+                        this.setHour(th, tm, looks)
+                }
+                return looks;
+            }
+        }
+        //     if(btns == 1) {
+
+        // } ts = Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59)
+        // this.wr(DS1302_REG_SECOND, DecToHex(ts & 0x7f % 60));
+        // this.setYear(tys, tms, tds);
+        // this.setHour(th, tm, ts);
+        /**
+         * set year
+         * @param dat is the Year will be set, eg: 2018
+         */
+        //% blockId="DS1302_set_year" block="%ds|set year %dat set month %mon set day %days" group="DS1602时钟模块"
+        //% subcategory="智能模块"
+        //% weight=81 blockGap=8
+        //% parts="DS1302CLOCK"
+        //% mon.min=1 mon.max=12
+        //% days.min=1 days.max=31
+        setYear(dat: number, mon: number, days: number): void {
+            tys = dat;
+            tms = mon;
+            tds = days;
+            this.wr(DS1302_REG_YEAR, DecToHex(dat % 100));
+            this.wr(DS1302_REG_MONTH, DecToHex(mon % 13));
+            this.wr(DS1302_REG_DAY, DecToHex(days % 32))
+        }
+
+        /**
+         * set hour
+         * @param dat is the Hour will be set, eg: 0
+         */
+        //% blockId="DS1302_set_hour" block="%ds|set hour %dat set minute %minu set second %sec" group="DS1602时钟模块"
+        //% subcategory="智能模块"
+        //% weight=73 blockGap=8
+        //% parts="DS1302CLOCK"
+        //% dat.min=0 dat.max=23
+        //% minu.min=0 minu.max=59
+        //% sec.min=0 sec.max=59
+        setHour(dat: number, minu: number, sec: number): void {
+            th = dat;
+            tm = minu;
+            ts = sec;
+            this.wr(DS1302_REG_HOUR, DecToHex(dat % 24));
+            this.wr(DS1302_REG_MINUTE, DecToHex(minu % 60));
+            this.wr(DS1302_REG_SECOND, DecToHex(sec % 60));
+        }
+
+
+
+        /**
+         * start DS1302CLOCK RTC (go on)
+         */
+        //% blockId="DS1302_start" block="%ds|start RTC" group="DS1602时钟模块"
+        //% subcategory="智能模块"
+        //% weight=41 blockGap=8
+        //% parts="DS1302CLOCK"
+        start() {
+            btns = 1;
+        }
+
+        /**
+         * pause DS1302CLOCK RTC
+         */
+        //% blockId="DS1302_pause" block="%ds|pause RTC" group="DS1602时钟模块"
+        //% subcategory="智能模块"
+        //% weight=40 blockGap=8
+        //% parts="DS1302CLOCK"
+        pause() {
+            btns = 0;
+        }
+
+    }
+
+    /**
+     * create a DS1302CLOCK object.
+     * @param clk the CLK pin for DS1302CLOCK, eg: DigitalPin.P13
+     * @param dio the DIO pin for DS1302CLOCK, eg: DigitalPin.P14
+     * @param cs the CS pin for DS1302CLOCK, eg: DigitalPin.P15
+     */
+    //% weight=200 blockGap=8
+    //% blockId="DS1302_create" block="CLK %clk|DIO %dio|CS %cs" group="DS1602时钟模块"
+    //% subcategory="智能模块"
+    export function create(clk: DigitalPin, dio: DigitalPin, cs: DigitalPin): DS1302RTC {
+        let ds = new DS1302RTC();
+        ds.clk = clk;
+        ds.dio = dio;
+        ds.cs = cs;
+        pins.digitalWritePin(ds.clk, 0);
+        pins.digitalWritePin(ds.cs, 0);
+        return ds;
+    }
+
+
+
+    
 
 }

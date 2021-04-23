@@ -164,7 +164,14 @@
     "sensors.Gamepad_Shaft|block": "游戏手柄获取 %shaft 的值",
     "Shaft.X_Shaft|block": "X轴",
     "Shaft.Y_Shaft|block": "Y轴",
-    "sensors.Gamepad_Status|block": "按键 %button 是否是 %status 状态"
+    "sensors.Gamepad_Status|block": "按键 %button 是否是 %status 状态",
+
+    "sensors.DS1302RTC.getYear|block": "%ds|读取时间 %TIME",
+    "sensors.DS1302RTC.setYear|block": "%ds|设置年 %dat 月 %mon 日 %days ",
+    "sensors.DS1302RTC.setHour|block": "%ds|设置时 %dat 分 %minu 秒 %sec ",
+    "sensors.DS1302RTC.start|block": "%ds|启动时钟",
+    "sensors.DS1302RTC.pause|block": "%ds|暂停时钟",
+    "sensors.create|block": "创建 CLK %clk|DAT %dio|RST %cs"
     
     
 }
