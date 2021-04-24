@@ -1,21 +1,3 @@
-
-enum times {
-    //% block=year
-    time1 = 0,
-    //% block=month
-    time2 = 1,
-    //% block=day
-    time3 = 2,
-    //% block=hour
-    time4 = 3,
-    //% block=minute
-    time5 = 4,
-    //% block=second
-    time6 = 5,
-}
-
-
-
 enum PingUnit {
     //% block="cm"
     Centimeters,
@@ -82,50 +64,6 @@ enum _selectpin {
     Dpin = 2,
 }
 
-// enum RemoteButton {
-//     //% block=A
-//     A = 0x45,
-//     //% block=B
-//     B = 0x46,
-//     //% block=C
-//     C = 0x47,
-//     //% block=D
-//     D = 0x44,
-//     //% block=UP
-//     UP = 0x40,
-//     //% block=+
-//     Add = 0x43,
-//     //% block=LEFT
-//     Left = 0x07,
-//     //% block=OK
-//     Ok = 0x15,
-//     //% block=RIGHT
-//     Right = 0x09,
-//     //% block=DOWN
-//     Down = 0x19,
-//     //% block=-
-//     EQ = 0x0d,
-//     //% block=0
-//     NUM0 = 0x16,
-//     //% block=1
-//     NUM1 = 0x0c,
-//     //% block=2
-//     NUM2 = 0x18,
-//     //% block=3
-//     NUM3 = 0x5e,
-//     //% block=4
-//     NUM4 = 0x8,
-//     //% block=5
-//     NUM5 = 0x1c,
-//     //% block=6
-//     NUM6 = 0x5a,
-//     //% block=7
-//     NUM7 = 0x42,
-//     //% block=8
-//     NUM8 = 0x52,
-//     //% block=9
-//     NUM9 = 0x4A,
-// }
 
 enum waterpin {
     P0,
@@ -242,16 +180,7 @@ enum Select {
     _clear = 2,
 }
 
-enum Mode {
-    //% block="LOOP"
-    LOOP_MODE = 0,        // 循环模式
-    //% block="BUTTON"
-    BUTTON_MODE = 1,      // 按键模式
-    //% block="KEYWORDS"
-    KEYWORDS_MODE = 2,    // 关键字模式
-    //% block="KEYWORDS_AND"
-    KEYWORDS_AND_BUTTON = 3, //关键字加按键模式
-}
+
 
 enum barb_fitting {
     //% block="LEFT"
@@ -288,22 +217,6 @@ enum Shaft{
     Y_Shaft = 1,
 }
 
-enum GESTURE_TYPE {
-    //% block=无
-    None = 0,
-    //% block=向下
-    Right = 1,
-    //% block=向上
-    Left = 2,
-    //% block=向右
-    Up = 3,
-    //% block=向左
-    Down = 4,
-    //% block=向前
-    Forward = 5,
-    //% block=向后
-    Backward = 6
-}
 
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
@@ -425,12 +338,6 @@ namespace sensors {
             default: return " "
         }
     }
-
-    
-
-
-
-
 
     //% blockId=setled block="set led ：%lpin|status %lstatus"   group="LED灯"
     //% weight=70
@@ -1816,39 +1723,7 @@ namespace sensors {
         }
     }
 
-    let VOICE_RESET_REG = 0x5;
-    let VOICE_IIC_ADDR = 0x79;
-    let VOICE_ADD_WORDS_REG = 0x04;
-    let VOICE_ASR_START_REG = 0x6;
-    let VOICE_RESULT_REG = 0;
-    let VOICE_CONFIG_TIME_REG = 0x3;
-
-    function i2cwrite(addr: number, reg: number, value: number) {
-        let buf = pins.createBuffer(2)
-        buf[0] = reg
-        buf[1] = value
-        pins.i2cWriteBuffer(addr, buf)
-    }
-
-    function i2cwrite1(addr: number, reg: number, value: number ,value1: string) {
-        let lengths = value1.length
-        let buf = pins.createBuffer(2+lengths)
-        //let arr = value1.split('')
-        buf[0] = reg 
-        buf[1] = value
-        let betys = []
-        betys = stringToBytes(value1)
-        for (let i = 0; i < betys.length; i++) {
-            buf[2+i] = betys[i]
-        }
-        pins.i2cWriteBuffer(addr, buf)
-    }
     
-    function i2ccmd(addr: number, value: number) {
-        let buf = pins.createBuffer(1)
-        buf[0] = value
-        pins.i2cWriteBuffer(addr, buf)
-    }
     
     function i2cread(addr: number, reg: number) {
         pins.i2cWriteNumber(addr, reg, NumberFormat.UInt8BE);
@@ -1856,76 +1731,7 @@ namespace sensors {
         return val;
     }
 
-    //% blockId="Speech_recognition_reset" block="Voice recognition module for reset"  group="语音识别模块"
-    //% subcategory="智能模块"
-    //% inlineInputMode=inline
-    export function Speech_recognition_reset(): void {
-        i2ccmd(VOICE_IIC_ADDR,VOICE_RESET_REG)
-        basic.pause(300)
-    }
-
-    //% blockId="Speech_recognition_mode" block="The voice recognition mode is set to %Mode"  group="语音识别模块"
-    //% subcategory="智能模块"
-    //% inlineInputMode=inline
-    export function Speech_recognition_mode(Mode : Mode): void {
-        i2cwrite(VOICE_IIC_ADDR,VOICE_RESET_REG,Mode)
-        basic.pause(300)
-    }
-
-    //% blockId="Speech_recognition_glossary" block="Voice recognition to set the word number %word_number|Word content %word_content"  group="语音识别模块"
-    //% subcategory="智能模块"
-    //% inlineInputMode=inline
-    export function Speech_recognition_glossary(word_number : number, word_content : string): void {
-        i2cwrite1(VOICE_IIC_ADDR, VOICE_ADD_WORDS_REG, word_number,word_content)
-        basic.pause(300)
-    }
-
-    //% blockId="Speech_recognition_start" block="Voice recognition starts to recognize"  group="语音识别模块"
-    //% subcategory="智能模块"
-    //% inlineInputMode=inline
-    export function Speech_recognition_start(): void {
-        i2ccmd(VOICE_IIC_ADDR,VOICE_ASR_START_REG)
-        basic.pause(300)
-    }
-
-    //% blockId="Speech_recognition_get_result" block="Speech recognition to get the corresponding number of the recognized words"   group="语音识别模块"
-    //% subcategory="智能模块"
-    //% inlineInputMode=inline
-    export function Speech_recognition_get_result(): number {
-       let result =i2cread(VOICE_IIC_ADDR,VOICE_RESULT_REG)
-       return result;
-    }
-
-    //% blockId="Speech_recognition_time" block="Voice recognition to set wake-up time %time"  group="语音识别模块"
-    //% subcategory="智能模块"
-    //% inlineInputMode=inline
-    export function Speech_recognition_time(time : number): void {
-        i2cwrite(VOICE_IIC_ADDR,VOICE_CONFIG_TIME_REG,time)
-        basic.pause(300)
-    }
-
-    function stringToBytes (str : string) {  
-
-        
-        let ch = 0;
-        let st = 0;
-        let gm:number[]; 
-        gm = [];
-        for (let i = 0; i < str.length; i++ ) { 
-            ch = str.charCodeAt(i);  
-            st = 0 ;                 
-
-           do {  
-                st = ( ch & 0xFF );  
-                ch = ch >> 8;   
-                gm.push(st);        
-            }    
-
-            while ( ch );  
-            
-        }  
-        return gm;  
-    } 
+    
 
     let JOYSTICK_I2C_ADDR = 0x5A;
     let JOYSTICK_LEFT_X_REG = 0x10;
@@ -2020,257 +1826,405 @@ namespace sensors {
     }
       
 
-    let DS1302_REG_SECOND = 0x80
-    let DS1302_REG_MINUTE = 0x82
-    let DS1302_REG_HOUR = 0x84
-    let DS1302_REG_DAY = 0x86
-    let DS1302_REG_MONTH = 0x88
-    let DS1302_REG_YEAR = 0x8C
-    let DS1302_REG_WP = 0x8E
+    let color = 1;
+    let font: number[] = [];
+    font[0] = 0x0022d422;
+    font[1] = 0x0022d422;
+    font[2] = 0x0022d422;
+    font[3] = 0x0022d422;
+    font[4] = 0x0022d422;
+    font[5] = 0x0022d422;
+    font[6] = 0x0022d422;
+    font[7] = 0x0022d422;
+    font[8] = 0x0022d422;
+    font[9] = 0x0022d422;
+    font[10] = 0x0022d422;
+    font[11] = 0x0022d422;
+    font[12] = 0x0022d422;
+    font[13] = 0x0022d422;
+    font[14] = 0x0022d422;
+    font[15] = 0x0022d422;
+    font[16] = 0x0022d422;
+    font[17] = 0x0022d422;
+    font[18] = 0x0022d422;
+    font[19] = 0x0022d422;
+    font[20] = 0x0022d422;
+    font[21] = 0x0022d422;
+    font[22] = 0x0022d422;
+    font[23] = 0x0022d422;
+    font[24] = 0x0022d422;
+    font[25] = 0x0022d422;
+    font[26] = 0x0022d422;
+    font[27] = 0x0022d422;
+    font[28] = 0x0022d422;
+    font[29] = 0x0022d422;
+    font[30] = 0x0022d422;
+    font[31] = 0x0022d422;
+    font[32] = 0x00000000;
+    font[33] = 0x000002e0;
+    font[34] = 0x00018060;
+    font[35] = 0x00afabea;
+    font[36] = 0x00aed6ea;
+    font[37] = 0x01991133;
+    font[38] = 0x010556aa;
+    font[39] = 0x00000060;
+    font[40] = 0x000045c0;
+    font[41] = 0x00003a20;
+    font[42] = 0x00051140;
+    font[43] = 0x00023880;
+    font[44] = 0x00002200;
+    font[45] = 0x00021080;
+    font[46] = 0x00000100;
+    font[47] = 0x00111110;
+    font[48] = 0x0007462e;
+    font[49] = 0x00087e40;
+    font[50] = 0x000956b9;
+    font[51] = 0x0005d629;
+    font[52] = 0x008fa54c;
+    font[53] = 0x009ad6b7;
+    font[54] = 0x008ada88;
+    font[55] = 0x00119531;
+    font[56] = 0x00aad6aa;
+    font[57] = 0x0022b6a2;
+    font[58] = 0x00000140;
+    font[59] = 0x00002a00;
+    font[60] = 0x0008a880;
+    font[61] = 0x00052940;
+    font[62] = 0x00022a20;
+    font[63] = 0x0022d422;
+    font[64] = 0x00e4d62e;
+    font[65] = 0x000f14be;
+    font[66] = 0x000556bf;
+    font[67] = 0x0008c62e;
+    font[68] = 0x0007463f;
+    font[69] = 0x0008d6bf;
+    font[70] = 0x000094bf;
+    font[71] = 0x00cac62e;
+    font[72] = 0x000f909f;
+    font[73] = 0x000047f1;
+    font[74] = 0x0017c629;
+    font[75] = 0x0008a89f;
+    font[76] = 0x0008421f;
+    font[77] = 0x01f1105f;
+    font[78] = 0x01f4105f;
+    font[79] = 0x0007462e;
+    font[80] = 0x000114bf;
+    font[81] = 0x000b6526;
+    font[82] = 0x010514bf;
+    font[83] = 0x0004d6b2;
+    font[84] = 0x0010fc21;
+    font[85] = 0x0007c20f;
+    font[86] = 0x00744107;
+    font[87] = 0x01f4111f;
+    font[88] = 0x000d909b;
+    font[89] = 0x00117041;
+    font[90] = 0x0008ceb9;
+    font[91] = 0x0008c7e0;
+    font[92] = 0x01041041;
+    font[93] = 0x000fc620;
+    font[94] = 0x00010440;
+    font[95] = 0x01084210;
+    font[96] = 0x00000820;
+    font[97] = 0x010f4a4c;
+    font[98] = 0x0004529f;
+    font[99] = 0x00094a4c;
+    font[100] = 0x000fd288;
+    font[101] = 0x000956ae;
+    font[102] = 0x000097c4;
+    font[103] = 0x0007d6a2;
+    font[104] = 0x000c109f;
+    font[105] = 0x000003a0;
+    font[106] = 0x0006c200;
+    font[107] = 0x0008289f;
+    font[108] = 0x000841e0;
+    font[109] = 0x01e1105e;
+    font[110] = 0x000e085e;
+    font[111] = 0x00064a4c;
+    font[112] = 0x0002295e;
+    font[113] = 0x000f2944;
+    font[114] = 0x0001085c;
+    font[115] = 0x00012a90;
+    font[116] = 0x010a51e0;
+    font[117] = 0x010f420e;
+    font[118] = 0x00644106;
+    font[119] = 0x01e8221e;
+    font[120] = 0x00093192;
+    font[121] = 0x00222292;
+    font[122] = 0x00095b52;
+    font[123] = 0x0008fc80;
+    font[124] = 0x000003e0;
+    font[125] = 0x000013f1;
+    font[126] = 0x00841080;
+    font[127] = 0x0022d422;
+
+    let _I2CAddr = 60;
+    let _screen = pins.createBuffer(1025);
+    let _buf2 = pins.createBuffer(2);
+    let _buf3 = pins.createBuffer(3);
+    let _buf4 = pins.createBuffer(4);
+    let _ZOOM = 1;
 
 
-    let tys = 0;
-    let tms = 0;
-    let tds = 0;
-    let th = 0;
-    let tm = 0;
-    let ts = 0;
-    let btns = 0;
-    let looks = 0;
+    function cmd1(d: number) {
+        let n = d % 256;
+        pins.i2cWriteNumber(_I2CAddr, n, NumberFormat.UInt16BE);
+    }
 
+    function cmd2(d1: number, d2: number) {
+        _buf3[0] = 0;
+        _buf3[1] = d1;
+        _buf3[2] = d2;
+        pins.i2cWriteBuffer(_I2CAddr, _buf3);
+    }
 
-    /**
-     * convert a Hex data to Dec
-     */
-    function HexToDec(dat: number): number {
-        return (dat >> 4) * 10 + (dat % 16);
+    function cmd3(d1: number, d2: number, d3: number) {
+        _buf4[0] = 0;
+        _buf4[1] = d1;
+        _buf4[2] = d2;
+        _buf4[3] = d3;
+        pins.i2cWriteBuffer(_I2CAddr, _buf4);
+    }
+
+    function set_pos(col: number = 0, page: number = 0) {
+        cmd1(0xb0 | page) // page number
+        let c = col * (_ZOOM + 1)
+        cmd1(0x00 | (c % 16)) // lower start column address
+        cmd1(0x10 | (c >> 4)) // upper start column address    
+    }
+
+    // clear bit
+    function clrbit(d: number, b: number): number {
+        if (d & (1 << b))
+            d -= (1 << b)
+        return d
     }
 
     /**
-     * convert a Dec data to Hex
+     * 在 OLED 上显示一个像素
+     * @param x is X alis, eg: 0
+     * @param y is Y alis, eg: 0
      */
-    function DecToHex(dat: number): number {
-        return Math.idiv(dat, 10) * 16 + (dat % 10)
+    //% blockId=OLED12864_I2C_PIXEL block="Display pixels x %x|y %y" group="OLED"
+    //% subcategory="显示器"
+    //% weight=70 blockGap=8
+    export function OLED12864_I2C_PIXEL(x: number, y: number) {
+        let page = y >> 3
+        let shift_page = y % 8
+        let ind = x * (_ZOOM + 1) + page * 128 + 1
+        let b = (color) ? (_screen[ind] | (1 << shift_page)) : clrbit(_screen[ind], shift_page)
+        _screen[ind] = b
+        set_pos(x, page)
+        if (_ZOOM) {
+            _screen[ind + 1] = b
+            _buf3[0] = 0x40
+            _buf3[1] = _buf3[2] = b
+            pins.i2cWriteBuffer(_I2CAddr, _buf3)
+        }
+        else {
+            _buf2[0] = 0x40
+            _buf2[1] = b
+            pins.i2cWriteBuffer(_I2CAddr, _buf2)
+        }
     }
 
     /**
-     * DS1302CLOCK RTC class
+     * 显示一个字符串
+     * @param x is X alis, eg: 0
+     * @param y is Y alis, eg: 0
+     * @param s is the text will be show, eg: 'Hello!'
      */
-    export class DS1302RTC {
-        clk: DigitalPin;
-        dio: DigitalPin;
-        cs: DigitalPin;
-
-        /**
-         * write a byte to DS1302CLOCK
-         */
-        write_byte(dat: number) {
-            for (let i = 0; i < 8; i++) {
-                pins.digitalWritePin(this.dio, (dat >> i) & 1);
-                pins.digitalWritePin(this.clk, 1);
-                pins.digitalWritePin(this.clk, 0);
-            }
-        }
-
-        /**
-         * read a byte from DS1302CLOCK
-         */
-        read_byte(): number {
-            let d = 0;
-            for (let i = 0; i < 8; i++) {
-                d = d | (pins.digitalReadPin(this.dio) << i);
-                pins.digitalWritePin(this.clk, 1);
-                pins.digitalWritePin(this.clk, 0);
-            }
-            return d;
-        }
-
-        /**
-         * read reg
-         */
-        getReg(reg: number): number {
-            let t = 0;
-            pins.digitalWritePin(this.cs, 1);
-            this.write_byte(reg);
-            t = this.read_byte();
-            pins.digitalWritePin(this.cs, 0);
-            return t;
-        }
-
-        /**
-         * write reg
-         */
-        setReg(reg: number, dat: number) {
-            pins.digitalWritePin(this.cs, 1);
-            this.write_byte(reg);
-            this.write_byte(dat);
-            pins.digitalWritePin(this.cs, 0);
-        }
-
-        /**
-         * write reg with WP protect
-         */
-        wr(reg: number, dat: number) {
-            this.setReg(DS1302_REG_WP, 0)
-            this.setReg(reg, dat)
-            this.setReg(DS1302_REG_WP, 0)
-        }
-
-
-        /**
-         * get Year
-         */
-        //% blockId="DS1302_get_year" block="%ds|get time %TIME" group="DS1602时钟模块"
-        //% subcategory="智能模块"
-        //% weight=80 blockGap=8
-        //% parts="DS1302CLOCK"
-        getYear(TIME: times): number {
-            if (btns == 1) {
-                ts = Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59)
-                this.wr(DS1302_REG_SECOND, DecToHex(ts & 0x7f % 60));
-                this.setYear(tys, tms, tds);
-                this.setHour(th, tm, ts);
-                switch (TIME) {
-                    case 0:
-                        looks = tys;
-                        return looks;
-                    // return Math.min(HexToDec(this.getReg(DS1302_REG_YEAR + 1)), 99) + 2000;
-                    case 1:
-                        looks = tms;
-                        return looks;
-                    // return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_MONTH + 1)), 12), 1);
-                    case 2:
-                        looks = tds;
-                        return looks;
-                    // return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_DAY + 1)), 31), 1);
-                    case 3:
-                        looks = th;
-                        return looks;
-                    // return Math.min(HexToDec(this.getReg(DS1302_REG_HOUR + 1)), 23);
-                    case 4:
-                        looks = tm;
-                        return looks;
-                    // return Math.min(HexToDec(this.getReg(DS1302_REG_MINUTE + 1)), 59);
-                    default:
-                        // return Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59);
-                        looks = ts;
-                        return looks;
+    //% blockId=OLED12864_I2C_SHOWSTRING block="Display text x %x|y %y|text %s" group="OLED"
+    //% subcategory="显示器"
+    //% weight=80 blockGap=8
+    export function OLED12864_I2C_SHOWSTRING(x: number, y: number, s: string) {
+        let col = 0
+        let p = 0
+        let ind = 0
+        for (let n = 0; n < s.length; n++) {
+            p = font[s.charCodeAt(n)]
+            for (let i = 0; i < 5; i++) {
+                col = 0
+                for (let j = 0; j < 5; j++) {
+                    if (p & (1 << (5 * i + j)))
+                        col |= (1 << (j + 1))
                 }
-            } else {
-                switch (TIME) {
-                    case 0:
-                        this.setYear(looks, tms, tds)
-                    // return Math.min(HexToDec(this.getReg(DS1302_REG_YEAR + 1)), 99) + 2000;
-                    case 1:
-                        this.setYear(tys, looks, tds)
-                    // return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_MONTH + 1)), 12), 1);
-                    case 2:
-                        this.setYear(tys, tms, looks)
-                    // return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_DAY + 1)), 31), 1);
-                    case 3:
-                        this.setHour(looks, tm, ts)
-                    // return Math.min(HexToDec(this.getReg(DS1302_REG_HOUR + 1)), 23);
-                    case 4:
-                        this.setHour(th, looks, ts)
-                    // return Math.min(HexToDec(this.getReg(DS1302_REG_MINUTE + 1)), 59);
-                    default:
-                        // return Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59);
-                        this.setHour(th, tm, looks)
-                }
-                return looks;
+                ind = (x + n) * 5 * (_ZOOM + 1) + y * 128 + i * (_ZOOM + 1) + 1
+                if (color == 0)
+                    col = 255 - col
+                _screen[ind] = col
+                if (_ZOOM)
+                    _screen[ind + 1] = col
             }
         }
-        //     if(btns == 1) {
+        set_pos(x * 5, y)
+        let ind0 = x * 5 * (_ZOOM + 1) + y * 128
+        let buf = _screen.slice(ind0, ind + 1)
+        buf[0] = 0x40
+        pins.i2cWriteBuffer(_I2CAddr, buf)
+    }
 
-        // } ts = Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59)
-        // this.wr(DS1302_REG_SECOND, DecToHex(ts & 0x7f % 60));
-        // this.setYear(tys, tms, tds);
-        // this.setHour(th, tm, ts);
-        /**
-         * set year
-         * @param dat is the Year will be set, eg: 2018
-         */
-        //% blockId="DS1302_set_year" block="%ds|set year %dat set month %mon set day %days" group="DS1602时钟模块"
-        //% subcategory="智能模块"
-        //% weight=81 blockGap=8
-        //% parts="DS1302CLOCK"
-        //% mon.min=1 mon.max=12
-        //% days.min=1 days.max=31
-        setYear(dat: number, mon: number, days: number): void {
-            tys = dat;
-            tms = mon;
-            tds = days;
-            this.wr(DS1302_REG_YEAR, DecToHex(dat % 100));
-            this.wr(DS1302_REG_MONTH, DecToHex(mon % 13));
-            this.wr(DS1302_REG_DAY, DecToHex(days % 32))
+    /**
+     * 显示一个整数
+     * @param x is X alis, eg: 0
+     * @param y is Y alis, eg: 0
+     * @param num is the number will be show, eg: 12
+     */
+    //% blockId=OLED12864_I2C_NUMBER block="Display number x %x|y %y|number %num" group="OLED"
+    //% subcategory="显示器"
+    //% weight=80 blockGap=8
+    export function OLED12864_I2C_NUMBER(x: number, y: number, num: number) {
+        OLED12864_I2C_SHOWSTRING(x, y, num.toString())
+    }
+
+    /**
+     * 绘制一条水平线段
+     * @param x is X alis, eg: 0s
+     * @param y is Y alis, eg: 0
+     * @param len is the length of line, eg: 10
+     */
+    //% blockId=OLED12864_I2C_HLINE block="Draw horizontal line segment x %x|y %y|length %len" group="OLED"
+    //% subcategory="显示器"
+    //% weight=71 blockGap=8
+    //% x.min=0 x.max=60
+    //% y.min=0 y.max=30
+    //% len.min=1 len.max=62
+    export function OLED12864_I2C_HLINE(x: number, y: number, len: number) {
+        for (let i = x; i < (x + len); i++){
+            OLED12864_I2C_PIXEL(i, y)
+            basic.pause(1)
         }
+    }
 
-        /**
-         * set hour
-         * @param dat is the Hour will be set, eg: 0
-         */
-        //% blockId="DS1302_set_hour" block="%ds|set hour %dat set minute %minu set second %sec" group="DS1602时钟模块"
-        //% subcategory="智能模块"
-        //% weight=73 blockGap=8
-        //% parts="DS1302CLOCK"
-        //% dat.min=0 dat.max=23
-        //% minu.min=0 minu.max=59
-        //% sec.min=0 sec.max=59
-        setHour(dat: number, minu: number, sec: number): void {
-            th = dat;
-            tm = minu;
-            ts = sec;
-            this.wr(DS1302_REG_HOUR, DecToHex(dat % 24));
-            this.wr(DS1302_REG_MINUTE, DecToHex(minu % 60));
-            this.wr(DS1302_REG_SECOND, DecToHex(sec % 60));
+    /**
+     * 绘制一条垂直线段
+     * @param x is X alis, eg: 0
+     * @param y is Y alis, eg: 0
+     * @param len is the length of line, eg: 10
+     */
+    //% blockId=OLED12864_I2C_VLINE block="Draw vertical line segments x %x|y %y|length %len" group="OLED"
+    //% subcategory="显示器"
+    //% weight=72 blockGap=8
+    //% x.min=0 x.max=60
+    //% y.min=0 y.max=30
+    //% len.min=1 len.max=30
+    export function OLED12864_I2C_VLINE(x: number, y: number, len: number) {
+        for (let i = y; i < (y + len); i++){
+            OLED12864_I2C_PIXEL(x, i)
+            basic.pause(1)
         }
-
-
-
-        /**
-         * start DS1302CLOCK RTC (go on)
-         */
-        //% blockId="DS1302_start" block="%ds|start RTC" group="DS1602时钟模块"
-        //% subcategory="智能模块"
-        //% weight=41 blockGap=8
-        //% parts="DS1302CLOCK"
-        start() {
-            btns = 1;
-        }
-
-        /**
-         * pause DS1302CLOCK RTC
-         */
-        //% blockId="DS1302_pause" block="%ds|pause RTC" group="DS1602时钟模块"
-        //% subcategory="智能模块"
-        //% weight=40 blockGap=8
-        //% parts="DS1302CLOCK"
-        pause() {
-            btns = 0;
-        }
+            
 
     }
 
     /**
-     * create a DS1302CLOCK object.
-     * @param clk the CLK pin for DS1302CLOCK, eg: DigitalPin.P13
-     * @param dio the DIO pin for DS1302CLOCK, eg: DigitalPin.P14
-     * @param cs the CS pin for DS1302CLOCK, eg: DigitalPin.P15
+     * 在指定位置绘制矩形
+     * @param x1 is X alis, eg: 0
+     * @param y1 is Y alis, eg: 0
+     * @param x2 is X alis, eg: 60
+     * @param y2 is Y alis, eg: 30
      */
-    //% weight=200 blockGap=8
-    //% blockId="DS1302_create" block="CLK %clk|DIO %dio|CS %cs" group="DS1602时钟模块"
-    //% subcategory="智能模块"
-    export function create(clk: DigitalPin, dio: DigitalPin, cs: DigitalPin): DS1302RTC {
-        let ds = new DS1302RTC();
-        ds.clk = clk;
-        ds.dio = dio;
-        ds.cs = cs;
-        pins.digitalWritePin(ds.clk, 0);
-        pins.digitalWritePin(ds.cs, 0);
-        return ds;
+    //% blockId=OLED12864_I2C_RECT block="Draw rectangle x1 %x1|y1 %y1|x2 %x2|y2 %y2" group="OLED"
+    //% subcategory="显示器"
+    //% weight=73 blockGap=8
+    //% x1.min=0 x1.max=60
+    //% y1.min=0 y1.max=30
+    //% x2.min=0 x2.max=60
+    //% y2.min=0 y2.max=30
+    export function OLED12864_I2C_RECT(x1: number, y1: number, x2: number, y2: number) {
+        if (x1 > x2){
+            x1 = [x2, x2 = x1][0];
+        }
+            
+        if (y1 > y2){
+            y1 = [y2, y2 = y1][0];
+        }
+        OLED12864_I2C_HLINE(x1, y1, x2 - x1 + 1)
+        OLED12864_I2C_VLINE(x2, y1, y2 - y1 + 1)
+        OLED12864_I2C_HLINE(x1, y2, x2 - x1 + 1)
+        OLED12864_I2C_VLINE(x1, y1, y2 - y1 + 1)
     }
 
 
+    // /**
+    //  * 重新绘制屏幕的显示内容
+    //  */
+    // //% blockId="OLED12864_I2C_DRAW" block="刷新显示" group="OLED"
+    //% subcategory="显示器"
+    // //% weight=64 blockGap=8
+    // export 
+    function draw() {
+        set_pos()
+        pins.i2cWriteBuffer(_I2CAddr, _screen)
+    }
+
+    /**
+     * 清除 OLED 模块的显示内容
+     */
+    //% blockId=OLED12864_I2C_CLEAR block="Clear display" group="OLED"
+    //% subcategory="显示器"
+    //% weight=63 blockGap=8
+    export function OLED12864_I2C_CLEAR() {
+        OLED12864_I2C_init()
+    }
+
+
+    function clear() {
+        _screen.fill(0)
+        _screen[0] = 0x40
+        draw()
+    }
+
+    /**
+     * 打开 OLED 模块的屏幕显示
+     */
+    //% blockId=OLED12864_I2C_ON block="Show on" group="OLED"
+    //% subcategory="显示器"
+    //% weight=62 blockGap=8
+    export function OLED12864_I2C_ON() {
+        cmd1(0xAF)
+    }
+
+    /**
+     * 关闭 OLED 模块的屏幕显示
+     */
+    //% blockId=OLED12864_I2C_OFF block="Display off" group="OLED"
+    //% subcategory="显示器"
+    //% weight=61 blockGap=8
+    export function OLED12864_I2C_OFF() {
+        cmd1(0xAE)
+    }
+
+
+    /**
+     * OLED 初始化
+     */
+    //% blockId=OLED12864_I2C_init block="Initialize OLED" group="OLED"
+    //% subcategory="显示器"
+    //% weight=100 blockGap=8
+    export function OLED12864_I2C_init() {
+        cmd1(0xAE)       // SSD1306_DISPLAYOFF
+        cmd1(0xA4)       // SSD1306_DISPLAYALLON_RESUME
+        cmd2(0xD5, 0xF0) // SSD1306_SETDISPLAYCLOCKDIV
+        cmd2(0xA8, 0x3F) // SSD1306_SETMULTIPLEX
+        cmd2(0xD3, 0x00) // SSD1306_SETDISPLAYOFFSET
+        cmd1(0 | 0x0)    // line #SSD1306_SETSTARTLINE
+        cmd2(0x8D, 0x14) // SSD1306_CHARGEPUMP
+        cmd2(0x20, 0x00) // SSD1306_MEMORYMODE
+        cmd3(0x21, 0, 127) // SSD1306_COLUMNADDR
+        cmd3(0x22, 0, 63)  // SSD1306_PAGEADDR
+        cmd1(0xa0 | 0x1) // SSD1306_SEGREMAP
+        cmd1(0xc8)       // SSD1306_COMSCANDEC
+        cmd2(0xDA, 0x12) // SSD1306_SETCOMPINS
+        cmd2(0x81, 0xCF) // SSD1306_SETCONTRAST
+        cmd2(0xd9, 0xF1) // SSD1306_SETPRECHARGE
+        cmd2(0xDB, 0x40) // SSD1306_SETVCOMDETECT
+        cmd1(0xA6)       // SSD1306_NORMALDISPLAY
+        cmd2(0xD6, 1)    // zoom on
+        cmd1(0xAF)       // SSD1306_DISPLAYON
+        clear()
+        _ZOOM = 1
+    }
+    
 
     
 
