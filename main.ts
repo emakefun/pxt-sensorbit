@@ -495,27 +495,6 @@ namespace sensors {
         }
     }
 
-    // //% block="lcdon"   group="LCD1602显示屏"  
-    // //% subcategory="显示器"
-    // //% weight=66
-    // export function i2cLcdOn(): void {
-    //     lcdcmd(0x0C)
-    // }
-
-    // //% block="lcdoff"   group="LCD1602显示屏"  
-    // //% subcategory="显示器"
-    // //% weight=65
-    // export function i2cLcdOff(): void {
-    //     lcdcmd(0x08)
-    // }
-
-    // //% block="lcdclear"   group="LCD1602显示屏"  
-    // //% subcategory="显示器"
-    // //% weight=64
-    // export function i2cLcdClear(): void {
-    //     lcdcmd(0x01)
-    // }
-
     //% block="i2cLcdDisplay_Control %item"   group="LCD1602显示屏"  
     //% subcategory="显示器"
     //% weight=64
@@ -532,23 +511,8 @@ namespace sensors {
     }
 
 
-    // //% block="lcdlighton"   group="LCD1602显示屏"  
-    // //% subcategory="显示器"
-    // //% weight=63
-    // export function i2cLcdBacklightOn(): void {
-    //     BK = 8
-    //     lcdcmd(0)
-    // }
-
-    // //% block="lcdlightoff"   group="LCD1602显示屏"  
-    // //% subcategory="显示器"
-    // //% weight=62
-    // export function i2cLcdBacklightOff(): void {
-    //     BK = 0
-    //     lcdcmd(0)
-    // }
     //% subcategory="显示器"   group="LCD1602显示屏"
-    //% blockId="Backlight switch control %backlight"
+    //%  blockId=seti2cLcdBacklight block="Backlight switch control %backlight"
     //% weight=79
     export function seti2cLcdBacklight(backlight: LcdBacklight): void {
         if (backlight == 1) {
