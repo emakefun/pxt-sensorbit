@@ -516,7 +516,7 @@ namespace sensors {
     //     lcdcmd(0x01)
     // }
 
-    //% block="i2cLcdDisplay_Control"   group="LCD1602显示屏"  
+    //% block="i2cLcdDisplay_Control %item"   group="LCD1602显示屏"  
     //% subcategory="显示器"
     //% weight=64
     export function i2cLcdDisplay_Control(item: Item): void {
@@ -548,7 +548,7 @@ namespace sensors {
     //     lcdcmd(0)
     // }
     //% subcategory="显示器"   group="LCD1602显示屏"
-    //% blockId="Backlight switch control"
+    //% blockId="Backlight switch control %backlight"
     //% weight=79
     export function seti2cLcdBacklight(backlight: LcdBacklight): void {
         if (backlight == 1) {
