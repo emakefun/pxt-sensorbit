@@ -1374,7 +1374,7 @@ namespace sensors {
         if (!emRGBLight) {
             emRGBLight = EMRGBLight.create(pin, offset+6, EMRGBPixelMode.RGB)
         }
-        if(offset>=4){
+        if(offset >= 4 || offset == 0){
             if (index == RgbUltrasonics.Left) {
                 start = 0;
                 end = 2;
