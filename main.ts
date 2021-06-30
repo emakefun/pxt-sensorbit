@@ -1372,7 +1372,7 @@ namespace sensors {
     export function rus04_rgb(pin: DigitalPin, offset: number, index: number, rgb: number, effect: number): void {
         let start = 0, end = 0;
         if (!emRGBLight) {
-            emRGBLight = EMRGBLight.create(pin, offset+6, EMRGBPixelMode.RGB)
+            emRGBLight = EMRGBLight.create(pin, 10, EMRGBPixelMode.RGB)
         }
         if(offset >= 4 || offset == 0){
             if (index == RgbUltrasonics.Left) {
