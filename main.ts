@@ -48,6 +48,15 @@ enum ColorEffect {
     Flash = 0x03
 }
 
+enum rgb_ColorEffect {
+    //% block=none
+    None = 0x00,
+    //% block=breathing
+    Breathing = 0x01,
+    //% block=flash
+    Flash = 0x03
+}
+
 enum DHT11Type {
     //% block="temperature(℃)" 
     DHT11_temperature_C = 0,
@@ -487,7 +496,6 @@ namespace sensors {
             lcdcmd(0x01)
         }
     }
-
 
     //% subcategory="显示器"   group="LCD1602显示屏"
     //%  blockId=seti2cLcdBacklight block="Backlight switch control %backlight"
@@ -1327,6 +1335,7 @@ namespace sensors {
     let initialized = false
     //let neoStrip: neopixel.Strip;
     let emRGBLight: EMRGBLight.EmakefunRGBLight;
+    let board_emRGBLight: EMRGBLight.EmakefunRGBLight;
     let matBuf = pins.createBuffer(17);
     let distanceBuf = 0;
 
@@ -1368,13 +1377,20 @@ namespace sensors {
         }
         emRGBLight.show();
     }
+    
+    function board_RgbDisplay(indexstart: number, indexend: number, rgb: RgbColors): void {
+        for (let i = indexstart; i <= indexend; i++) {
+            board_emRGBLight.setPixelColor(i, rgb);
+        }
+        board_emRGBLight.show();
+    }
 
     export function rus04_rgb(pin: DigitalPin, offset: number, index: number, rgb: number, effect: number): void {
         let start = 0, end = 0;
         if (!emRGBLight) {
             emRGBLight = EMRGBLight.create(pin, 10, EMRGBPixelMode.RGB)
         }
-        if(offset >= 4 || offset == 0){
+        //if(offset >= 4 || offset == 0){
             if (index == RgbUltrasonics.Left) {
                 start = 0;
                 end = 2;
@@ -1385,11 +1401,12 @@ namespace sensors {
                 start = 0;
                 end = 5;
             }
-        }
+       // }
         start += offset;
         end += offset;
         switch (effect) {
             case ColorEffect.None:
+                emRGBLight.setBrightness(255);
                 RgbDisplay(start, end, rgb);
                 break;
             case ColorEffect.Breathing:
@@ -1397,15 +1414,16 @@ namespace sensors {
                     emRGBLight.setBrightness(i);
                     RgbDisplay(start, end, rgb);
                     //basic.pause((255 - i)/2);
-                    basic.pause((i < 20) ? 80 : (255 / i));
+                    basic.pause((i < 50) ? 10 : (255 / i));
                 }
                 for (let i = 255; i > 0; i -= 2) {
                     emRGBLight.setBrightness(i);
                     RgbDisplay(start, end, rgb);
-                    basic.pause((i < 20) ? 80 : (255 / i));
+                    basic.pause((i < 50) ? 10 : (255 / i));
                 }
                 break;
             case ColorEffect.Rotate:
+                emRGBLight.setBrightness(255);
                 for (let i = 0; i < 4; i++) {
                     emRGBLight.setPixelColor(start, rgb);
                     emRGBLight.setPixelColor(start + 1, 0);
@@ -1437,19 +1455,107 @@ namespace sensors {
                     }
                     emRGBLight.show();
                     basic.pause(150);
+                    emRGBLight.setBrightness(0);
                 }
                 RgbDisplay(4, 9, 0);
                 break;
             case ColorEffect.Flash:
-                for (let i = 0; i < 6; i++) {
+                for (let i = 0; i < 3; i++) {
+                    emRGBLight.setBrightness(255);
                     RgbDisplay(start, end, rgb);
-                    basic.pause(150);
+                    basic.pause(100);
                     RgbDisplay(start, end, 0);
-                    basic.pause(150);
+                    basic.pause(50);
                 }
                 break;
         }
     }
+	
+    export function board_rus04_rgb(pin: DigitalPin, offset: number, index: number, rgb: number, effect: number): void {
+        let start = 0, end = 0;
+        if (!board_emRGBLight) {
+            board_emRGBLight = EMRGBLight.create(pin, 10, EMRGBPixelMode.RGB)
+        }
+        if(offset >= 4){
+            if (index == RgbUltrasonics.Left) {
+                start = 0;
+                end = 2;
+            } else if (index == RgbUltrasonics.Right) {
+                start = 3;
+                end = 5;
+            } else if (index == RgbUltrasonics.All) {
+                start = 0;
+                end = 5;
+            }
+        }
+        start += offset;
+        end += offset;
+        switch (effect) {
+            case ColorEffect.None:
+                board_emRGBLight.setBrightness(255);
+                board_RgbDisplay(start, end, rgb);
+                break;
+            case ColorEffect.Breathing:
+                for (let i = 0; i < 255; i += 2) {
+                    board_emRGBLight.setBrightness(i);
+                    board_RgbDisplay(start, end, rgb);
+                    //basic.pause((255 - i)/2);
+                    basic.pause((i < 50) ? 10 : (255 / i));
+                }
+                for (let i = 255; i > 0; i -= 2) {
+                    board_emRGBLight.setBrightness(i);
+                    board_RgbDisplay(start, end, rgb);
+                    basic.pause((i < 50) ? 10 : (255 / i));
+                }
+                break;
+            case ColorEffect.Rotate:
+                board_emRGBLight.setBrightness(255);
+                for (let i = 0; i < 4; i++) {
+                    board_emRGBLight.setPixelColor(start, rgb);
+                    board_emRGBLight.setPixelColor(start + 1, 0);
+                    board_emRGBLight.setPixelColor(start + 2, 0);
+                    if (index == RgbUltrasonics.All) {
+                        board_emRGBLight.setPixelColor(end - 2, rgb);
+                        board_emRGBLight.setPixelColor(end - 1, 0);
+                        board_emRGBLight.setPixelColor(end, 0);
+                    }
+                    board_emRGBLight.show();
+                    basic.pause(150);
+                    board_emRGBLight.setPixelColor(start, 0);
+                    board_emRGBLight.setPixelColor(start + 1, rgb);
+                    board_emRGBLight.setPixelColor(start + 2, 0);
+                    if (index == RgbUltrasonics.All) {
+                        board_emRGBLight.setPixelColor(end - 2, 0);
+                        board_emRGBLight.setPixelColor(end - 1, rgb);
+                        board_emRGBLight.setPixelColor(end, 0);
+                    }
+                    board_emRGBLight.show();
+                    basic.pause(150);
+                    board_emRGBLight.setPixelColor(start, 0);
+                    board_emRGBLight.setPixelColor(start + 1, 0);
+                    board_emRGBLight.setPixelColor(start + 2, rgb);
+                    if (index == RgbUltrasonics.All) {
+                        board_emRGBLight.setPixelColor(end - 2, 0);
+                        board_emRGBLight.setPixelColor(end - 1, 0);
+                        board_emRGBLight.setPixelColor(end, rgb);
+                    }
+                    board_emRGBLight.show();
+                    basic.pause(150);
+                    board_emRGBLight.setBrightness(0);
+                }
+                board_RgbDisplay(4, 9, 0);
+                break;
+            case ColorEffect.Flash:
+                for (let i = 0; i < 3; i++) {
+                    board_emRGBLight.setBrightness(255);
+                    board_RgbDisplay(start, end, rgb);
+                    basic.pause(100);
+                    board_RgbDisplay(start, end, 0);
+                    basic.pause(50);
+                }
+                break;
+        }
+}
 
     //% blockId="sensorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
     //% weight=75
@@ -1767,7 +1873,8 @@ namespace sensors {
 	    }
     }
       
-
+     
+/*
     let color = 1;
     let font: number[] = [];
     font[0] = 0x0022d422;
@@ -2167,7 +2274,7 @@ namespace sensors {
         _ZOOM = 1
     }
     
-
+*/
     
 
 }
