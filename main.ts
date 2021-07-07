@@ -337,7 +337,7 @@ namespace sensors {
     let _Bpins = 0
 
     //% blockId=setrgbpin block="set RGBlight pin|g %_GPin|b %_BPin|r %_RPin"   group="三色灯"
-    //% weight=70
+    //% weight=71
     //% subcategory="显示器"
     export function setRGBpin(_GPin: DigitalPin, _BPin: DigitalPin, _RPin: DigitalPin): void {
         _Gpins = _GPin
@@ -364,7 +364,7 @@ namespace sensors {
     let gpins = 0
     let ypins = 0
     //% blockId=setpin block="set light pin|g %GPin|y %YPin|r %RPin"   group="交通灯"
-    //% weight=70
+    //% weight=71
     //% subcategory="显示器"
     export function setpin(GPin: DigitalPin, YPin: DigitalPin, RPin: DigitalPin): void {
         gpins = GPin
@@ -416,7 +416,7 @@ namespace sensors {
         set(d << 4)
     }
 
-    //% block="LcdInit $addr" addr.defl="39"  group="LCD1602显示屏"  
+    //% block="LcdInit $addr" addr.defl="0x27"  group="LCD1602显示屏"  
     //% subcategory="显示器"
     //% weight=70
     export function i2cLcdInit(addr: number) {
@@ -499,7 +499,7 @@ namespace sensors {
 
     //% subcategory="显示器"   group="LCD1602显示屏"
     //%  blockId=seti2cLcdBacklight block="Backlight switch control %backlight"
-    //% weight=79
+    //% weight=63
     export function seti2cLcdBacklight(backlight: LcdBacklight): void {
         if (backlight == 1) {
             BK = 8
@@ -1717,7 +1717,7 @@ namespace sensors {
         return result;
       }
 
-            //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
+    //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
     //% subcategory="micro:bit(V2)"
     //% inlineInputMode=inline
     export function dht11value_v2(dht11pin: DigitalPin, dht11type: DHT11Type): number {
