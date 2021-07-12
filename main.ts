@@ -239,7 +239,7 @@ namespace sensors {
         pins.digitalWritePin(pin, status)
     }
 
-    //% blockId=actuator_motor_run block="actuator_motor_run  %turn"  group="直流电机"
+    //% blockId=actuator_motor_run block="actuator_motor_run INA | %_INA | INB | %_INB | direction | %turn | speed %speed"  group="直流电机"
     //% weight=70
     //% inlineInputMode=inline
     //% speed.min=0 speed.max=255
