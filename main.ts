@@ -90,17 +90,6 @@ enum _rockerpin {
     Ypin = 1
 }
 
-enum rotation_direction {
-    //% block="none"
-    none = 0,
-    //% block="clockwise"
-    clockwise = 1,
-    //% block="counter-clockwise"
-    counterclockwise = 2,
-    //% block="180-degree"
-    one_eighty_degree = 3,
-}
-
 enum ledon_off {
     //% block="on"
     _on = 1,
