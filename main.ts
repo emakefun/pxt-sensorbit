@@ -1717,7 +1717,7 @@ namespace sensors {
         return result;
       }
 
-    //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
+    //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
     //% subcategory="micro:bit(V2)"
     //% inlineInputMode=inline
     export function dht11value_v2(dht11pin: DigitalPin, dht11type: DHT11Type): number {
@@ -1812,7 +1812,7 @@ namespace sensors {
     /**
      * 游戏手柄
      */
-    //% blockId=Gamepad_Press block="Gamepad buttons %button Is pressed？"  group="游戏手柄"
+    //% blockId=Gamepad_Press block="Gamepad buttons %button Is pressed？"  group="PH2.0手柄"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
@@ -1825,9 +1825,9 @@ namespace sensors {
     }
 
     /**
-     * 游戏手柄
+     * PH2.0手柄
      */
-    //% blockId=Gamepad_Release block="Gamepad buttons %button Is Released？"  group="游戏手柄"
+    //% blockId=Gamepad_Release block="Gamepad buttons %button Is Released？"  group="PH2.0手柄"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
@@ -1840,9 +1840,9 @@ namespace sensors {
     }
 
     /**
-     * 游戏手柄
+     * PH2.0手柄
      */
-    //% blockId=Gamepad_Shaft block="Game controller acquisition %shaft the value of"  group="游戏手柄"
+    //% blockId=Gamepad_Shaft block="Game controller acquisition %shaft the value of"  group="PH2.0手柄"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
@@ -1858,9 +1858,9 @@ namespace sensors {
     }
 
     /**
-     * 游戏手柄
+     * PH2.0手柄
      */
-    //% blockId=Gamepad_Status block="Button %button is it %status status?"  group="游戏手柄"
+    //% blockId=Gamepad_Status block="Button %button is it %status status?"  group="PH2.0手柄"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
