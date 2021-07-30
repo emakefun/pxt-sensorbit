@@ -207,21 +207,21 @@ enum Mode {
 
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
-    //% blockId=actuator_buzzer0 block="actuator_buzzer0 pin ：%pin|status %status"   group="有源蜂鸣器"
+    //% blockId=actuator_buzzer0 block="actuator_buzzer0 pin %pin|status %status"   group="有源蜂鸣器"
     //% weight=70
     //% subcategory="执行器"
     export function actuator_buzzer0(pin: DigitalPin, status: on_off): void {
         pins.digitalWritePin(pin, status)
     }
 
-    //% blockId=actuator_buzzer1 block="actuator_buzzer1 pin ：%pin|freq %freq"   group="无源蜂鸣器"
+    //% blockId=actuator_buzzer1 block="actuator_buzzer1 pin %pin|freq %freq"   group="无源蜂鸣器"
     //% weight=70
     //% subcategory="执行器"
     export function actuator_buzzer1(pin: AnalogPin, freq: number): void {
         pins.analogWritePin(pin, freq)
     }
 
-    //% blockId=actuator_relay block="actuator_relay pin ：%pin|status %status"   group="继电器"
+    //% blockId=actuator_relay block="actuator_relay pin %pin|status %status"   group="继电器"
     //% weight=70
     //% subcategory="执行器"
     export function actuator_relay(pin: DigitalPin, status: on_off): void {
@@ -269,7 +269,7 @@ namespace sensors {
     /**
      * 激光模块
      */
-    //% blockId=actuator_laser block="actuator_laser pin ：%pin|status %status"   group="激光模块"
+    //% blockId=actuator_laser block="actuator_laser pin %pin|status %status"   group="激光模块"
 	//% weight=70
 	//% subcategory="执行器"
     export function actuator_laser(pin: DigitalPin,status: on_off): void {
@@ -326,7 +326,7 @@ namespace sensors {
         }
     }
 
-    //% blockId=setled block="set led ：%lpin|status %lstatus"   group="LED灯"
+    //% blockId=setled block="set led %lpin|status %lstatus"   group="LED灯"
     //% weight=70
     //% subcategory="显示器"
     export function setled(lpin: DigitalPin, lstatus: ledon_off): void {
