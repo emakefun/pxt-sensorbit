@@ -1595,7 +1595,7 @@ namespace sensors {
         }
     }
 
-    //% blockId="readdht11" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
+    //% blockId="readdht11" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
     //% subcategory="传感器"
     //% inlineInputMode=inline
     export function dht11value(dht11pin: DigitalPin, dht11type: DHT11Type): number {
@@ -1912,6 +1912,7 @@ namespace sensors {
     //% blockId="Speech_recognition_reset" block="Voice recognition module for reset"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
+    //% weight=100
     export function Speech_recognition_reset(): void {
         i2ccmd(VOICE_IIC_ADDR,VOICE_RESET_REG)
         basic.pause(300)
