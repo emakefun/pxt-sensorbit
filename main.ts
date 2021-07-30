@@ -281,7 +281,7 @@ namespace sensors {
 
     //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="触摸键盘"
     //% weight=71
-    //% subcategory="执行器"
+    //% subcategory="基础输入模块"
     export function actuator_keyborad_pin(SDO: DigitalPin, SCL: DigitalPin): void {
 
         _SDO = SDO
@@ -290,7 +290,7 @@ namespace sensors {
 
     //% blockId=actuator_keyborad_read block="actuator_keyborad_read"   group="触摸键盘"
     //% weight=70
-    //% subcategory="执行器"
+    //% subcategory="基础输入模块"
     export function actuator_keyborad_read(): string {
         let DATA = 0
         pins.digitalWritePin(_SDO, 1)
@@ -336,7 +336,7 @@ namespace sensors {
     let _Gpins = 0
     let _Bpins = 0
 
-    //% blockId=setrgbpin block="set RGBlight pin|g %_GPin|b %_BPin|r %_RPin"   group="三色灯"
+    //% blockId=setrgbpin block="set RGBlight pin|r %_RPin|g %_GPin|b %_BPin"   group="三色灯"
     //% weight=71
     //% subcategory="显示器"
     export function setRGBpin(_GPin: DigitalPin, _BPin: DigitalPin, _RPin: DigitalPin): void {
