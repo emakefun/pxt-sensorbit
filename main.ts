@@ -1143,10 +1143,10 @@ namespace sensors {
     }
 
     /**
-     * 水位传感器
+     * 水深传感器
      */
 
-    //% blockId=sensor_waterLevel block="sensor_waterLevel pin |analogpin %pin" group="水位传感器"
+    //% blockId=sensor_waterLevel block="sensor_waterLevel pin |analogpin %pin" group="水深传感器"
     //% weight=70
     //% inlineInputMode=inline
     //% subcategory="传感器"
