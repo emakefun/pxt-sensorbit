@@ -157,9 +157,5 @@
     "sensors.Gamepad_Shaft|block": "PH2.0手柄获取%shaft的值",
     "Shaft.X_Shaft|block": "X轴",
     "Shaft.Y_Shaft|block": "Y轴",
-<<<<<<< HEAD
     "sensors.Gamepad_Status|block": "PH2.0按键%button是否是%status状态"
-=======
-    "sensors.Gamepad_Status|block": "PH2.0手柄按键%button是否是%status状态"
->>>>>>> acd1fb9f5a389a5a4cdea931e3aed30aa7ce5521
-}
+  
