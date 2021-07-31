@@ -158,4 +158,5 @@
     "Shaft.X_Shaft|block": "X轴",
     "Shaft.Y_Shaft|block": "Y轴",
     "sensors.Gamepad_Status|block": "PH2.0按键%button是否是%status状态"
+}
   
