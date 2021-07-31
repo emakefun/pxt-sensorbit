@@ -116,7 +116,7 @@
     "sensors.actuator_servo|block": "舵机引脚%pin|角度%angle",
     "sensors.actuator_keyborad_pin|block": "触摸键盘SDO引脚%SDOSCL引脚%SCL",
     "sensors.actuator_keyborad_read|block": "触摸键盘读取相应值",
-    "sensors.ping|block": "普通超声波trig%trigecho%echo读取距离单位%unit",
+    "sensors.ping|block": "普通超声波trig%trig echo%echo读取距离单位%unit",
     "LcdBacklight._on|block": "打开",
     "LcdBacklight._off|block": "关闭",
     "Item._on|block": "打开",
