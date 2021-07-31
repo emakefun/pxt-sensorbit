@@ -140,7 +140,7 @@
     "sensors.Speech_recognition_glossary|block": "语音识别设置词条编号%word_number词条内容%word_content",
     "sensors.Speech_recognition_start|block": "语音识别开始识别",
     "sensors.Speech_recognition_get_result|block": "语音识别获取识别到的词条的对应编号",
-    "sensors.Speech_recognition_time|block": "语音识别设置唤醒时间%time(ms)",
+    "sensors.Speech_recognition_time|block": "语音识别设置唤醒时间%time毫秒(ms)",
     "sensors.Gamepad_Press|block": "PH2.0手柄按键%button是否被按下？",
     "barb_fitting.BUTOON_LEFT|block": "D",
     "barb_fitting.BUTOON_RIGHT|block": "B",
