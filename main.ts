@@ -1812,7 +1812,7 @@ namespace sensors {
     /**
      * 游戏手柄
      */
-    //% blockId=Gamepad_Press block="Gamepad buttons %button Is pressed？"  group="游戏手柄"
+    //% blockId=Gamepad_Press block="Gamepad buttons %button Is pressed？"  group="PH2.0手柄"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
@@ -1825,9 +1825,9 @@ namespace sensors {
     }
 
     /**
-     * 游戏手柄
+     * PH2.0手柄
      */
-    //% blockId=Gamepad_Release block="Gamepad buttons %button Is Released？"  group="游戏手柄"
+    //% blockId=Gamepad_Release block="Gamepad buttons %button Is Released？"  group="PH2.0手柄"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
@@ -1840,9 +1840,9 @@ namespace sensors {
     }
 
     /**
-     * 游戏手柄
+     * PH2.0手柄
      */
-    //% blockId=Gamepad_Shaft block="Game controller acquisition %shaft the value of"  group="游戏手柄"
+    //% blockId=Gamepad_Shaft block="Game controller acquisition %shaft the value of"  group="PH2.0手柄"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
@@ -1858,9 +1858,9 @@ namespace sensors {
     }
 
     /**
-     * 游戏手柄
+     * PH2.0手柄
      */
-    //% blockId=Gamepad_Status block="Button %button is it %status status?"  group="游戏手柄"
+    //% blockId=Gamepad_Status block="Button %button is it %status status?"  group="PH2.0手柄"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
