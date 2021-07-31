@@ -363,7 +363,7 @@ namespace sensors {
     let rpins = 0
     let gpins = 0
     let ypins = 0
-    //% blockId=setpin block="set light pin|g %GPin|y %YPin|r %RPin"   group="交通灯"
+    //% blockId=setpin block="set light pin|r %RPin|g %GPin|y %YPin"   group="交通灯"
     //% weight=71
     //% subcategory="显示器"
     export function setpin(GPin: DigitalPin, YPin: DigitalPin, RPin: DigitalPin): void {
@@ -931,7 +931,7 @@ namespace sensors {
     // let _Dpin = 0
     // let _Bpin = 0
 
-    // //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind"   group="旋转编码器"
+    // //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" group="旋转编码器"
     // //% weight=70
     // //% subcategory="基础输入模块"
     // export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
@@ -940,7 +940,7 @@ namespace sensors {
     //     _Dpin = pind
     // }
 
-    // //% blockId=pinsRead block="select pin  %selectpin"  group="旋转编码器"
+    // //% blockId=pinsRead block="select pin %selectpin" group="旋转编码器"
     // //% weight=69
     // //% subcategory="基础输入模块"
     // export function pinsRead(selectpin: _selectpin): number {
@@ -1717,7 +1717,7 @@ namespace sensors {
         return result;
       }
 
-    //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
+    //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
     //% subcategory="micro:bit(V2)"
     //% inlineInputMode=inline
     export function dht11value_v2(dht11pin: DigitalPin, dht11type: DHT11Type): number {
