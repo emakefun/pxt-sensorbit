@@ -15,7 +15,7 @@
     "sensors.rockerPin|block": "摇杆模块初始化引脚X%pinx引脚Y%piny引脚B%pinb",
     "sensors._analogRead|block": "摇杆模块%selectpin读取模拟值",
     "sensors._digitalRead|block": "摇杆模块按键被按下？",
-    "sensors.basic_piano_pin|block": "钢琴模块引脚DIO%DIO CLK%CLK",
+    "sensors.basic_piano_pin|block": "钢琴模块初始化引脚DIO%DIO CLK%CLK",
     "sensors.basic_piano_play|block": "弹奏钢琴",
     "sensors.sensor_water|block": "水蒸气传感器引脚%pines读取值",
     "sensors.sensor_temperature|block": "LM35温度传感器引脚%pin读取环境温度",
