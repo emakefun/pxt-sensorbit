@@ -336,7 +336,7 @@ namespace sensors {
     let _Gpins = 0
     let _Bpins = 0
 
-    //% blockId=setrgbpin block="set RGBlight pin|g %_GPin|b %_BPin|r %_RPin"   group="三色灯"
+    //% blockId=setrgbpin block="set RGBlight pin|g %_GPin|b %_BPin|r %_RPin"   group="RGB三色灯"
     //% weight=71
     //% subcategory="显示器"
     export function setRGBpin(_GPin: DigitalPin, _BPin: DigitalPin, _RPin: DigitalPin): void {
@@ -345,7 +345,7 @@ namespace sensors {
         _Rpins = _RPin
     }
 
-    //% blockId=yledon block="set color pin|r_color %r_color|g_color %g_color|b_color %b_color"   group="三色灯"
+    //% blockId=yledon block="set color pin|r_color %r_color|g_color %g_color|b_color %b_color"   group="RGB三色灯"
     //% r_color.min=0  r_color.max=255
     //% g_color.min=0  g_color.max=255
     //% b_color.min=0  b_color.max=255
