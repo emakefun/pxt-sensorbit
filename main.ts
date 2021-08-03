@@ -1343,7 +1343,7 @@ namespace sensors {
      * Get RUS04 distance
      * @param pin Microbit ultrasonic pin; eg: P2
     */
-    //% blockId=Ultrasonic block="Read RgbUltrasonic Distance at pin %pin(cm)"  group="RGB超声波"
+    //% blockId=Ultrasonic block="Read RgbUltrasonic Distance at pin %pin(cm)"  group="RGB超声波传感器"
     //% weight=76
     //% inlineInputMode=inline
     //% subcategory="传感器"
@@ -1557,7 +1557,7 @@ namespace sensors {
         }
 }
 
-    //% blockId="sensorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
+    //% blockId="sensorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波传感器"
     //% weight=75
     //% inlineInputMode=inline
     //% subcategory="传感器"
