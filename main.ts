@@ -279,7 +279,7 @@ namespace sensors {
     let _SDO = 0
     let _SCL = 0
 
-    //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="触摸键盘"
+    //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="矩阵键盘模块"
     //% weight=71
     //% subcategory="基础输入模块"
     export function actuator_keyborad_pin(SDO: DigitalPin, SCL: DigitalPin): void {
@@ -875,7 +875,7 @@ namespace sensors {
         }
     }
 
-    //% blockId=touchbutton block="touch |digital pin %pin"   group="触摸按键"
+    //% blockId=touchbutton block="touch |digital pin %pin"   group="触摸按键模块"
     //% weight=70
     //% subcategory="基础输入模块"
     export function touchButton(pin: DigitalPin): boolean {
@@ -887,7 +887,7 @@ namespace sensors {
         }
     }
 
-    //% blockId=button block="Button |digital pin %pin"   group="按键开关"
+    //% blockId=button block="Button |digital pin %pin"   group="按键开关模块"
     //% weight=70
     //% subcategory="基础输入模块"
     export function Button(pin: DigitalPin): boolean {
@@ -899,7 +899,7 @@ namespace sensors {
         }
     }
 
-    //% blockId=crashbutton block="crashButton |digital pin %pin"   group="碰撞开关"
+    //% blockId=crashbutton block="crashButton |digital pin %pin"   group="触碰开关模块"
     //% weight=70
     //% subcategory="基础输入模块"
     export function crashButton(pin: DigitalPin): boolean {
@@ -911,7 +911,7 @@ namespace sensors {
         }
     }
 
-    //% blockId=slideRheostat block="slideRheostat |analog pin %pin"   group="滑动变阻器"
+    //% blockId=slideRheostat block="slideRheostat |analog pin %pin"   group="滑动变阻器模块"
     //% weight=70
     //% subcategory="基础输入模块"
     export function slideRheostat(pin: AnalogPin): number {
@@ -919,7 +919,7 @@ namespace sensors {
         return row
     }
 
-    //% blockId=rotaryPotentiometer block="rotaryPotentiometer |analog pin %pin" group="旋转电位器"
+    //% blockId=rotaryPotentiometer block="rotaryPotentiometer |analog pin %pin" group="旋转电位器模块"
     //% weight=70
     //% subcategory="基础输入模块"
     export function rotaryPotentiometer(pin: AnalogPin): number {
@@ -931,7 +931,7 @@ namespace sensors {
     // let _Dpin = 0
     // let _Bpin = 0
 
-    // //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" group="旋转编码器"
+    // //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" group="旋转编码器模块"
     // //% weight=70
     // //% subcategory="基础输入模块"
     // export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
@@ -940,7 +940,7 @@ namespace sensors {
     //     _Dpin = pind
     // }
 
-    // //% blockId=pinsRead block="select pin %selectpin" group="旋转编码器"
+    // //% blockId=pinsRead block="select pin %selectpin" group="旋转编码器模块"
     // //% weight=69
     // //% subcategory="基础输入模块"
     // export function pinsRead(selectpin: _selectpin): number {
