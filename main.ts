@@ -288,7 +288,7 @@ namespace sensors {
         _SCL = SCL
     }
 
-    //% blockId=actuator_keyborad_read block="actuator_keyborad_read"   group="触摸键盘"
+    //% blockId=actuator_keyborad_read block="actuator_keyborad_read"   group="矩阵键盘模块"
     //% weight=70
     //% subcategory="基础输入模块"
     export function actuator_keyborad_read(): string {
