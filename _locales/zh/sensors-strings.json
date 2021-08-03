@@ -2,7 +2,7 @@
     "sensors|block": "Sensor:bit",
     "sensors.touchButton|block": "触摸模块引脚%pin检测到被触摸？",
     "sensors.Button|block": "按键模块引脚%pin检测到按键被按下？",
-    "sensors.crashButton|block": "碰撞模块引脚%pin检测到发生碰撞？",
+    "sensors.crashButton|block": "触碰模块引脚%pin检测到发生碰撞？",
     "sensors.slideRheostat|block": "滑动变阻器引脚%pin获取滑块位置(0~100)",
     "sensors.rotaryPotentiometer|block": "旋转电位器引脚%pin读取模拟值",
     "_selectpin.Apin|block": "引脚A",
