@@ -73,7 +73,7 @@
     "_selectcolor._blue|block": "蓝色",
     "_selectcolor._red|block": "红色",
     "_selectcolor._green|block": "绿色",
-    "sensors.setled|block": "LED灯%lpin|状态%lstatus",
+    "sensors.setled|block": "LED灯引脚%lpin|状态%lstatus",
     "sensors.setpin|block": "交通灯红(R)%RPin绿(G)%GPin黄(Y)%YPin",
     "sensors.selectlight|block": "LED灯%selectpin状态%_status",
     "sensors.setRGBpin|block": "RGB三色灯红(R)%RPin绿(G)%GPin蓝(B)%YPin",
