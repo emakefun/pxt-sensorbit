@@ -790,7 +790,7 @@ namespace sensors {
     //% blockId="TM650_Control" block="display control" group="TM1650数码管"
     //% weight=40 blockGap=8
     //% subcategory="显示器"
-    export function TM650_Control(option: Select) {
+     function TM650_Control(option: Select) {
         if (option == 0) {
             cmd(_intensity * 16 + 1)
         }
