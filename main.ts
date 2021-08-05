@@ -887,7 +887,7 @@ namespace sensors {
         }
     }
 
-    //% blockId=button block="Button |digital pin %pin"   group="按键开关模块"
+    //% blockId=button block="Button |digital pin %pin"   group="按键模块"
     //% weight=70
     //% subcategory="基础输入模块"
     export function Button(pin: DigitalPin): boolean {
@@ -899,7 +899,7 @@ namespace sensors {
         }
     }
 
-    //% blockId=crashbutton block="crashButton |digital pin %pin"   group="触碰开关模块"
+    //% blockId=crashbutton block="crashButton |digital pin %pin"   group="触碰模块"
     //% weight=70
     //% subcategory="基础输入模块"
     export function crashButton(pin: DigitalPin): boolean {
