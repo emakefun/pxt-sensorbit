@@ -1311,7 +1311,7 @@ namespace sensors {
     /**
      * 气体传感器
      */
-    //% blockId=sensor_gas_analogread  block="Pin %pin reads the analog value of the MQ4-gas sensor"  group="气体传感器"
+    //% blockId=sensor_gas_analogread  block="Pin %pin reads the analog value of the MQ4-gas sensor"  group="MQ4气体传感器"
     //% weight=70
     //% inlineInputMode=inline
     //% subcategory="传感器"
@@ -1319,7 +1319,7 @@ namespace sensors {
         return pins.analogReadPin(_AG)
     }
 
-    //% blockId=sensor_gas_digitalread  block="Pin %pin reads the digital value of the MQ4-gas sensor"  group="气体传感器"
+    //% blockId=sensor_gas_digitalread  block="Pin %pin reads the digital value of the MQ4-gas sensor"  group="MQ4气体传感器"
     //% weight=70
     //% inlineInputMode=inline
     //% subcategory="传感器"
