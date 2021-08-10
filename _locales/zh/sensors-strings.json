@@ -17,7 +17,7 @@
     "sensors._digitalRead|block": "摇杆模块按键被按下？",
     "sensors.basic_piano_pin|block": "钢琴模块引脚 DIO %DIO CLK %CLK",
     "sensors.basic_piano_play|block": "弹奏钢琴",
-    "sensors.piano_v2|block": "钢琴模块(V2)引脚DIO %DIO CLK %CLK",
+    "sensors.piano_v2_init|block": "钢琴模块(V2)引脚DIO %DIO CLK %CLK",
     "sensors.piano_v2_play|block": "弹奏钢琴(V2)",
     "sensors.sensor_water|block": "水蒸气 引脚 %pines 读取值",
     "sensors.sensor_temperature|block": "引脚%pin获取环境温度",
