@@ -355,7 +355,7 @@ namespace sensors {
             DATA |= pins.digitalReadPin(_pianoDIO) << i
         }
         control.waitMicros(2 * 1000)
-	    serial.writeString(DATA);
+	    serial.writeString('' + DATA + '\n');
 //         switch (DATA & 0xFFFF) {
 //             case 0xFFFE: return "1"
 //             case 0xFFFD: return "2"
