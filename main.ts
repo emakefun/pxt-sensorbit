@@ -358,14 +358,14 @@ namespace sensors {
         control.waitMicros(2 * 1000)
 //         serial.writeString('' + DATA + '\n');
         switch (DATA & 0xFF) {
-            case 0xFE: music.playTone(262, music.beat(BeatFraction.Half)) break;
-            case 0xFD: music.playTone(294, music.beat(BeatFraction.Half)) break;
-            case 0xFB: music.playTone(330, music.beat(BeatFraction.Half)) break;
-            case 0xF7: music.playTone(349, music.beat(BeatFraction.Half)) break;
-            case 0xEF: music.playTone(392, music.beat(BeatFraction.Half)) break;
-            case 0xDF: music.playTone(440, music.beat(BeatFraction.Half)) break;
-            case 0xBF: music.playTone(494, music.beat(BeatFraction.Half)) break;
-            case 0x7F: music.playTone(523, music.beat(BeatFraction.Half)) break;
+            case 0xFE: music.playTone(262, music.beat(BeatFraction.Half)); break;
+            case 0xFD: music.playTone(294, music.beat(BeatFraction.Half)); break;
+            case 0xFB: music.playTone(330, music.beat(BeatFraction.Half)); break;
+            case 0xF7: music.playTone(349, music.beat(BeatFraction.Half)); break;
+            case 0xEF: music.playTone(392, music.beat(BeatFraction.Half)); break;
+            case 0xDF: music.playTone(440, music.beat(BeatFraction.Half)); break;
+            case 0xBF: music.playTone(494, music.beat(BeatFraction.Half)); break;
+            case 0x7F: music.playTone(523, music.beat(BeatFraction.Half)); break;
 //             default: return " "
         }
     }
