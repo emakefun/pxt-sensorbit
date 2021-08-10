@@ -1744,7 +1744,7 @@ namespace sensors {
                         }
                     }
                 }
-		serial.writeString(dhtvalue1)
+		serial.writeNumber(dhtvalue1)
                 return ((dhtvalue1 & 0x0000ffff)>> 8);
                 break;
 
