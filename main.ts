@@ -1744,7 +1744,7 @@ namespace sensors {
                         }
                     }
                 }
-		serial.writeNumber(dhtvalue1)
+		serial.writeString("DHT11_V2" + "" + dhtvalue1)
                 return ((dhtvalue1 & 0x0000ffff)>> 8);
                 break;
 
