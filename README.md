@@ -206,9 +206,9 @@
 - ![DHT11temperatureandhumiditysensor2.png](sensorbit/DHT11temperatureandhumiditysensor2.png)
 - 实现用DHT11温湿度传感器测温湿度的功能
 - 对于Micro：bit（v2）同样有
-- ![DHT11temperatureandhumiditysensor v2.png](sensorbit/DHT11temperatureandhumiditysensorv2.png)
+- ![DHT11temperatureandhumiditysensorv2.png](sensorbit/DHT11temperatureandhumiditysensorv2.png)
 -     示例程序
-- ![DHT11temperatureandhumiditysensor v2 2.png](sensorbit/DHT11temperatureandhumiditysensorv22.png)
+- ![DHT11temperatureandhumiditysensorv22.png](sensorbit/DHT11temperatureandhumiditysensorv22.png)
 - 20  红外循迹传感器
 - 判断周围是否有黑线
 - ![Infraredtrackingsensor1.png](sensorbit/Infraredtrackingsensor1.png)
