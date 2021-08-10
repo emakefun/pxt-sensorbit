@@ -341,7 +341,7 @@ namespace sensors {
     //% blockId=piano_v2_read block="piano_v2_read"   group="触摸钢琴模块V2"
     //% weight=70
     //% subcategory="基础输入模块"
-    export function piano_v2_read(): string {
+    export function piano_v2_read(): void {
         let DATA = 0
         pins.digitalWritePin(_pianoDIO, 1)
         control.waitMicros(93)
@@ -355,7 +355,7 @@ namespace sensors {
             DATA |= pins.digitalReadPin(_pianoDIO) << i
         }
         control.waitMicros(2 * 1000)
-	    serial.showNumber(DATA);
+	    serial.writeString(DATA);
 //         switch (DATA & 0xFFFF) {
 //             case 0xFFFE: return "1"
 //             case 0xFFFD: return "2"
