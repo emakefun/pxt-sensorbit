@@ -330,7 +330,7 @@ namespace sensors {
     let _pianoDIO = 0
     let _pianoCLK = 0
 
-    //% blockId=piano_v2 block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块V2"
+    //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块V2"
     //% weight=71
     //% subcategory="基础输入模块"
     export function piano_v2_init(pianoDIO: DigitalPin, pianoCLK: DigitalPin): void {
