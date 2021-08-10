@@ -305,6 +305,7 @@ namespace sensors {
             DATA |= pins.digitalReadPin(_SDO) << i
         }
         control.waitMicros(2 * 1000)
+	serial.writeString('' + DATA + '\n');
         switch (DATA & 0xFFFF) {
             case 0xFFFE: return "1"
             case 0xFFFD: return "2"
@@ -349,13 +350,13 @@ namespace sensors {
         pins.digitalWritePin(_pianoDIO, 0)
         control.waitMicros(10)
 
-        for (let i = 0; i < 16; i++) {
+        for (let i = 0; i < 8; i++) {
             pins.digitalWritePin(_pianoCLK, 1)
             pins.digitalWritePin(_pianoCLK, 0)
             DATA |= pins.digitalReadPin(_pianoDIO) << i
         }
         control.waitMicros(2 * 1000)
-	    serial.writeString('' + DATA + '\n');
+        serial.writeString('' + DATA + '\n');
 //         switch (DATA & 0xFFFF) {
 //             case 0xFFFE: return "1"
 //             case 0xFFFD: return "2"
