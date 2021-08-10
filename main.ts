@@ -339,10 +339,10 @@ namespace sensors {
         _pianoCLK = pianoCLK
     }
 
-    //% blockId=piano_v2_read block="piano_v2_read"   group="触摸钢琴模块V2"
+    //% blockId=piano_v2_play block="piano_v2_read"   group="触摸钢琴模块V2"
     //% weight=70
     //% subcategory="基础输入模块"
-    export function piano_v2_read(): void {
+    export function piano_v2_play(): void {
         let DATA = 0
         pins.digitalWritePin(_pianoDIO, 1)
         control.waitMicros(93)
