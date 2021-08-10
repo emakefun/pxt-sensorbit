@@ -342,7 +342,7 @@ namespace sensors {
     //% blockId=piano_v2_read block="piano_v2_read"   group="触摸钢琴模块V2"
     //% weight=70
     //% subcategory="基础输入模块"
-    export function piano_v2_read(): string {
+    export function piano_v2_read(): void {
         let DATA = 0
         pins.digitalWritePin(_pianoDIO, 1)
         control.waitMicros(93)
@@ -358,15 +358,15 @@ namespace sensors {
         control.waitMicros(2 * 1000)
 //         serial.writeString('' + DATA + '\n');
         switch (DATA & 0xFF) {
-            case 0xFE: return "1"
-            case 0xFD: return "2"
-            case 0xFB: return "3"
-            case 0xF7: return "4"
-            case 0xEF: return "5"
-            case 0xDF: return "6"
-            case 0xBF: return "7"
-            case 0x7F: return "8"
-            default: return " "
+            case 0xFE: music.playTone(262, music.beat(BeatFraction.Half)) break;
+            case 0xFD: music.playTone(294, music.beat(BeatFraction.Half)) break;
+            case 0xFB: music.playTone(330, music.beat(BeatFraction.Half)) break;
+            case 0xF7: music.playTone(349, music.beat(BeatFraction.Half)) break;
+            case 0xEF: music.playTone(392, music.beat(BeatFraction.Half)) break;
+            case 0xDF: music.playTone(440, music.beat(BeatFraction.Half)) break;
+            case 0xBF: music.playTone(494, music.beat(BeatFraction.Half)) break;
+            case 0x7F: music.playTone(523, music.beat(BeatFraction.Half)) break;
+//             default: return " "
         }
     }
 
