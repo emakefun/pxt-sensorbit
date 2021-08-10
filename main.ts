@@ -305,7 +305,7 @@ namespace sensors {
             DATA |= pins.digitalReadPin(_SDO) << i
         }
         control.waitMicros(2 * 1000)
-	serial.writeString('' + DATA + '\n');
+// 	serial.writeString('' + DATA + '\n');
         switch (DATA & 0xFFFF) {
             case 0xFFFE: return "1"
             case 0xFFFD: return "2"
@@ -356,26 +356,18 @@ namespace sensors {
             DATA |= pins.digitalReadPin(_pianoDIO) << i
         }
         control.waitMicros(2 * 1000)
-        serial.writeString('' + DATA + '\n');
-//         switch (DATA & 0xFFFF) {
-//             case 0xFFFE: return "1"
-//             case 0xFFFD: return "2"
-//             case 0xFFFB: return "3"
-//             case 0xFFEF: return "4"
-//             case 0xFFDF: return "5"
-//             case 0xFFBF: return "6"
-//             case 0xFEFF: return "7"
-//             case 0xFDFF: return "8"
-//             case 0xFBFF: return "9"
-//             case 0xDFFF: return "0"
-//             case 0xFFF7: return "A"
-//             case 0xFF7F: return "B"
-//             case 0xF7FF: return "C"
-//             case 0x7FFF: return "D"
-//             case 0xEFFF: return "*"
-//             case 0xBFFF: return "#"
-//             default: return " "
-//         }
+//         serial.writeString('' + DATA + '\n');
+        switch (DATA & 0xFF) {
+            case 0xFE: return "1"
+            case 0xFD: return "2"
+            case 0xFB: return "3"
+            case 0xF7: return "4"
+            case 0xEF: return "5"
+            case 0xDF: return "6"
+            case 0xBF: return "7"
+            case 0x7F: return "8"
+            default: return " "
+        }
     }
 
     //% blockId=setled block="set led ：%lpin|status %lstatus"   group="LED灯"
