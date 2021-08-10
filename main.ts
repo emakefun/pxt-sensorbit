@@ -325,6 +325,57 @@ namespace sensors {
             default: return " "
         }
     }
+	
+    let _pianoDIO = 0
+    let _pianoCLK = 0
+
+    //% blockId=piano_v2 block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块V2"
+    //% weight=71
+    //% subcategory="基础输入模块"
+    export function piano_v2_init(pianoDIO: DigitalPin, pianoCLK: DigitalPin): void {
+
+        _pianoDIO = pianoDIO
+        _pianoCLK = pianoCLK
+    }
+
+    //% blockId=piano_v2_read block="piano_v2_read"   group="触摸钢琴模块V2"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function piano_v2_read(): string {
+        let DATA = 0
+        pins.digitalWritePin(_pianoDIO, 1)
+        control.waitMicros(93)
+
+        pins.digitalWritePin(_pianoDIO, 0)
+        control.waitMicros(10)
+
+        for (let i = 0; i < 16; i++) {
+            pins.digitalWritePin(_pianoCLK, 1)
+            pins.digitalWritePin(_pianoCLK, 0)
+            DATA |= pins.digitalReadPin(_pianoDIO) << i
+        }
+        control.waitMicros(2 * 1000)
+	    serial.showNumber(DATA);
+//         switch (DATA & 0xFFFF) {
+//             case 0xFFFE: return "1"
+//             case 0xFFFD: return "2"
+//             case 0xFFFB: return "3"
+//             case 0xFFEF: return "4"
+//             case 0xFFDF: return "5"
+//             case 0xFFBF: return "6"
+//             case 0xFEFF: return "7"
+//             case 0xFDFF: return "8"
+//             case 0xFBFF: return "9"
+//             case 0xDFFF: return "0"
+//             case 0xFFF7: return "A"
+//             case 0xFF7F: return "B"
+//             case 0xF7FF: return "C"
+//             case 0x7FFF: return "D"
+//             case 0xEFFF: return "*"
+//             case 0xBFFF: return "#"
+//             default: return " "
+//         }
+    }
 
     //% blockId=setled block="set led ：%lpin|status %lstatus"   group="LED灯"
     //% weight=70
