@@ -13,7 +13,7 @@
 ### 2 触摸按键模块
 - 通过引脚检测是否被触摸
 - ![Touchkeymodule1.png](sensorbit/Touchkeymodule1.png)
-    示例程序
+-    示例程序
 - ![Touchkeymodule2.png](sensorbit/Touchkeymodule2.png) 
 - 当模块被触摸，则显示笑脸表情，否则显示难过表情 
 ### 3  按键模块
