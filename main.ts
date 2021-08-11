@@ -305,6 +305,7 @@ namespace sensors {
             DATA |= pins.digitalReadPin(_SDO) << i
         }
         control.waitMicros(2 * 1000)
+// 	serial.writeString('' + DATA + '\n');
         switch (DATA & 0xFFFF) {
             case 0xFFFE: return "1"
             case 0xFFFD: return "2"
@@ -323,6 +324,49 @@ namespace sensors {
             case 0xEFFF: return "*"
             case 0xBFFF: return "#"
             default: return " "
+        }
+    }
+	
+    let _pianoDIO = 0
+    let _pianoCLK = 0
+
+    //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块V2"
+    //% weight=71
+    //% subcategory="基础输入模块"
+    export function piano_v2_init(pianoDIO: DigitalPin, pianoCLK: DigitalPin): void {
+
+        _pianoDIO = pianoDIO
+        _pianoCLK = pianoCLK
+    }
+
+    //% blockId=piano_v2_play block="piano_v2_read"   group="触摸钢琴模块V2"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function piano_v2_play(): void {
+        let DATA = 0
+        pins.digitalWritePin(_pianoDIO, 1)
+        control.waitMicros(93)
+
+        pins.digitalWritePin(_pianoDIO, 0)
+        control.waitMicros(10)
+
+        for (let i = 0; i < 8; i++) {
+            pins.digitalWritePin(_pianoCLK, 1)
+            pins.digitalWritePin(_pianoCLK, 0)
+            DATA |= pins.digitalReadPin(_pianoDIO) << i
+        }
+        control.waitMicros(2 * 1000)
+//         serial.writeString('' + DATA + '\n');
+        switch (DATA & 0xFF) {
+            case 0xFE: music.playTone(262, music.beat(BeatFraction.Half)); break;
+            case 0xFD: music.playTone(294, music.beat(BeatFraction.Half)); break;
+            case 0xFB: music.playTone(330, music.beat(BeatFraction.Half)); break;
+            case 0xF7: music.playTone(349, music.beat(BeatFraction.Half)); break;
+            case 0xEF: music.playTone(392, music.beat(BeatFraction.Half)); break;
+            case 0xDF: music.playTone(440, music.beat(BeatFraction.Half)); break;
+            case 0xBF: music.playTone(494, music.beat(BeatFraction.Half)); break;
+            case 0x7F: music.playTone(523, music.beat(BeatFraction.Half)); break;
+//             default: return " "
         }
     }
 
@@ -1744,6 +1788,7 @@ namespace sensors {
                         }
                     }
                 }
+		serial.writeString("DHT11_V2" + "" + dhtvalue1)
                 return ((dhtvalue1 & 0x0000ffff)>> 8);
                 break;
 
