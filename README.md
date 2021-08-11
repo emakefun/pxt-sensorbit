@@ -27,7 +27,7 @@
 - ![Touchmodule1.png](sensorbit/Touchmodule1.png)
 -     示例程序
 - ![Touchmodule2.png](sensorbit/Touchmodule2.png)
-- 发生碰撞则显示开心表情，未发生则显示难过表情
+- 当发生碰撞则显示开心表情，未发生则显示难过表情
 ### 5  滑动变阻器模块
 - 通过引脚来获取变阻器当前的阻值(1~100)
 - ![slide resistor1.png](sensorbit/slideresistor1.png)
@@ -57,9 +57,9 @@
 - ![Pianomodule2.png](sensorbit/Pianomodule2.png)
 -     示例程序
 - ![Pianomodule3.png](sensorbit/Pianomodule3.png)
-- 通过触摸到不同的按键，会产生不同的音乐
+- 通过触摸到不同的按键，从而产生不同的音乐
 ### 9  PH2.0手柄
-- PH2.0手柄默认连接I2C引脚(即p19，p20)，下面代码实现PH2.0的效果
+- PH2.0手柄默认连接I2C引脚(即P19，P20)，下面代码实现PH2.0的效果
 - 获取手柄按键状态
 - ![PH2.0handle1.png](sensorbit/PH2.0handle1.png)
 - 获取X/Y轴的值
@@ -205,7 +205,7 @@
 -     示例程序
 - ![DHT11temperatureandhumiditysensor2.png](sensorbit/DHT11temperatureandhumiditysensor2.png)
 - 实现用DHT11温湿度传感器测温湿度的功能
-- 对于Micro：bit（v2）同样有
+- 对于Micro:bitV2同样有
 - ![DHT11temperatureandhumiditysensorv2.png](sensorbit/DHT11temperatureandhumiditysensorv2.png)
 -     示例程序
 - ![DHT11temperatureandhumiditysensorv22.png](sensorbit/DHT11temperatureandhumiditysensorv22.png)
@@ -218,7 +218,7 @@
 - ![Infraredtrackingsensor3.png](sensorbit/Infraredtrackingsensor3.png)
 -     示例程序
 - ![Infraredtrackingsensor4.png](sensorbit/Infraredtrackingsensor4.png)
-- 判断黑线的存在，1s后打印四路循迹传感器值
+- 判断黑线的存在，若存在打印四路循迹传感器值，不存在则显示笑脸
 ## 显示器
 ### 1  LED灯
 - 通过引脚控制灯的状态
@@ -257,7 +257,7 @@
 - ![LCD1602display6.png](sensorbit/LCD1602display6.png)
 -     示例程序
 - ![LCD1602display7.png](sensorbit/LCD1602display7.png)
-- 实现显示功能
+- 刚开机时，设置IC2地址。之后开始循环，打开LCD1602显示屏和背光灯，在0行1列显示0，在0行2列显示l，在1行1列显示字符串“lllll”，暂停1s后关闭屏幕和背光灯1s后重新执行上述操作
 ### 5  TM1637数码管
 - 设置数码管引脚显示亮度，显示位数
 - ![TM1637digitaltube1.png](sensorbit/TM1637digitaltube1.png)
@@ -285,7 +285,7 @@
 - ![TM1650digitaltube1.png](sensorbit/TM1650digitaltube1.png)
 - 使TM1650数码管显示十六进制数字
 - ![TM1650digitaltube2.png](sensorbit/TM1650digitaltube2.png)
-- 使TM1650数码管相应位置上的点点亮
+- 使TM1650数码管相应位置上的点点亮或熄灭
 - ![TM1650digitaltube3.png](sensorbit/TM1650digitaltube3.png)
 - 使TM1650数码管对应位置显示数字
 - ![TM1650digitaltube4.png](sensorbit/TM1650digitaltube4.png)
@@ -293,7 +293,7 @@
 - ![TM1650digitaltube5.png](sensorbit/TM1650digitaltube5.png)
 -     示例程序
 - ![TM1650digitaltube6.png](sensorbit/TM1650digitaltube6.png)
-- 实现对应的显示效果
+- 显示数字4477，200ms后显示16进制的8，，200ms后点亮第2位的点再在2位上显示数字9暂停200ms，以此循环
 ## 执行器
 ### 1  有源蜂鸣器
 - 通过引脚控制有源蜂鸣器
@@ -347,7 +347,7 @@
 - ![Intelligentvoicemodule6.png](sensorbit/Intelligentvoicemodule6.png)
 -     示例程序
 - ![Intelligentvoicemodule7.png](sensorbit/Intelligentvoicemodule7.png)
-- 实现匹配关键词打印其编号的功能
+- 通过设置的语音识别模式唤醒，开始匹配，匹配词条，打印出其编号，如：wa  打印出2
 
 
 
