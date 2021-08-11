@@ -95,9 +95,13 @@
 ### 4  红外循迹传感器
 - 通过引脚来判断是否存在黑线
 - ![Infraredtrackingsensor1.png](sensorbit/Infraredtrackingsensor1.png)
--     示例程序
+- 初始化引脚
 - ![Infraredtrackingsensor2.png](sensorbit/Infraredtrackingsensor2.png)
-- 红外循迹传感器若感应到黑线，则显示哭脸，否则显示笑脸
+- 获取模拟值
+- ![Infraredtrackingsensor3.png](sensorbit/Infraredtrackingsensor3.png)
+-     示例程序
+- ![Infraredtrackingsensor4.png](sensorbit/Infraredtrackingsensor4.png)
+- 红外循迹传感器若感应到黑线，则打印模拟值，没有则显示爱心
 ### 5  倾斜传感器
 - 通过引脚来判断是否倾斜     
 - ![Inclinationsensor1.png](sensorbit/Inclinationsensor1.png)
@@ -226,7 +230,7 @@
 - ![LEDlights1.png](sensorbit/LEDlights1.png)
 -     示例程序
 - ![LEDlights2.png](sensorbit/LEDlights2.png) 
-- 实现对LED灯状态的控制功能
+- 实现对LED灯状态的控制功能，使其间接性点亮
 ### 2  RGB三色灯
 - 初始化引脚
 - ![Three-colorlight1.png](sensorbit/Three-colorlight1.png)
@@ -294,7 +298,7 @@
 - ![TM1650digitaltube5.png](sensorbit/TM1650digitaltube5.png)
 -     示例程序
 - ![TM1650digitaltube6.png](sensorbit/TM1650digitaltube6.png)
-- 在亮度为4的条件下，先显示数字4477暂停200ms后
+- 在亮度为4的条件下，先显示数字4477暂停200ms后显示十六进制数 8，暂停200ms点亮第二位的点，之后在2号位显示9，以此循环
 ## 执行器
 ### 1  有源蜂鸣器
 - 通过引脚控制有源蜂鸣器
@@ -348,7 +352,7 @@
 - ![Intelligentvoicemodule6.png](sensorbit/Intelligentvoicemodule6.png)
 -     示例程序
 - ![Intelligentvoicemodule7.png](sensorbit/Intelligentvoicemodule7.png)
-- 根据唤醒模式开始识别对应的词条内容，匹配后打印出词条编号
+- 根据唤醒模式开始识别对应的词条内容，匹配后打印出词条编号，例如，感应到“wa”打印2
 
 
 

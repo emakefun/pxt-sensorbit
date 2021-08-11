@@ -21,7 +21,6 @@
     "sensors.sensor_temperature|block": "LM35温度传感器引脚%pin读取环境温度",
     "sensors.sensor_flame|block": "火焰传感器引脚%pin检测到火焰(数字值)？",
     "sensors.sensor_flame_analog|block": "火焰传感器引脚%pin读取火焰的模拟值",
-    "sensors.sensor_infraredTracking|block": "红外循迹传感器引脚%pin检测到黑线？",
     "sensors.sensor_incline|block": "倾斜传感器引脚%pin检测到倾斜？",
     "sensors.sensor_illumination|block": "光敏传感器引脚%pin读取光照强度模拟值",
     "sensors.sensor_thermosensitive|block": "热敏传感器引脚%pin获取热度模拟值",
