@@ -59,7 +59,7 @@
 - ![Pianomodule3.png](sensorbit/Pianomodule3.png)
 - 通过触摸到不同的按键，会产生不同的音乐
 ### 9  PH2.0手柄
-- PH2.0手柄默认连接I2C引脚(即p19，p20)，下面代码实现PH2.0的效果
+- PH2.0手柄默认连接I2C引脚(即P19，P20)，下面代码实现PH2.0的效果
 - 获取手柄按键状态
 - ![PH2.0handle1.png](sensorbit/PH2.0handle1.png)
 - 获取X/Y轴的值
@@ -184,7 +184,7 @@
 - ![gassensor2.png](sensorbit/gassensor2.png)
 -     示例程序
 - ![gassensor3.png](sensorbit/gassensor3.png)
-- 实现对气体的检测功能，若有气体打印其浓度的模拟值，没有则显示笑脸
+- 实现对气体(甲烷，天然气等)的检测功能，若有气体打印其浓度的模拟值，没有气体(甲烷，天然气等)则显示笑脸
 ### 18  RGB超声波传感器
 - 通过引脚获得超声波所测得的距离值
 - ![RGBultrasonicsensor1.png](sensorbit/RGBultrasonicsensor1.png)
@@ -204,11 +204,12 @@
 - ![DHT11temperatureandhumiditysensor1.png](sensorbit/DHT11temperatureandhumiditysensor1.png)
 -     示例程序
 - ![DHT11temperatureandhumiditysensor2.png](sensorbit/DHT11temperatureandhumiditysensor2.png)
-- 实现用DHT11温湿度传感器测温湿度的功能
-- 对于Micro：bit（v2）同样有
+- 实现用DHT11温湿度传感器测温湿度的功能,先打印温度值，再打印湿度值
+- 对于Micro:bitV2同样有
 - ![DHT11temperatureandhumiditysensorv2.png](sensorbit/DHT11temperatureandhumiditysensorv2.png)
 -     示例程序
 - ![DHT11temperatureandhumiditysensorv22.png](sensorbit/DHT11temperatureandhumiditysensorv22.png)
+
 ### 21  红外循迹传感器
 - 判断周围是否有黑线
 - ![Infraredtrackingsensor1.png](sensorbit/Infraredtrackingsensor1.png)
@@ -218,7 +219,7 @@
 - ![Infraredtrackingsensor3.png](sensorbit/Infraredtrackingsensor3.png)
 -     示例程序
 - ![Infraredtrackingsensor4.png](sensorbit/Infraredtrackingsensor4.png)
-- 判断黑线的存在，1s后打印红外循迹传感器值
+- 判断黑线的存在,存在则显示哭脸，不存在则显示笑脸，1s后打印红外循迹传感器值
 ## 显示器
 ### 1  LED灯
 - 通过引脚控制灯的状态
@@ -257,7 +258,7 @@
 - ![LCD1602display6.png](sensorbit/LCD1602display6.png)
 -     示例程序
 - ![LCD1602display7.png](sensorbit/LCD1602display7.png)
-- 实现显示功能
+- 先为LCD1602显示屏设置默认地址，开始显示第0行第一列显示0第二列显示l，第一行第二列显示llll
 ### 5  TM1637数码管
 - 设置数码管引脚显示亮度，显示位数
 - ![TM1637digitaltube1.png](sensorbit/TM1637digitaltube1.png)
@@ -293,7 +294,7 @@
 - ![TM1650digitaltube5.png](sensorbit/TM1650digitaltube5.png)
 -     示例程序
 - ![TM1650digitaltube6.png](sensorbit/TM1650digitaltube6.png)
-- 实现对应的显示效果
+- 在亮度为4的条件下，先显示数字4477暂停200ms后
 ## 执行器
 ### 1  有源蜂鸣器
 - 通过引脚控制有源蜂鸣器
@@ -314,11 +315,11 @@
 - ![Relay2.png](sensorbit/Relay2.png)
 - 继电器间接性打开关闭
 ### 4  直流电机
-- 通过引脚设置直流电机的运行模式和速度
+- 通过引脚设置直流电机的运行模式(正转或反转)和速度
 - ![DC1.png](sensorbit/DC1.png)
 -     示例程序
 - ![DC2.png](sensorbit/DC2.png)
-- 直流电机按照设定的程序执行 
+- 直流电机先以100的速度正转，1s后再以100的速度反转，一直循环下去 
 ### 5  舵机
 - 通过引脚使舵机偏转到一定的角度
 - ![Steeringgear1.png](sensorbit/Steeringgear1.png)
@@ -347,7 +348,7 @@
 - ![Intelligentvoicemodule6.png](sensorbit/Intelligentvoicemodule6.png)
 -     示例程序
 - ![Intelligentvoicemodule7.png](sensorbit/Intelligentvoicemodule7.png)
-- 实现匹配关键词打印其编号的功能
+- 根据唤醒模式开始识别对应的词条内容，匹配后打印出词条编号
 
 
 

@@ -97,7 +97,7 @@
     "sensors.on|block": "TM1650数码管打开显示",
     "sensors.off|block": "TM1650数码管关闭显示",
     "sensors.showHex|block": "TM1650数码管显示十六进制数据%num",
-    "sensors.digit|block": "TM1650数码管第%bit位显示数据%num",
+    "sensors.digit|block": "TM1650数码管显示数据%num在第%bit位",
     "sensors.showDpAt|block": "TM1650数码管%show第%bit位的点",
     "on_off._on|block": "打开",
     "on_off._off|block": "关闭",
