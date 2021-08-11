@@ -184,7 +184,7 @@
 - ![gassensor2.png](sensorbit/gassensor2.png)
 -     示例程序
 - ![gassensor3.png](sensorbit/gassensor3.png)
-- 实现对气体的检测功能，若有气体打印其浓度的模拟值，没有则显示笑脸
+- 实现对气体(co,甲烷，天然气等)的检测功能，若有该气体打印其浓度的模拟值，没有则显示笑脸
 ### 18  RGB超声波传感器
 - 通过引脚获得超声波所测得的距离值
 - ![RGBultrasonicsensor1.png](sensorbit/RGBultrasonicsensor1.png)
@@ -204,7 +204,7 @@
 - ![DHT11temperatureandhumiditysensor1.png](sensorbit/DHT11temperatureandhumiditysensor1.png)
 -     示例程序
 - ![DHT11temperatureandhumiditysensor2.png](sensorbit/DHT11temperatureandhumiditysensor2.png)
-- 实现用DHT11温湿度传感器测温湿度的功能
+- 实现用DHT11温湿度传感器测温湿度的功能，分别打印出来
 - 对于Micro:bitV2同样有
 - ![DHT11temperatureandhumiditysensorv2.png](sensorbit/DHT11temperatureandhumiditysensorv2.png)
 -     示例程序
@@ -218,10 +218,10 @@
 - ![Infraredtrackingsensor3.png](sensorbit/Infraredtrackingsensor3.png)
 -     示例程序
 - ![Infraredtrackingsensor4.png](sensorbit/Infraredtrackingsensor4.png)
-- 判断黑线的存在，1s后打印四路循迹传感器值
+- 初始化传感器引脚，判断黑线的存在，存在则打印四路循迹传感器值，不存在则显示笑脸
 ## 显示器
 ### 1  LED灯
-- 通过引脚控制灯的状态
+- 通过引脚控制灯的状态（打开或关闭）
 - ![LEDlights1.png](sensorbit/LEDlights1.png)
 -     示例程序
 - ![LEDlights2.png](sensorbit/LEDlights2.png) 
@@ -235,7 +235,7 @@
 - ![Three-colorlight3.png](sensorbit/Three-colorlight3.png)
 - 实现对RGB三色灯颜色变换的功能
 ### 3  交通灯
-- 初始化各个灯的引脚
+- 初始化各个灯引脚
 - ![trafficlight1.png](sensorbit/trafficlight1.png)
 - 设置灯的状态（点亮/熄灭）
 - ![trafficlight2.png](sensorbit/trafficlight2.png)
@@ -257,7 +257,8 @@
 - ![LCD1602display6.png](sensorbit/LCD1602display6.png)
 -     示例程序
 - ![LCD1602display7.png](sensorbit/LCD1602display7.png)
-- 实现显示功能
+- 设置默认地址，执行循环，打开LCD1602显示屏和背光灯，在0行第一列显示0，第二列显示l，第一行第一列显示字符串“lllll"
+1s后关闭屏幕和背光灯，1s后循环重新开始
 ### 5  TM1637数码管
 - 设置数码管引脚显示亮度，显示位数
 - ![TM1637digitaltube1.png](sensorbit/TM1637digitaltube1.png)
@@ -285,7 +286,7 @@
 - ![TM1650digitaltube1.png](sensorbit/TM1650digitaltube1.png)
 - 使TM1650数码管显示十六进制数字
 - ![TM1650digitaltube2.png](sensorbit/TM1650digitaltube2.png)
-- 使TM1650数码管相应位置上的点点亮
+- 使TM1650数码管相应位置上的点点亮或熄灭
 - ![TM1650digitaltube3.png](sensorbit/TM1650digitaltube3.png)
 - 使TM1650数码管对应位置显示数字
 - ![TM1650digitaltube4.png](sensorbit/TM1650digitaltube4.png)
@@ -293,7 +294,7 @@
 - ![TM1650digitaltube5.png](sensorbit/TM1650digitaltube5.png)
 -     示例程序
 - ![TM1650digitaltube6.png](sensorbit/TM1650digitaltube6.png)
-- 实现对应的显示效果
+- 先显示数字4477，200ms之后显示8（16进制）200ms后点亮第二位的点，在第二位显示9，持续200ms，以此循环
 ## 执行器
 ### 1  有源蜂鸣器
 - 通过引脚控制有源蜂鸣器
@@ -312,13 +313,13 @@
 - ![Relay1.png](sensorbit/Relay1.png)
 -     示例程序
 - ![Relay2.png](sensorbit/Relay2.png)
-- 继电器间接性打开关闭
+- 继电器间接性打开和关闭
 ### 4  直流电机
-- 通过引脚设置直流电机的运行模式和速度
+- 通过引脚设置直流电机的运行模式（正转和反转）和速度
 - ![DC1.png](sensorbit/DC1.png)
 -     示例程序
 - ![DC2.png](sensorbit/DC2.png)
-- 直流电机按照设定的程序执行 
+- 直流电机以100的速度先正转再反转
 ### 5  舵机
 - 通过引脚使舵机偏转到一定的角度
 - ![Steeringgear1.png](sensorbit/Steeringgear1.png)
@@ -347,7 +348,7 @@
 - ![Intelligentvoicemodule6.png](sensorbit/Intelligentvoicemodule6.png)
 -     示例程序
 - ![Intelligentvoicemodule7.png](sensorbit/Intelligentvoicemodule7.png)
-- 实现匹配关键词打印其编号的功能
+- 当执行语音识别时，接收信息与词条库匹配，匹配成功时打印词条编号，例如  接收到“wa” 打印数字2
 
 
 
