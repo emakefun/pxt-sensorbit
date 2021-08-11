@@ -1651,9 +1651,9 @@ namespace sensors {
 
 
 /**
-     * 红外循迹传感器
+     * 四路循迹传感器
      */
-    //% blockId=sensor_tracking block="sensor_tracking pin |digitalpin %pin"  group="红外循迹传感器"
+    //% blockId=sensor_tracking block="sensor_tracking pin |digitalpin %pin"  group="四路循迹传感器"
     //% weight=74
     //% subcategory="传感器"
     //% inlineInputMode=inline
@@ -1673,7 +1673,7 @@ namespace sensors {
       /**
        * 四路循迹传感器初始化
        */
-      //% blockId=four_sensor_tracking block="four_sensor_tracking pin1 |digitalpin %pin1 pin2 |digitalpin %pin2 |pin3 |digitalpin %pin3 |pin4 |digitalpin %pin4"  group="红外循迹传感器"
+      //% blockId=four_sensor_tracking block="four_sensor_tracking pin1 |digitalpin %pin1 pin2 |digitalpin %pin2 |pin3 |digitalpin %pin3 |pin4 |digitalpin %pin4"  group="四路循迹传感器"
       //% inlineInputMode=inline
       //% weight=73
       //% subcategory="传感器"
@@ -1684,7 +1684,7 @@ namespace sensors {
         outPin4 = pin4;
       }
       
-      //% blockId=four_sensor_trackingValue block="four_sensor_tracking get sensor value"  group="红外循迹传感器"
+      //% blockId=four_sensor_trackingValue block="four_sensor_tracking get sensor value"  group="四路循迹传感器"
       //% inlineInputMode=inline
       //% weight=72
       //% subcategory="传感器"
