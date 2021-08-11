@@ -27,6 +27,7 @@
     "sensors.sensor_thermosensitive|block": "热敏传感器引脚%pin获取热度模拟值",
     "sensors.sensor_waterLevel|block": "水深传感器引脚%pin读取水深度模拟值",
     "sensors.sensor_soilMoisture|block": "土壤湿度传感器引脚%pin读取土壤湿度模拟值",
+     "sensors.sensor_infraredTracking|block": "红外循迹传感器引脚%pin检测到黑线？",
     "sensors.sensor_obstacleAvoid|block": "避障传感器引脚%pin检测到前方有障碍物？",
     "sensors.sensor_reedSwitch|block": "磁簧开关传感器引脚%pin检测到磁场？",
     "sensors.sensor_humanBody|block": "人体热释电传感器引脚%pin检测到人体热源？",
