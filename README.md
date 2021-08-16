@@ -94,9 +94,9 @@
 - 判断周围是否有火焰存在，若存在打印火焰的模拟值，不存在则显示笑脸。
 ### 4  红外循迹传感器
 - 通过引脚来判断是否存在黑线
-- ![Infraredtrackingsensor1.png](sensorbit/Infraredtrackingsensor1.png)
+- ![Fourwaytrackingsensor1.png](sensorbit/Fourwaytrackingsensor1.png)
 -     示例程序
-- ![Infraredtrackingsensor2.png](sensorbit/Infraredtrackingsensor2.png)
+- ![Fourwaytrackingsensor2.png](sensorbit/Fourwaytrackingsensor2.png)
 - 红外循迹传感器若感应到黑线，则显示哭脸，否则显示笑脸
 ### 5  倾斜传感器
 - 通过引脚来判断是否倾斜     
@@ -225,7 +225,7 @@
 - ![LEDlights1.png](sensorbit/LEDlights1.png)
 -     示例程序
 - ![LEDlights2.png](sensorbit/LEDlights2.png) 
-- 实现对LED灯状态的控制功能
+- 实现对LED灯状态的控制功能,LED灯交替打开和关闭
 ### 2  RGB三色灯
 - 初始化引脚
 - ![Three-colorlight1.png](sensorbit/Three-colorlight1.png)
@@ -233,7 +233,7 @@
 - ![Three-colorlight2.png](sensorbit/Three-colorlight2.png)
 -     示例程序
 - ![Three-colorlight3.png](sensorbit/Three-colorlight3.png)
-- 实现对RGB三色灯颜色变换的功能
+- 通过配色，实现对RGB三色灯颜色变换的功能
 ### 3  交通灯
 - 初始化各个灯引脚
 - ![trafficlight1.png](sensorbit/trafficlight1.png)
@@ -241,7 +241,7 @@
 - ![trafficlight2.png](sensorbit/trafficlight2.png)
 -     示例程序
 - ![trafficlight3.png](sensorbit/trafficlight3.png)   
-- 通过对三个灯的控制实现交通灯的功能
+- 通过对三个灯的控制实现交通灯的功能，红绿黄三种灯交替点亮和熄灭
 ### 4  LCD1602显示屏
 - 设置LCD1602显示屏的IC2地址，十进制默认为39，十六进制默认为0x27
 - ![LCD1602display1.png](sensorbit/LCD1602display1.png)
