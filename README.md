@@ -126,7 +126,7 @@
 - 通过引脚获取土壤湿度值
 - ![Soilmoisturesensor1.png](sensorbit/Soilmoisturesensor1.png)
 -     示例程序
-- ![Soilmoisturesensor1.png](sensorbit/Soilmoisturesensor1.png)
+- ![Soilmoisturesensor2.png](sensorbit/Soilmoisturesensor2.png)
 - 打印土壤湿度值，每一秒更新一次
 ### 10  避障传感器    
 - 通过引脚获取数字值判断前方是否有障碍物
@@ -294,7 +294,7 @@
 - ![TM1650digitaltube5.png](sensorbit/TM1650digitaltube5.png)
 -     示例程序
 - ![TM1650digitaltube6.png](sensorbit/TM1650digitaltube6.png)
-- 先显示数字4477，200ms之后显示8（16进制）200ms后点亮第二位的点，在第二位显示9，持续200ms，以此循环
+- 先显示数字4477，1s之后显示8（16进制）1s后点亮第二位的点，在第二位显示9，持续1s，以此循环
 ## 执行器
 ### 1  有源蜂鸣器
 - 通过引脚控制有源蜂鸣器
