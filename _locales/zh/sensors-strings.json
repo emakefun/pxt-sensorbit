@@ -65,7 +65,7 @@
     "DHT11Type.DHT11_humidity|block": "湿度(0~100)",
     "DHT11Type.DHT11_temperature_C|block": "摄氏温度(℃)",
     "sensors.dht11value|block": "DHT11温湿度传感器引脚%dht11pin读取%dht11type",
-    "sensors.dht11value_v2|block": "DHT11温湿度传感器引脚%dht11pin读取%dht11type",
+    "sensors.dht11value_v2|block": "(micro:bit V2)DHT11温湿度传感器引脚%dht11pin读取%dht11type",
     "ledon_off._on|block": "点亮",
     "ledon_off._off|block": "熄灭",
     "_selectlight._yellow|block": "黄灯",
