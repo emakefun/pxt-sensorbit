@@ -1983,7 +1983,7 @@ namespace sensors {
     //% blockId="Speech_recognition_glossary" block="Voice recognition to set the word number %word_number|Word content %word_content"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
-    //% weight=97
+    //% weight=95
     export function Speech_recognition_glossary(word_number : number, word_content : string): void {
         i2cwrite1(VOICE_IIC_ADDR, VOICE_ADD_WORDS_REG, word_number,word_content)
         basic.pause(300)
@@ -2002,7 +2002,7 @@ namespace sensors {
     //% blockId="Speech_recognition_time" block="Voice recognition to set wake-up time %time"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
-    //% weight=95
+    //% weight=97
     export function Speech_recognition_time(time : number): void {
         i2cwrite(VOICE_IIC_ADDR,VOICE_CONFIG_TIME_REG,time)
         basic.pause(300)
