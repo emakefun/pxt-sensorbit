@@ -383,7 +383,7 @@ namespace sensors {
 
     let _DIO = 0
     let _CLK = 0
-    //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="钢琴模块"
+    //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="钢琴模块 V1"
     //% weight=70
     //% subcategory="基础输入模块"
     export function basic_piano_pin(DIO: DigitalPin, CLK: DigitalPin): void {
@@ -392,7 +392,7 @@ namespace sensors {
         _CLK = CLK
     }
 
-    //% blockId=basic_piano_play block="basic_piano_play"   group="钢琴模块"
+    //% blockId=basic_piano_play block="basic_piano_play"   group="钢琴模块 V1"
     //% weight=69
     //% subcategory="基础输入模块"
     export function basic_piano_play(): void {
@@ -430,7 +430,7 @@ namespace sensors {
     let _pianoDIO = 0
     let _pianoCLK = 0
 
-    //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="钢琴模块"
+    //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="钢琴模块 V2"
     //% weight=61
     //% subcategory="基础输入模块"
     export function piano_v2_init(pianoDIO: DigitalPin, pianoCLK: DigitalPin): void {
@@ -439,7 +439,7 @@ namespace sensors {
         _pianoCLK = pianoCLK
     }
 
-    //% blockId=piano_v2_play block="piano_v2_read"   group="钢琴模块"
+    //% blockId=piano_v2_play block="piano_v2_read"   group="钢琴模块 V2"
     //% weight=60
     //% subcategory="基础输入模块"
     export function piano_v2_play(): void {
@@ -1353,24 +1353,6 @@ namespace sensors {
         pins.digitalWritePin(pin, status)
     }
 
-    //% blockId=actuator_motor_run block="actuator_motor_run INA | %_INA | INB | %_INB | direction | %turn | speed %speed"  group="直流电机"
-    //% weight=70
-    //% inlineInputMode=inline
-    //% speed.min=0 speed.max=255
-    //% subcategory="执行器"
-    export function actuator_motor_run(_INA: AnalogPin, _INB: AnalogPin, turn: run_turn, speed: number): void {
-
-        if (turn == 0) {
-            pins.analogWritePin(_INA, 0)
-            pins.analogWritePin(_INB, speed)
-
-        } else if (turn == 1) {
-            pins.analogWritePin(_INA, speed)
-            pins.analogWritePin(_INB, 0)
-        }
-
-    }
-
     /**
      * 舵机
      */
@@ -1401,7 +1383,24 @@ namespace sensors {
         pins.digitalWritePin(pin,status)
     }
 
-    
+   
+    //% blockId=actuator_motor_run block="actuator_motor_run INA | %_INA | INB | %_INB | direction | %turn | speed %speed"  group="直流电机"
+    //% weight=70
+    //% inlineInputMode=inline
+    //% speed.min=0 speed.max=255
+    //% subcategory="执行器"
+    export function actuator_motor_run(_INA: AnalogPin, _INB: AnalogPin, turn: run_turn, speed: number): void {
+
+        if (turn == 0) {
+            pins.analogWritePin(_INA, 0)
+            pins.analogWritePin(_INB, speed)
+
+        } else if (turn == 1) {
+            pins.analogWritePin(_INA, speed)
+            pins.analogWritePin(_INB, 0)
+        }
+
+    } 
 
     //% blockId=setled block="set led %lpin|status %lstatus"   group="LED灯"
     //% weight=70
@@ -1463,6 +1462,131 @@ namespace sensors {
             a = gpins
         }
         pins.digitalWritePin(a, _status)
+    }
+
+  
+
+    let i2cAddr: number
+    let BK: number
+    let RS: number
+    function setreg(d: number) {
+        pins.i2cWriteNumber(i2cAddr, d, NumberFormat.Int8LE)
+        basic.pause(1)
+    }
+
+    function set(d: number) {
+        d = d & 0xF0
+        d = d + BK + RS
+        setreg(d)
+        setreg(d + 4)
+        setreg(d)
+    }
+
+    function lcdcmd(d: number) {
+        RS = 0
+        set(d)
+        set(d << 4)
+    }
+
+    function lcddat(d: number) {
+        RS = 1
+        set(d)
+        set(d << 4)
+    }
+
+    //% block="LcdInit $addr" addr.defl="0x27"  group="LCD1602显示屏"  
+    //% subcategory="显示器"
+    //% weight=70
+    export function i2cLcdInit(addr: number) {
+        i2cAddr = addr
+        BK = 8
+        RS = 0
+        lcdcmd(0x33)
+        basic.pause(5)
+        set(0x30)
+        basic.pause(5)
+        set(0x20)
+        basic.pause(5)
+        lcdcmd(0x28)
+        lcdcmd(0x0C)
+        lcdcmd(0x06)
+        lcdcmd(0x01)
+    }
+
+    //% block="showchar $ch|col $x|row $y"   group="LCD1602显示屏"  
+    //% subcategory="显示器"
+    //% weight=69
+    export function i2cLcdShowChar(y: number, x: number, ch: string): void {
+        let a: number
+        y = y - 1
+        if (y > 0)
+            a = 0xC0
+        else
+            a = 0x80
+        x = x - 1
+        a += x
+        lcdcmd(a)
+        lcddat(ch.charCodeAt(0))
+    }
+
+    //% block="showNumber $n|col $x|row $y"   group="LCD1602显示屏"  
+    //% subcategory="显示器"
+    //% weight=68
+    export function i2cLcdShowNumber(y: number, x: number, n: number): void {
+        let s = n.toString()
+        i2cLcdShowString(y, x, s)
+    }
+
+    /**
+     * TODO: describe your function here
+     * 
+     */
+    //% block="showString $s|col $x|row $y"   group="LCD1602显示屏"  
+    //% subcategory="显示器"
+    //% weight=67
+    export function i2cLcdShowString(y: number, x: number, s: string): void {
+        let a: number
+        y = y - 1
+        if (y > 0)
+            a = 0xC0
+        else
+            a = 0x80
+        x = x - 1
+        a += x
+        lcdcmd(a)
+
+        for (let i = 0; i < s.length; i++) {
+            lcddat(s.charCodeAt(i))
+        }
+    }
+
+    //% block="i2cLcdDisplay_Control %item"   group="LCD1602显示屏"  
+    //% subcategory="显示器"
+    //% weight=64
+    export function i2cLcdDisplay_Control(item: Item): void {
+        if (item == 1) {
+            lcdcmd(0x0C)
+        }
+        if (item == 2) {
+            lcdcmd(0x08)
+        }
+        if (item == 3) {
+            lcdcmd(0x01)
+        }
+    }
+
+    //% subcategory="显示器"   group="LCD1602显示屏"
+    //%  blockId=seti2cLcdBacklight block="Backlight switch control %backlight"
+    //% weight=63
+    export function seti2cLcdBacklight(backlight: LcdBacklight): void {
+        if (backlight == 1) {
+            BK = 8
+            lcdcmd(0)
+        }
+        if (backlight == 0) {
+            BK = 0
+            lcdcmd(0)
+        }
     }
 
     let COMMAND_I2C_ADDRESS = 0x24
@@ -1592,131 +1716,6 @@ namespace sensors {
             cmd((dat << 4) | 0x01)
         }
     }
-
-    let i2cAddr: number
-    let BK: number
-    let RS: number
-    function setreg(d: number) {
-        pins.i2cWriteNumber(i2cAddr, d, NumberFormat.Int8LE)
-        basic.pause(1)
-    }
-
-    function set(d: number) {
-        d = d & 0xF0
-        d = d + BK + RS
-        setreg(d)
-        setreg(d + 4)
-        setreg(d)
-    }
-
-    function lcdcmd(d: number) {
-        RS = 0
-        set(d)
-        set(d << 4)
-    }
-
-    function lcddat(d: number) {
-        RS = 1
-        set(d)
-        set(d << 4)
-    }
-
-    //% block="LcdInit $addr" addr.defl="0x27"  group="LCD1602显示屏"  
-    //% subcategory="显示器"
-    //% weight=70
-    export function i2cLcdInit(addr: number) {
-        i2cAddr = addr
-        BK = 8
-        RS = 0
-        lcdcmd(0x33)
-        basic.pause(5)
-        set(0x30)
-        basic.pause(5)
-        set(0x20)
-        basic.pause(5)
-        lcdcmd(0x28)
-        lcdcmd(0x0C)
-        lcdcmd(0x06)
-        lcdcmd(0x01)
-    }
-
-    //% block="showchar $ch|col $x|row $y"   group="LCD1602显示屏"  
-    //% subcategory="显示器"
-    //% weight=69
-    export function i2cLcdShowChar(y: number, x: number, ch: string): void {
-        let a: number
-        y = y - 1
-        if (y > 0)
-            a = 0xC0
-        else
-            a = 0x80
-        x = x - 1
-        a += x
-        lcdcmd(a)
-        lcddat(ch.charCodeAt(0))
-    }
-
-    //% block="showNumber $n|col $x|row $y"   group="LCD1602显示屏"  
-    //% subcategory="显示器"
-    //% weight=68
-    export function i2cLcdShowNumber(y: number, x: number, n: number): void {
-        let s = n.toString()
-        i2cLcdShowString(y, x, s)
-    }
-
-    /**
-     * TODO: describe your function here
-     * 
-     */
-    //% block="showString $s|col $x|row $y"   group="LCD1602显示屏"  
-    //% subcategory="显示器"
-    //% weight=67
-    export function i2cLcdShowString(y: number, x: number, s: string): void {
-        let a: number
-        y = y - 1
-        if (y > 0)
-            a = 0xC0
-        else
-            a = 0x80
-        x = x - 1
-        a += x
-        lcdcmd(a)
-
-        for (let i = 0; i < s.length; i++) {
-            lcddat(s.charCodeAt(i))
-        }
-    }
-
-    //% block="i2cLcdDisplay_Control %item"   group="LCD1602显示屏"  
-    //% subcategory="显示器"
-    //% weight=64
-    export function i2cLcdDisplay_Control(item: Item): void {
-        if (item == 1) {
-            lcdcmd(0x0C)
-        }
-        if (item == 2) {
-            lcdcmd(0x08)
-        }
-        if (item == 3) {
-            lcdcmd(0x01)
-        }
-    }
-
-    //% subcategory="显示器"   group="LCD1602显示屏"
-    //%  blockId=seti2cLcdBacklight block="Backlight switch control %backlight"
-    //% weight=63
-    export function seti2cLcdBacklight(backlight: LcdBacklight): void {
-        if (backlight == 1) {
-            BK = 8
-            lcdcmd(0)
-        }
-        if (backlight == 0) {
-            BK = 0
-            lcdcmd(0)
-        }
-    }
-
-
 
 
     /**
@@ -1983,7 +1982,7 @@ namespace sensors {
     //% blockId="Speech_recognition_glossary" block="Voice recognition to set the word number %word_number|Word content %word_content"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
-    //% weight=97
+    //% weight=95
     export function Speech_recognition_glossary(word_number : number, word_content : string): void {
         i2cwrite1(VOICE_IIC_ADDR, VOICE_ADD_WORDS_REG, word_number,word_content)
         basic.pause(300)
@@ -2002,7 +2001,7 @@ namespace sensors {
     //% blockId="Speech_recognition_time" block="Voice recognition to set wake-up time %time"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
-    //% weight=95
+    //% weight=97
     export function Speech_recognition_time(time : number): void {
         i2cwrite(VOICE_IIC_ADDR,VOICE_CONFIG_TIME_REG,time)
         basic.pause(300)
