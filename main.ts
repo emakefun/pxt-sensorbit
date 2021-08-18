@@ -1956,7 +1956,7 @@ namespace sensors {
     //% blockId="Speech_recognition_reset" block="Voice recognition module for reset"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
- 
+     //% weight=100
     export function Speech_recognition_reset(): void {
         i2ccmd(VOICE_IIC_ADDR,VOICE_RESET_REG)
         basic.pause(300)
