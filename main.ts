@@ -1965,6 +1965,7 @@ namespace sensors {
     //% blockId="Speech_recognition_start" block="Voice recognition starts to recognize"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
+    //% weight=99
     export function Speech_recognition_start(): void {
         i2ccmd(VOICE_IIC_ADDR,VOICE_ASR_START_REG)
         basic.pause(300)
@@ -1973,6 +1974,7 @@ namespace sensors {
     //% blockId="Speech_recognition_mode" block="The voice recognition mode is set to %Mode"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
+    //% weight=98
     export function Speech_recognition_mode(Mode : Mode): void {
         i2cwrite(VOICE_IIC_ADDR,VOICE_RESET_REG,Mode)
         basic.pause(300)
@@ -1981,6 +1983,7 @@ namespace sensors {
     //% blockId="Speech_recognition_glossary" block="Voice recognition to set the word number %word_number|Word content %word_content"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
+    //% weight=97
     export function Speech_recognition_glossary(word_number : number, word_content : string): void {
         i2cwrite1(VOICE_IIC_ADDR, VOICE_ADD_WORDS_REG, word_number,word_content)
         basic.pause(300)
@@ -1990,6 +1993,7 @@ namespace sensors {
     //% blockId="Speech_recognition_get_result" block="Speech recognition to get the corresponding number of the recognized words"   group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
+    //% weight=96
     export function Speech_recognition_get_result(): number {
         let result =i2cread(VOICE_IIC_ADDR,VOICE_RESULT_REG)
         return result;
@@ -1998,6 +2002,7 @@ namespace sensors {
     //% blockId="Speech_recognition_time" block="Voice recognition to set wake-up time %time"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
+    //% weight=95
     export function Speech_recognition_time(time : number): void {
         i2cwrite(VOICE_IIC_ADDR,VOICE_CONFIG_TIME_REG,time)
         basic.pause(300)
