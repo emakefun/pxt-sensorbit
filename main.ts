@@ -203,8 +203,368 @@ enum Mode {
     //% block="KEYWORDS_AND"
     KEYWORDS_AND_BUTTON = 3, //关键字加按键模式
 }
+  
+   
+    //% blockId=touchbutton block="touch |digital pin %pin"   group="触摸模块"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function touchButton(pin: DigitalPin): boolean {
+       // pins.digitalWritePin(pin, 0)
+        if (pins.digitalReadPin(pin) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    //% blockId=button block="Button |digital pin %pin"   group="按键模块"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function Button(pin: DigitalPin): boolean {
+     //   pins.digitalWritePin(pin, 0)
+        if (pins.digitalReadPin(pin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
+    //% blockId=crashbutton block="crashButton |digital pin %pin"   group="触碰模块"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function crashButton(pin: DigitalPin): boolean {
+       // pins.digitalWritePin(pin, 0)
+        if (pins.digitalReadPin(pin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //% blockId=slideRheostat block="slideRheostat |analog pin %pin"   group="滑动变阻器模块"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function slideRheostat(pin: AnalogPin): number {
+        let row = pins.analogReadPin(pin)
+        return row
+    }
+
+    //% blockId=rotaryPotentiometer block="rotaryPotentiometer |analog pin %pin" group="旋转电位器模块"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function rotaryPotentiometer(pin: AnalogPin): number {
+        let row = pins.analogReadPin(pin)
+        return row
+    }
+
+    // let _Apin = 0
+    // let _Dpin = 0
+    // let _Bpin = 0
+
+    // //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" group="旋转编码器模块"
+    // //% weight=70
+    // //% subcategory="基础输入模块"
+    // export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
+    //     _Apin = pina
+    //     _Bpin = pinb
+    //     _Dpin = pind
+    // }
+
+    // //% blockId=pinsRead block="select pin %selectpin" group="旋转编码器模块"
+    // //% weight=69
+    // //% subcategory="基础输入模块"
+    // export function pinsRead(selectpin: _selectpin): number {
+    //     let a
+    //     if (selectpin == 0)
+    //         a = _Apin
+    //     else if (selectpin == 1)
+    //         a = _Bpin
+    //     else if (selectpin == 2)
+    //         a = _Dpin
+    //     pins.digitalWritePin(a, 0)
+    //     if (pins.digitalReadPin(a) == 1) {
+    //         return 1;
+    //     } else {
+    //         return 0;
+    //     }
+    //     //return pins.digitalReadPin(a)
+    // }
+    let _pianoDIO = 0
+    let _pianoCLK = 0
+
+    //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块V2"
+    //% weight=71
+    //% subcategory="基础输入模块"
+    export function piano_v2_init(pianoDIO: DigitalPin, pianoCLK: DigitalPin): void {
+
+        _pianoDIO = pianoDIO
+        _pianoCLK = pianoCLK
+    }
+
+    //% blockId=piano_v2_play block="piano_v2_read"   group="触摸钢琴模块V2"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function piano_v2_play(): void {
+        let DATA = 0
+        pins.digitalWritePin(_pianoDIO, 1)
+        control.waitMicros(93)
+
+        pins.digitalWritePin(_pianoDIO, 0)
+        control.waitMicros(10)
+
+        for (let i = 0; i < 8; i++) {
+            pins.digitalWritePin(_pianoCLK, 1)
+            pins.digitalWritePin(_pianoCLK, 0)
+            DATA |= pins.digitalReadPin(_pianoDIO) << i
+        }
+        control.waitMicros(2 * 1000)
+//         serial.writeString('' + DATA + '\n');
+        switch (DATA & 0xFF) {
+            case 0xFE: music.playTone(262, music.beat(BeatFraction.Half)); break;
+            case 0xFD: music.playTone(294, music.beat(BeatFraction.Half)); break;
+            case 0xFB: music.playTone(330, music.beat(BeatFraction.Half)); break;
+            case 0xF7: music.playTone(349, music.beat(BeatFraction.Half)); break;
+            case 0xEF: music.playTone(392, music.beat(BeatFraction.Half)); break;
+            case 0xDF: music.playTone(440, music.beat(BeatFraction.Half)); break;
+            case 0xBF: music.playTone(494, music.beat(BeatFraction.Half)); break;
+            case 0x7F: music.playTone(523, music.beat(BeatFraction.Half)); break;
+//             default: return " "
+        }
+    }
+    let _SDO = 0
+    let _SCL = 0
+
+    //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="矩阵键盘模块"
+    //% weight=71
+    //% subcategory="基础输入模块"
+    export function actuator_keyborad_pin(SDO: DigitalPin, SCL: DigitalPin): void {
+
+        _SDO = SDO
+        _SCL = SCL
+    }
+
+    //% blockId=actuator_keyborad_read block="actuator_keyborad_read"   group="矩阵键盘模块"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function actuator_keyborad_read(): string {
+        let DATA = 0
+        pins.digitalWritePin(_SDO, 1)
+        control.waitMicros(93)
+
+        pins.digitalWritePin(_SDO, 0)
+        control.waitMicros(10)
+
+        for (let i = 0; i < 16; i++) {
+            pins.digitalWritePin(_SCL, 1)
+            pins.digitalWritePin(_SCL, 0)
+            DATA |= pins.digitalReadPin(_SDO) << i
+        }
+        control.waitMicros(2 * 1000)
+// 	serial.writeString('' + DATA + '\n');
+        switch (DATA & 0xFFFF) {
+            case 0xFFFE: return "1"
+            case 0xFFFD: return "2"
+            case 0xFFFB: return "3"
+            case 0xFFEF: return "4"
+            case 0xFFDF: return "5"
+            case 0xFFBF: return "6"
+            case 0xFEFF: return "7"
+            case 0xFDFF: return "8"
+            case 0xFBFF: return "9"
+            case 0xDFFF: return "0"
+            case 0xFFF7: return "A"
+            case 0xFF7F: return "B"
+            case 0xF7FF: return "C"
+            case 0x7FFF: return "D"
+            case 0xEFFF: return "*"
+            case 0xBFFF: return "#"
+            default: return " "
+        }
+    }
+    let _DIO = 0
+    let _CLK = 0
+
+    //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="钢琴模块"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function basic_piano_pin(DIO: DigitalPin, CLK: DigitalPin): void {
+
+        _DIO = DIO
+        _CLK = CLK
+    }
+
+    //% blockId=basic_piano_play block="basic_piano_play"   group="钢琴模块"
+    //% weight=69
+    //% subcategory="基础输入模块"
+    export function basic_piano_play(): void {
+
+        if (0 == pins.digitalReadPin(_DIO)) {
+            let list: number[] = []
+            for (let index = 0; index <= 15; index++) {
+                for (let index2 = 0; index2 < 4; index2++) {
+                    pins.digitalWritePin(_CLK, 0)
+                }
+                for (let index2 = 0; index2 < 4; index2++) {
+                    pins.digitalWritePin(_CLK, 1)
+                }
+                list[index] = pins.digitalReadPin(_DIO)
+            }
+            if (!(list[0])) {
+                music.playTone(262, music.beat(BeatFraction.Half))
+            } else if (!(list[1])) {
+                music.playTone(294, music.beat(BeatFraction.Half))
+            } else if (!(list[2])) {
+                music.playTone(330, music.beat(BeatFraction.Half))
+            } else if (!(list[3])) {
+                music.playTone(349, music.beat(BeatFraction.Half))
+            } else if (!(list[4])) {
+                music.playTone(392, music.beat(BeatFraction.Half))
+            } else if (!(list[5])) {
+                music.playTone(440, music.beat(BeatFraction.Half))
+            } else if (!(list[6])) {
+                music.playTone(494, music.beat(BeatFraction.Half))
+            } else if (!(list[7])) {
+                music.playTone(523, music.beat(BeatFraction.Half))
+            }
+        }
+    }	
+
+    let Xpin = 0
+    let Ypin = 0
+    let Bpin = 0
+
+    //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
+        Xpin = pinx
+        Ypin = piny
+        Bpin = pinb
+    }
+
+    //% blockId=_analogRead block="select analog pin  %selectpin" group="摇杆模块"
+    //% weight=69
+    //% subcategory="基础输入模块"
+    export function _analogRead(selectpin: _rockerpin): number {
+        let a
+        if (selectpin == 0)
+            a = Xpin
+        else if (selectpin == 1)
+            a = Ypin
+        return pins.analogReadPin(a)
+    }
+
+    //% blockId=_digitalRead block="Is the rocker module pressed?" group="摇杆模块"
+    //% weight=68
+    //% subcategory="基础输入模块"
+    export function _digitalRead(): boolean {
+       // pins.digitalWritePin(Bpin, 0)
+        if (pins.digitalReadPin(Bpin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+ 
+
+    /**
+     * 游戏手柄
+     */
+    //% blockId=Gamepad_Press block="Gamepad buttons %button Is pressed？"  group="PH2.0手柄"
+    //% weight=74
+    //% subcategory="基础输入模块"
+    //% inlineInputMode=inline
+    export function Gamepad_Press(button: barb_fitting): boolean {
+        if(Get_Button_Status(button) != NONE_PRESS && Get_Button_Status(button) != 0xff)
+    {
+        return true;
+    }
+        return false;   
+    }
+
+    /**
+     * PH2.0手柄
+     */
+    //% blockId=Gamepad_Release block="Gamepad buttons %button Is Released？"  group="PH2.0手柄"
+    //% weight=74
+    //% subcategory="基础输入模块"
+    //% inlineInputMode=inline
+    export function Gamepad_Release(button: barb_fitting): boolean {
+        if(Get_Button_Status(button) == NONE_PRESS)
+    {
+        return true;
+    }
+        return false;   
+    }
+
+    /**
+     * PH2.0手柄
+     */
+    //% blockId=Gamepad_Shaft block="Game controller acquisition %shaft the value of"  group="PH2.0手柄"
+    //% weight=74
+    //% subcategory="基础输入模块"
+    //% inlineInputMode=inline
+    export function Gamepad_Shaft(shaft: Shaft): number { 
+        let value = 0;
+        if(shaft == 0){
+            value = i2cread(JOYSTICK_I2C_ADDR,JOYSTICK_LEFT_X_REG);
+        }
+        if(shaft == 1){
+            value = i2cread(JOYSTICK_I2C_ADDR,JOYSTICK_LEFT_Y_REG);
+        }
+        return value;
+    }
+
+    /**
+     * PH2.0手柄
+     */
+    //% blockId=Gamepad_Status block="Button %button is it %status status?"  group="PH2.0手柄"
+    //% weight=74
+    //% subcategory="基础输入模块"
+    //% inlineInputMode=inline
+    export function Gamepad_Status(button : barb_fitting,status : key_status): boolean {
+	    if(Get_Button_Status(button) == status)
+	    {
+		return true;
+	    }else{
+		return false;
+	    }
+    }
+      
+     let VOICE_RESET_REG = 0x5;
+    let VOICE_IIC_ADDR = 0x79;
+    let VOICE_ADD_WORDS_REG = 0x04;
+    let VOICE_ASR_START_REG = 0x6;
+    let VOICE_RESULT_REG = 0;
+    let VOICE_CONFIG_TIME_REG = 0x3;
+
+    function i2cwrite(addr: number, reg: number, value: number) {
+        let buf = pins.createBuffer(2)
+        buf[0] = reg
+        buf[1] = value
+        pins.i2cWriteBuffer(addr, buf)
+    }
+
+    function i2cwrite1(addr: number, reg: number, value: number ,value1: string) {
+        let lengths = value1.length
+        let buf = pins.createBuffer(2+lengths)
+        //let arr = value1.split('')
+        buf[0] = reg 
+        buf[1] = value
+        let betys = []
+        betys = stringToBytes(value1)
+        for (let i = 0; i < betys.length; i++) {
+            buf[2+i] = betys[i]
+        }
+        pins.i2cWriteBuffer(addr, buf)
+    }
+
+    function i2ccmd(addr: number, value: number) {
+        let buf = pins.createBuffer(1)
+        buf[0] = value
+        pins.i2cWriteBuffer(addr, buf)
+    }
 //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
 namespace sensors {
     //% blockId=actuator_buzzer0 block="actuator_buzzer0 pin %pin|status %status"   group="有源蜂鸣器"
@@ -276,99 +636,7 @@ namespace sensors {
         pins.digitalWritePin(pin,status)
     }
 
-    let _SDO = 0
-    let _SCL = 0
-
-    //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="矩阵键盘模块"
-    //% weight=71
-    //% subcategory="基础输入模块"
-    export function actuator_keyborad_pin(SDO: DigitalPin, SCL: DigitalPin): void {
-
-        _SDO = SDO
-        _SCL = SCL
-    }
-
-    //% blockId=actuator_keyborad_read block="actuator_keyborad_read"   group="矩阵键盘模块"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function actuator_keyborad_read(): string {
-        let DATA = 0
-        pins.digitalWritePin(_SDO, 1)
-        control.waitMicros(93)
-
-        pins.digitalWritePin(_SDO, 0)
-        control.waitMicros(10)
-
-        for (let i = 0; i < 16; i++) {
-            pins.digitalWritePin(_SCL, 1)
-            pins.digitalWritePin(_SCL, 0)
-            DATA |= pins.digitalReadPin(_SDO) << i
-        }
-        control.waitMicros(2 * 1000)
-// 	serial.writeString('' + DATA + '\n');
-        switch (DATA & 0xFFFF) {
-            case 0xFFFE: return "1"
-            case 0xFFFD: return "2"
-            case 0xFFFB: return "3"
-            case 0xFFEF: return "4"
-            case 0xFFDF: return "5"
-            case 0xFFBF: return "6"
-            case 0xFEFF: return "7"
-            case 0xFDFF: return "8"
-            case 0xFBFF: return "9"
-            case 0xDFFF: return "0"
-            case 0xFFF7: return "A"
-            case 0xFF7F: return "B"
-            case 0xF7FF: return "C"
-            case 0x7FFF: return "D"
-            case 0xEFFF: return "*"
-            case 0xBFFF: return "#"
-            default: return " "
-        }
-    }
-	
-    let _pianoDIO = 0
-    let _pianoCLK = 0
-
-    //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块V2"
-    //% weight=71
-    //% subcategory="基础输入模块"
-    export function piano_v2_init(pianoDIO: DigitalPin, pianoCLK: DigitalPin): void {
-
-        _pianoDIO = pianoDIO
-        _pianoCLK = pianoCLK
-    }
-
-    //% blockId=piano_v2_play block="piano_v2_read"   group="触摸钢琴模块V2"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function piano_v2_play(): void {
-        let DATA = 0
-        pins.digitalWritePin(_pianoDIO, 1)
-        control.waitMicros(93)
-
-        pins.digitalWritePin(_pianoDIO, 0)
-        control.waitMicros(10)
-
-        for (let i = 0; i < 8; i++) {
-            pins.digitalWritePin(_pianoCLK, 1)
-            pins.digitalWritePin(_pianoCLK, 0)
-            DATA |= pins.digitalReadPin(_pianoDIO) << i
-        }
-        control.waitMicros(2 * 1000)
-//         serial.writeString('' + DATA + '\n');
-        switch (DATA & 0xFF) {
-            case 0xFE: music.playTone(262, music.beat(BeatFraction.Half)); break;
-            case 0xFD: music.playTone(294, music.beat(BeatFraction.Half)); break;
-            case 0xFB: music.playTone(330, music.beat(BeatFraction.Half)); break;
-            case 0xF7: music.playTone(349, music.beat(BeatFraction.Half)); break;
-            case 0xEF: music.playTone(392, music.beat(BeatFraction.Half)); break;
-            case 0xDF: music.playTone(440, music.beat(BeatFraction.Half)); break;
-            case 0xBF: music.playTone(494, music.beat(BeatFraction.Half)); break;
-            case 0x7F: music.playTone(523, music.beat(BeatFraction.Half)); break;
-//             default: return " "
-        }
-    }
+    
 
     //% blockId=setled block="set led %lpin|status %lstatus"   group="LED灯"
     //% weight=70
@@ -919,180 +1187,7 @@ namespace sensors {
         }
     }
 
-    //% blockId=touchbutton block="touch |digital pin %pin"   group="触摸模块"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function touchButton(pin: DigitalPin): boolean {
-       // pins.digitalWritePin(pin, 0)
-        if (pins.digitalReadPin(pin) == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    //% blockId=button block="Button |digital pin %pin"   group="按键模块"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function Button(pin: DigitalPin): boolean {
-     //   pins.digitalWritePin(pin, 0)
-        if (pins.digitalReadPin(pin) == 1) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    //% blockId=crashbutton block="crashButton |digital pin %pin"   group="触碰模块"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function crashButton(pin: DigitalPin): boolean {
-       // pins.digitalWritePin(pin, 0)
-        if (pins.digitalReadPin(pin) == 1) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    //% blockId=slideRheostat block="slideRheostat |analog pin %pin"   group="滑动变阻器模块"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function slideRheostat(pin: AnalogPin): number {
-        let row = pins.analogReadPin(pin)
-        return row
-    }
-
-    //% blockId=rotaryPotentiometer block="rotaryPotentiometer |analog pin %pin" group="旋转电位器模块"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function rotaryPotentiometer(pin: AnalogPin): number {
-        let row = pins.analogReadPin(pin)
-        return row
-    }
-
-    // let _Apin = 0
-    // let _Dpin = 0
-    // let _Bpin = 0
-
-    // //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" group="旋转编码器模块"
-    // //% weight=70
-    // //% subcategory="基础输入模块"
-    // export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
-    //     _Apin = pina
-    //     _Bpin = pinb
-    //     _Dpin = pind
-    // }
-
-    // //% blockId=pinsRead block="select pin %selectpin" group="旋转编码器模块"
-    // //% weight=69
-    // //% subcategory="基础输入模块"
-    // export function pinsRead(selectpin: _selectpin): number {
-    //     let a
-    //     if (selectpin == 0)
-    //         a = _Apin
-    //     else if (selectpin == 1)
-    //         a = _Bpin
-    //     else if (selectpin == 2)
-    //         a = _Dpin
-    //     pins.digitalWritePin(a, 0)
-    //     if (pins.digitalReadPin(a) == 1) {
-    //         return 1;
-    //     } else {
-    //         return 0;
-    //     }
-    //     //return pins.digitalReadPin(a)
-    // }
-
-
-    let Xpin = 0
-    let Ypin = 0
-    let Bpin = 0
-
-    //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
-        Xpin = pinx
-        Ypin = piny
-        Bpin = pinb
-    }
-
-    //% blockId=_analogRead block="select analog pin  %selectpin" group="摇杆模块"
-    //% weight=69
-    //% subcategory="基础输入模块"
-    export function _analogRead(selectpin: _rockerpin): number {
-        let a
-        if (selectpin == 0)
-            a = Xpin
-        else if (selectpin == 1)
-            a = Ypin
-        return pins.analogReadPin(a)
-    }
-
-    //% blockId=_digitalRead block="Is the rocker module pressed?" group="摇杆模块"
-    //% weight=68
-    //% subcategory="基础输入模块"
-    export function _digitalRead(): boolean {
-       // pins.digitalWritePin(Bpin, 0)
-        if (pins.digitalReadPin(Bpin) == 1) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    let _DIO = 0
-    let _CLK = 0
-
-    //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="钢琴模块"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function basic_piano_pin(DIO: DigitalPin, CLK: DigitalPin): void {
-
-        _DIO = DIO
-        _CLK = CLK
-    }
-
-    //% blockId=basic_piano_play block="basic_piano_play"   group="钢琴模块"
-    //% weight=69
-    //% subcategory="基础输入模块"
-    export function basic_piano_play(): void {
-
-        if (0 == pins.digitalReadPin(_DIO)) {
-            let list: number[] = []
-            for (let index = 0; index <= 15; index++) {
-                for (let index2 = 0; index2 < 4; index2++) {
-                    pins.digitalWritePin(_CLK, 0)
-                }
-                for (let index2 = 0; index2 < 4; index2++) {
-                    pins.digitalWritePin(_CLK, 1)
-                }
-                list[index] = pins.digitalReadPin(_DIO)
-            }
-            if (!(list[0])) {
-                music.playTone(262, music.beat(BeatFraction.Half))
-            } else if (!(list[1])) {
-                music.playTone(294, music.beat(BeatFraction.Half))
-            } else if (!(list[2])) {
-                music.playTone(330, music.beat(BeatFraction.Half))
-            } else if (!(list[3])) {
-                music.playTone(349, music.beat(BeatFraction.Half))
-            } else if (!(list[4])) {
-                music.playTone(392, music.beat(BeatFraction.Half))
-            } else if (!(list[5])) {
-                music.playTone(440, music.beat(BeatFraction.Half))
-            } else if (!(list[6])) {
-                music.playTone(494, music.beat(BeatFraction.Half))
-            } else if (!(list[7])) {
-                music.playTone(523, music.beat(BeatFraction.Half))
-            }
-        }
-    }
-
-
-
-
+    
     //% blockId=sensor_water block="Water vapor sensor pin %pines"  group="水蒸气传感器"
     //% weight=70
     //% inlineInputMode=inline
@@ -1854,103 +1949,6 @@ namespace sensors {
         }
     }
 
-    /**
-     * 游戏手柄
-     */
-    //% blockId=Gamepad_Press block="Gamepad buttons %button Is pressed？"  group="PH2.0手柄"
-    //% weight=74
-    //% subcategory="基础输入模块"
-    //% inlineInputMode=inline
-    export function Gamepad_Press(button: barb_fitting): boolean {
-        if(Get_Button_Status(button) != NONE_PRESS && Get_Button_Status(button) != 0xff)
-    {
-        return true;
-    }
-        return false;   
-    }
-
-    /**
-     * PH2.0手柄
-     */
-    //% blockId=Gamepad_Release block="Gamepad buttons %button Is Released？"  group="PH2.0手柄"
-    //% weight=74
-    //% subcategory="基础输入模块"
-    //% inlineInputMode=inline
-    export function Gamepad_Release(button: barb_fitting): boolean {
-        if(Get_Button_Status(button) == NONE_PRESS)
-    {
-        return true;
-    }
-        return false;   
-    }
-
-    /**
-     * PH2.0手柄
-     */
-    //% blockId=Gamepad_Shaft block="Game controller acquisition %shaft the value of"  group="PH2.0手柄"
-    //% weight=74
-    //% subcategory="基础输入模块"
-    //% inlineInputMode=inline
-    export function Gamepad_Shaft(shaft: Shaft): number { 
-        let value = 0;
-        if(shaft == 0){
-            value = i2cread(JOYSTICK_I2C_ADDR,JOYSTICK_LEFT_X_REG);
-        }
-        if(shaft == 1){
-            value = i2cread(JOYSTICK_I2C_ADDR,JOYSTICK_LEFT_Y_REG);
-        }
-        return value;
-    }
-
-    /**
-     * PH2.0手柄
-     */
-    //% blockId=Gamepad_Status block="Button %button is it %status status?"  group="PH2.0手柄"
-    //% weight=74
-    //% subcategory="基础输入模块"
-    //% inlineInputMode=inline
-    export function Gamepad_Status(button : barb_fitting,status : key_status): boolean {
-	    if(Get_Button_Status(button) == status)
-	    {
-		return true;
-	    }else{
-		return false;
-	    }
-    }
-      
-     let VOICE_RESET_REG = 0x5;
-    let VOICE_IIC_ADDR = 0x79;
-    let VOICE_ADD_WORDS_REG = 0x04;
-    let VOICE_ASR_START_REG = 0x6;
-    let VOICE_RESULT_REG = 0;
-    let VOICE_CONFIG_TIME_REG = 0x3;
-
-    function i2cwrite(addr: number, reg: number, value: number) {
-        let buf = pins.createBuffer(2)
-        buf[0] = reg
-        buf[1] = value
-        pins.i2cWriteBuffer(addr, buf)
-    }
-
-    function i2cwrite1(addr: number, reg: number, value: number ,value1: string) {
-        let lengths = value1.length
-        let buf = pins.createBuffer(2+lengths)
-        //let arr = value1.split('')
-        buf[0] = reg 
-        buf[1] = value
-        let betys = []
-        betys = stringToBytes(value1)
-        for (let i = 0; i < betys.length; i++) {
-            buf[2+i] = betys[i]
-        }
-        pins.i2cWriteBuffer(addr, buf)
-    }
-
-    function i2ccmd(addr: number, value: number) {
-        let buf = pins.createBuffer(1)
-        buf[0] = value
-        pins.i2cWriteBuffer(addr, buf)
-    }
 
 
 
