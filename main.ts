@@ -291,48 +291,7 @@ namespace sensors {
     //     }
     //     //return pins.digitalReadPin(a)
     // }
-    let _pianoDIO = 0
-    let _pianoCLK = 0
-
-    //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块V2"
-    //% weight=71
-    //% subcategory="基础输入模块"
-    export function piano_v2_init(pianoDIO: DigitalPin, pianoCLK: DigitalPin): void {
-
-        _pianoDIO = pianoDIO
-        _pianoCLK = pianoCLK
-    }
-
-    //% blockId=piano_v2_play block="piano_v2_read"   group="触摸钢琴模块V2"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function piano_v2_play(): void {
-        let DATA = 0
-        pins.digitalWritePin(_pianoDIO, 1)
-        control.waitMicros(93)
-
-        pins.digitalWritePin(_pianoDIO, 0)
-        control.waitMicros(10)
-
-        for (let i = 0; i < 8; i++) {
-            pins.digitalWritePin(_pianoCLK, 1)
-            pins.digitalWritePin(_pianoCLK, 0)
-            DATA |= pins.digitalReadPin(_pianoDIO) << i
-        }
-        control.waitMicros(2 * 1000)
-//         serial.writeString('' + DATA + '\n');
-        switch (DATA & 0xFF) {
-            case 0xFE: music.playTone(262, music.beat(BeatFraction.Half)); break;
-            case 0xFD: music.playTone(294, music.beat(BeatFraction.Half)); break;
-            case 0xFB: music.playTone(330, music.beat(BeatFraction.Half)); break;
-            case 0xF7: music.playTone(349, music.beat(BeatFraction.Half)); break;
-            case 0xEF: music.playTone(392, music.beat(BeatFraction.Half)); break;
-            case 0xDF: music.playTone(440, music.beat(BeatFraction.Half)); break;
-            case 0xBF: music.playTone(494, music.beat(BeatFraction.Half)); break;
-            case 0x7F: music.playTone(523, music.beat(BeatFraction.Half)); break;
-//             default: return " "
-        }
-    }
+   
     let _SDO = 0
     let _SCL = 0
 
@@ -383,9 +342,47 @@ namespace sensors {
             default: return " "
         }
     }
+    
+
+    let Xpin = 0
+    let Ypin = 0
+    let Bpin = 0
+
+    //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
+        Xpin = pinx
+        Ypin = piny
+        Bpin = pinb
+    }
+
+    //% blockId=_analogRead block="select analog pin  %selectpin" group="摇杆模块"
+    //% weight=69
+    //% subcategory="基础输入模块"
+    export function _analogRead(selectpin: _rockerpin): number {
+        let a
+        if (selectpin == 0)
+            a = Xpin
+        else if (selectpin == 1)
+            a = Ypin
+        return pins.analogReadPin(a)
+    }
+
+    //% blockId=_digitalRead block="Is the rocker module pressed?" group="摇杆模块"
+    //% weight=68
+    //% subcategory="基础输入模块"
+    export function _digitalRead(): boolean {
+       // pins.digitalWritePin(Bpin, 0)
+        if (pins.digitalReadPin(Bpin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     let _DIO = 0
     let _CLK = 0
-
     //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="钢琴模块"
     //% weight=70
     //% subcategory="基础输入模块"
@@ -430,45 +427,48 @@ namespace sensors {
             }
         }
     }	
+    let _pianoDIO = 0
+    let _pianoCLK = 0
 
-    let Xpin = 0
-    let Ypin = 0
-    let Bpin = 0
-
-    //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
-    //% weight=70
+    //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="钢琴模块"
+    //% weight=61
     //% subcategory="基础输入模块"
-    export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
-        Xpin = pinx
-        Ypin = piny
-        Bpin = pinb
+    export function piano_v2_init(pianoDIO: DigitalPin, pianoCLK: DigitalPin): void {
+
+        _pianoDIO = pianoDIO
+        _pianoCLK = pianoCLK
     }
 
-    //% blockId=_analogRead block="select analog pin  %selectpin" group="摇杆模块"
-    //% weight=69
+    //% blockId=piano_v2_play block="piano_v2_read"   group="钢琴模块"
+    //% weight=60
     //% subcategory="基础输入模块"
-    export function _analogRead(selectpin: _rockerpin): number {
-        let a
-        if (selectpin == 0)
-            a = Xpin
-        else if (selectpin == 1)
-            a = Ypin
-        return pins.analogReadPin(a)
-    }
+    export function piano_v2_play(): void {
+        let DATA = 0
+        pins.digitalWritePin(_pianoDIO, 1)
+        control.waitMicros(93)
 
-    //% blockId=_digitalRead block="Is the rocker module pressed?" group="摇杆模块"
-    //% weight=68
-    //% subcategory="基础输入模块"
-    export function _digitalRead(): boolean {
-       // pins.digitalWritePin(Bpin, 0)
-        if (pins.digitalReadPin(Bpin) == 1) {
-            return false;
-        } else {
-            return true;
+        pins.digitalWritePin(_pianoDIO, 0)
+        control.waitMicros(10)
+
+        for (let i = 0; i < 8; i++) {
+            pins.digitalWritePin(_pianoCLK, 1)
+            pins.digitalWritePin(_pianoCLK, 0)
+            DATA |= pins.digitalReadPin(_pianoDIO) << i
+        }
+        control.waitMicros(2 * 1000)
+//         serial.writeString('' + DATA + '\n');
+        switch (DATA & 0xFF) {
+            case 0xFE: music.playTone(262, music.beat(BeatFraction.Half)); break;
+            case 0xFD: music.playTone(294, music.beat(BeatFraction.Half)); break;
+            case 0xFB: music.playTone(330, music.beat(BeatFraction.Half)); break;
+            case 0xF7: music.playTone(349, music.beat(BeatFraction.Half)); break;
+            case 0xEF: music.playTone(392, music.beat(BeatFraction.Half)); break;
+            case 0xDF: music.playTone(440, music.beat(BeatFraction.Half)); break;
+            case 0xBF: music.playTone(494, music.beat(BeatFraction.Half)); break;
+            case 0x7F: music.playTone(523, music.beat(BeatFraction.Half)); break;
+//             default: return " "
         }
     }
-
- 
 
     /**
      * 游戏手柄
@@ -588,26 +588,6 @@ namespace sensors {
 
    }
 
-   //% blockId=sensor_flame block="Pin %pin reads the digital value of the flame sensor" group="火焰传感器"
-   //% weight=70
-   //% inlineInputMode=inline
-   //% subcategory="传感器"
-   export function sensor_flame(pin: DigitalPin): boolean {
-      // pins.digitalWritePin(pin, 0)
-       if (pins.digitalReadPin(pin) == 1) {
-           return false;
-       } else {
-           return true;
-       }
-   }
-
-   //% blockId=sensor_flame_analog block="Pin %pin reads the analog value of the flame sensor" group="火焰传感器"
-   //% weight=70
-   //% inlineInputMode=inline
-   //% subcategory="传感器"
-   export function sensor_flame_analog(pin: AnalogPin): number {
-       return pins.analogReadPin(pin)
-   }
 
    //% blockId=sensor_infraredTracking block="Pin %pin reads the digital value of the infraredTracking sensor" group="红外循迹传感器"
    //% weight=70
@@ -686,6 +666,18 @@ namespace sensors {
    }
 
    /**
+    * 灰度传感器
+    */
+
+   //% blockId=sensor_grayLevel block="sensor_grayLevel pin |analogpin %pin" group="灰度传感器"
+   //% weight=70
+   //% inlineInputMode=inline
+   //% subcategory="传感器"
+   export function sensor_grayLevel(pin: AnalogPin): number {
+    return pins.analogReadPin(pin)
+}
+
+   /**
     * 避障传感器
     */
 
@@ -737,6 +729,50 @@ namespace sensors {
        }
    }
 
+      //% blockId=sensor_flame block="Pin %pin reads the digital value of the flame sensor" group="火焰传感器"
+   //% weight=70
+   //% inlineInputMode=inline
+   //% subcategory="传感器"
+   export function sensor_flame(pin: DigitalPin): boolean {
+    // pins.digitalWritePin(pin, 0)
+     if (pins.digitalReadPin(pin) == 1) {
+         return false;
+     } else {
+         return true;
+     }
+ }
+
+ //% blockId=sensor_flame_analog block="Pin %pin reads the analog value of the flame sensor" group="火焰传感器"
+ //% weight=70
+ //% inlineInputMode=inline
+ //% subcategory="传感器"
+ export function sensor_flame_analog(pin: AnalogPin): number {
+     return pins.analogReadPin(pin)
+ }
+
+   //% blockId="sensor_ping" block="ping trig %trig|echo %echo|unit %unit" group="普通超声波传感器"
+   //% weight=75
+   //% inlineInputMode=inline
+   //% subcategory="传感器"
+   export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 500): number {
+    // send pulse
+    pins.setPull(trig, PinPullMode.PullNone);
+    pins.digitalWritePin(trig, 0);
+    control.waitMicros(2);
+    pins.digitalWritePin(trig, 1);
+    control.waitMicros(10);
+    pins.digitalWritePin(trig, 0);
+
+    // read pulse
+    const d = pins.pulseIn(echo, PulseValue.High, maxCmDistance * 58);
+
+    switch (unit) {
+        case PingUnit.Centimeters: return Math.idiv(d, 58);
+        case PingUnit.Inches: return Math.idiv(d, 148);
+        default: return d;
+    }
+}
+
    /**
     * 震动传感器
     */
@@ -766,17 +802,6 @@ namespace sensors {
        return pins.analogReadPin(pin)
    }
 
-   /**
-    * 灰度传感器
-    */
-
-   //% blockId=sensor_grayLevel block="sensor_grayLevel pin |analogpin %pin" group="灰度传感器"
-   //% weight=70
-   //% inlineInputMode=inline
-   //% subcategory="传感器"
-   export function sensor_grayLevel(pin: AnalogPin): number {
-       return pins.analogReadPin(pin)
-   }
 
    /**
     * 声音传感器
@@ -1091,29 +1116,7 @@ namespace sensors {
     * @param unit desired conversion unit
     * @param maxCmDistance maximum distance in centimeters (default is 500)
     */
-   //% blockId="sensor_ping" block="ping trig %trig|echo %echo|unit %unit" group="普通超声波传感器"
-   //% weight=75
-   //% inlineInputMode=inline
-   //% subcategory="传感器"
-   export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 500): number {
-       // send pulse
-       pins.setPull(trig, PinPullMode.PullNone);
-       pins.digitalWritePin(trig, 0);
-       control.waitMicros(2);
-       pins.digitalWritePin(trig, 1);
-       control.waitMicros(10);
-       pins.digitalWritePin(trig, 0);
-
-       // read pulse
-       const d = pins.pulseIn(echo, PulseValue.High, maxCmDistance * 58);
-
-       switch (unit) {
-           case PingUnit.Centimeters: return Math.idiv(d, 58);
-           case PingUnit.Inches: return Math.idiv(d, 148);
-           default: return d;
-       }
-   }
-
+ 
    //% blockId="readdht11" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
    //% subcategory="传感器"
    //% inlineInputMode=inline
@@ -1237,7 +1240,7 @@ namespace sensors {
      }
 
    //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
-   //% subcategory="micro:bit(V2)"
+   //% subcategory="传感器"
    //% inlineInputMode=inline
    export function dht11value_v2(dht11pin: DigitalPin, dht11type: DHT11Type): number {
        pins.digitalWritePin(dht11pin, 0)
@@ -1460,6 +1463,134 @@ namespace sensors {
             a = gpins
         }
         pins.digitalWritePin(a, _status)
+    }
+
+    let COMMAND_I2C_ADDRESS = 0x24
+    let DISPLAY_I2C_ADDRESS = 0x34
+    let _SEG = [0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71]
+
+    let _intensity = 3
+    let dbuf = [0, 0, 0, 0]
+
+    function cmd(c: number) {
+        pins.i2cWriteNumber(COMMAND_I2C_ADDRESS, c, NumberFormat.Int8BE)
+    }
+
+    function dat(bit: number, d: number) {
+        pins.i2cWriteNumber(DISPLAY_I2C_ADDRESS + (bit % 4), d, NumberFormat.Int8BE)
+    }
+
+    // //% blockId="TM650_ON" block="turn on display" group="TM1650数码管"
+    // //% weight=50 blockGap=8
+    // //% subcategory="显示器"
+    // export function on() {
+    //     cmd(_intensity * 16 + 1)
+    // }
+
+    // //% blockId="TM650_OFF" block="turn off display" group="TM1650数码管"
+    // //% weight=50 blockGap=8
+    // //% subcategory="显示器"
+    // export function off() {
+    //     _intensity = 0
+    //     cmd(0)
+    // }
+
+    // //% blockId="TM650_CLEAR" block="clear display" group="TM1650数码管"
+    // //% weight=40 blockGap=8
+    // //% subcategory="显示器"
+    // export function clear() {
+    //     dat(0, 0)
+    //     dat(1, 0)
+    //     dat(2, 0)
+    //     dat(3, 0)
+    //     dbuf = [0, 0, 0, 0]
+    // }
+    //% blockId="TM650_Control" block="display control" group="TM1650数码管"
+    //% weight=40 blockGap=8
+    //% subcategory="显示器"
+     function TM650_Control(option: Select) {
+        if (option == 0) {
+            cmd(_intensity * 16 + 1)
+        }
+        if (option == 1) {
+            _intensity = 0
+            cmd(0)
+        }
+        if (option == 2) {
+            dat(0, 0)
+            dat(1, 0)
+            dat(2, 0)
+            dat(3, 0)
+            dbuf = [0, 0, 0, 0]
+        }
+    }
+
+    //% blockId="TM650_DIGIT" block="show digit %num|at %bit"  group="TM1650数码管"
+    //% weight=80 blockGap=8
+    //% num.max=15 num.min=0
+    //% subcategory="显示器"
+    //% bit.max=3 bit.min=0
+    export function digit(num: number, bit: number) {
+        dbuf[bit % 4] = _SEG[num % 16]
+        dat(bit, _SEG[num % 16])
+    }
+
+    //% blockId="TM650_SHOW_NUMBER" block="show number %num"  group="TM1650数码管"
+    //% weight=100 blockGap=8
+    //% subcategory="显示器"
+    export function showNumber(num: number) {
+        if (num < 0) {
+            dat(0, 0x40) // '-'
+            num = -num
+        }
+        else
+            digit(Math.idiv(num, 1000) % 10, 0)
+        digit(num % 10, 3)
+        digit(Math.idiv(num, 10) % 10, 2)
+        digit(Math.idiv(num, 100) % 10, 1)
+    }
+
+    //% blockId="TM650_SHOW_HEX_NUMBER" block="show hex number %num"  group="TM1650数码管"
+    //% weight=90 blockGap=8
+    //% subcategory="显示器"
+    export function showHex(num: number) {
+        if (num < 0) {
+            dat(0, 0x40) // '-'
+            num = -num
+        }
+        else
+            digit((num >> 12) % 16, 0)
+        digit(num % 16, 3)
+        digit((num >> 4) % 16, 2)
+        digit((num >> 8) % 16, 1)
+    }
+
+    //% blockId="TM650_SHOW_DP" block="show dot point %bit|show %num" group="TM1650数码管"
+    //% weight=80 blockGap=8
+    //% subcategory="显示器"
+    //% bit.max=3 bit.min=0
+    export function showDpAt(status: ledon_off, bit: number) {
+        let show = status == 1 ? true : false;
+        if (show) dat(bit, dbuf[bit % 4] | 0x80)
+        else dat(bit, dbuf[bit % 4] & 0x7F)
+    }
+
+    //% blockId="TM650_INTENSITY" block="set intensity %dat" group="TM1650数码管"
+    //% weight=70 blockGap=8
+    //% subcategory="显示器"
+    //% dat.max=7 dat.min=0
+    export function setIntensity(dat: number) {
+        if ((dat < 0) || (dat > 8)) {
+            return
+        }
+        if (dat == 0) {
+            _intensity = 0
+            cmd(0)
+        }
+        else {
+            _intensity = dat
+            cmd((dat << 4) | 0x01)
+        }
     }
 
     let i2cAddr: number
@@ -1821,145 +1952,21 @@ namespace sensors {
         return tm
     }
 
-    let COMMAND_I2C_ADDRESS = 0x24
-    let DISPLAY_I2C_ADDRESS = 0x34
-    let _SEG = [0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71]
-
-    let _intensity = 3
-    let dbuf = [0, 0, 0, 0]
-
-    function cmd(c: number) {
-        pins.i2cWriteNumber(COMMAND_I2C_ADDRESS, c, NumberFormat.Int8BE)
-    }
-
-    function dat(bit: number, d: number) {
-        pins.i2cWriteNumber(DISPLAY_I2C_ADDRESS + (bit % 4), d, NumberFormat.Int8BE)
-    }
-
-    // //% blockId="TM650_ON" block="turn on display" group="TM1650数码管"
-    // //% weight=50 blockGap=8
-    // //% subcategory="显示器"
-    // export function on() {
-    //     cmd(_intensity * 16 + 1)
-    // }
-
-    // //% blockId="TM650_OFF" block="turn off display" group="TM1650数码管"
-    // //% weight=50 blockGap=8
-    // //% subcategory="显示器"
-    // export function off() {
-    //     _intensity = 0
-    //     cmd(0)
-    // }
-
-    // //% blockId="TM650_CLEAR" block="clear display" group="TM1650数码管"
-    // //% weight=40 blockGap=8
-    // //% subcategory="显示器"
-    // export function clear() {
-    //     dat(0, 0)
-    //     dat(1, 0)
-    //     dat(2, 0)
-    //     dat(3, 0)
-    //     dbuf = [0, 0, 0, 0]
-    // }
-    //% blockId="TM650_Control" block="display control" group="TM1650数码管"
-    //% weight=40 blockGap=8
-    //% subcategory="显示器"
-     function TM650_Control(option: Select) {
-        if (option == 0) {
-            cmd(_intensity * 16 + 1)
-        }
-        if (option == 1) {
-            _intensity = 0
-            cmd(0)
-        }
-        if (option == 2) {
-            dat(0, 0)
-            dat(1, 0)
-            dat(2, 0)
-            dat(3, 0)
-            dbuf = [0, 0, 0, 0]
-        }
-    }
-
-    //% blockId="TM650_DIGIT" block="show digit %num|at %bit"  group="TM1650数码管"
-    //% weight=80 blockGap=8
-    //% num.max=15 num.min=0
-    //% subcategory="显示器"
-    //% bit.max=3 bit.min=0
-    export function digit(num: number, bit: number) {
-        dbuf[bit % 4] = _SEG[num % 16]
-        dat(bit, _SEG[num % 16])
-    }
-
-    //% blockId="TM650_SHOW_NUMBER" block="show number %num"  group="TM1650数码管"
-    //% weight=100 blockGap=8
-    //% subcategory="显示器"
-    export function showNumber(num: number) {
-        if (num < 0) {
-            dat(0, 0x40) // '-'
-            num = -num
-        }
-        else
-            digit(Math.idiv(num, 1000) % 10, 0)
-        digit(num % 10, 3)
-        digit(Math.idiv(num, 10) % 10, 2)
-        digit(Math.idiv(num, 100) % 10, 1)
-    }
-
-    //% blockId="TM650_SHOW_HEX_NUMBER" block="show hex number %num"  group="TM1650数码管"
-    //% weight=90 blockGap=8
-    //% subcategory="显示器"
-    export function showHex(num: number) {
-        if (num < 0) {
-            dat(0, 0x40) // '-'
-            num = -num
-        }
-        else
-            digit((num >> 12) % 16, 0)
-        digit(num % 16, 3)
-        digit((num >> 4) % 16, 2)
-        digit((num >> 8) % 16, 1)
-    }
-
-    //% blockId="TM650_SHOW_DP" block="show dot point %bit|show %num" group="TM1650数码管"
-    //% weight=80 blockGap=8
-    //% subcategory="显示器"
-    //% bit.max=3 bit.min=0
-    export function showDpAt(status: ledon_off, bit: number) {
-        let show = status == 1 ? true : false;
-        if (show) dat(bit, dbuf[bit % 4] | 0x80)
-        else dat(bit, dbuf[bit % 4] & 0x7F)
-    }
-
-    //% blockId="TM650_INTENSITY" block="set intensity %dat" group="TM1650数码管"
-    //% weight=70 blockGap=8
-    //% subcategory="显示器"
-    //% dat.max=7 dat.min=0
-    export function setIntensity(dat: number) {
-        if ((dat < 0) || (dat > 8)) {
-            return
-        }
-        if (dat == 0) {
-            _intensity = 0
-            cmd(0)
-        }
-        else {
-            _intensity = dat
-            cmd((dat << 4) | 0x01)
-        }
-    }
-
-    
-
-
-
-
+   
     //% blockId="Speech_recognition_reset" block="Voice recognition module for reset"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
     //% weight=100
     export function Speech_recognition_reset(): void {
         i2ccmd(VOICE_IIC_ADDR,VOICE_RESET_REG)
+        basic.pause(300)
+    }
+    
+    //% blockId="Speech_recognition_start" block="Voice recognition starts to recognize"  group="语音识别模块"
+    //% subcategory="智能模块"
+    //% inlineInputMode=inline
+    export function Speech_recognition_start(): void {
+        i2ccmd(VOICE_IIC_ADDR,VOICE_ASR_START_REG)
         basic.pause(300)
     }
 
@@ -1979,21 +1986,14 @@ namespace sensors {
         basic.pause(300)
     }
 
-    //% blockId="Speech_recognition_start" block="Voice recognition starts to recognize"  group="语音识别模块"
-    //% subcategory="智能模块"
-    //% inlineInputMode=inline
-    export function Speech_recognition_start(): void {
-        i2ccmd(VOICE_IIC_ADDR,VOICE_ASR_START_REG)
-        basic.pause(300)
-    }
 
     //% blockId="Speech_recognition_get_result" block="Speech recognition to get the corresponding number of the recognized words"   group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
     export function Speech_recognition_get_result(): number {
-       let result =i2cread(VOICE_IIC_ADDR,VOICE_RESULT_REG)
-       return result;
-    }
+        let result =i2cread(VOICE_IIC_ADDR,VOICE_RESULT_REG)
+        return result;
+     }
 
     //% blockId="Speech_recognition_time" block="Voice recognition to set wake-up time %time"  group="语音识别模块"
     //% subcategory="智能模块"
