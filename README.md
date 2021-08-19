@@ -50,7 +50,7 @@
 -     示例程序
 - ![Rockermodule4.png](sensorbit/Rockermodule4.png)
 - 当向上/下/左/右推动摇杆时，LED点阵屏会打印出上/下/左/右的图案。当按下摇杆时，LED点阵屏会打印出一个开心的表情。
-### 8  钢琴模块 V1
+### 8.  钢琴模块 V1
 - 初始化引脚CLK,DIO
 - ![Pianomodule11.png](sensorbit/Pianomodule11.png)
 - 实现是否弹奏钢琴
@@ -58,7 +58,7 @@
 -     示例程序
 - ![Pianomodule13.png](sensorbit/Pianomodule13.png)
 - 通过触摸到不同的按键，会产生不同的音乐
-### 9  钢琴模块 V2
+### 9.  钢琴模块 V2
 - 初始化引脚CLK,DIO
 - ![Pianomodule21.png](sensorbit/Pianomodule21.png)
 - 实现是否弹奏钢琴
