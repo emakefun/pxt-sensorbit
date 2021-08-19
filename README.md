@@ -1,46 +1,46 @@
-# Emakefun micorbit ph2.0 sensorbit extensions
-### ![详细介绍请看官网](https://emakefun-docs.readthedocs.io/zh_CN/latest/)
-# Sensor:bit
+# Emakefun Micro:bit PH2.0 Sensor:bit Extensions
+### [详细介绍请看官网](https://emakefun-docs.readthedocs.io/zh_CN/latest/)
+# Sensor:bit模块介绍
 ## 基础输入模块 
-### 1 矩阵键盘模块
+### 1. 矩阵键盘模块
 - 初始化矩阵键盘引脚SCL,SDO
 - ![Matrixkeyboard1.png](sensorbit/Matrixkeyboard1.png)
 - 实现Micro:bit读取显示键盘值
 - ![Matrixkeyboard3.png](sensorbit/Matrixkeyboard3.png)
 -     示例程序
 - ![Matrixkeyboard2.png](sensorbit/Matrixkeyboard2.png)
-- 利用两个引脚获取数值，打印出相应的字母或数字
-### 2 触摸按键模块
+- 利用两个引脚获取数值，打显示相应的字母或数字
+### 2. 触摸按键模块
 - 通过引脚检测是否被触摸
 - ![Touchkeymodule1.png](sensorbit/Touchkeymodule1.png)
 -    示例程序
 - ![Touchkeymodule2.png](sensorbit/Touchkeymodule2.png) 
 - 当模块被触摸，则显示笑脸表情，否则显示难过表情 
-### 3  按键模块
+### 3.  按键模块
 - 通过引脚检测按键是否被按下
 - ![Keyswitchmodule1.png](sensorbit/Keyswitchmodule1.png)
 -     示例程序
 - ![Keyswitchmodule2.png](sensorbit/Keyswitchmodule2.png)
 - 当按键按下，显示笑脸表情，否则显示难过表情
-### 4  触碰模块
+### 4.  触碰模块
 - 通过引脚来检测是否发生碰撞
 - ![Touchmodule1.png](sensorbit/Touchmodule1.png)
 -     示例程序
 - ![Touchmodule2.png](sensorbit/Touchmodule2.png)
 - 发生碰撞则显示开心表情，未发生则显示难过表情
-### 5  滑动变阻器模块
+### 5.  滑动变阻器模块
 - 通过引脚来获取变阻器当前的阻值(1~100)
 - ![slide resistor1.png](sensorbit/slideresistor1.png)
 -     示例程序
 - ![slide resistor2.png](sensorbit/slideresistor2.png)
-- 打印出当前滑动变阻器的阻值，每一秒更新一次数值
-### 6  旋转电位器模块
+- 显示当前滑动变阻器的阻值，每一秒更新一次数值
+### 6.  旋转电位器模块
 - 通过引脚来获取旋转电位器当前的电压值
 - ![Rotatingpotentiometer1.png](sensorbit/Rotatingpotentiometer1.png)
 -     示例程序
 - ![Rotatingpotentiometer2.png](sensorbit/Rotatingpotentiometer2.png)
-- 打印出当前旋转电位器的电压值，每一秒更新一次数值
-### 7  摇杆模块
+- 显示当前旋转电位器的电压值，每一秒更新一次数值
+### 7.  摇杆模块
 - 初始化引脚X,Y,B
 - ![Rockermodule1.png](sensorbit/Rockermodule1.png)
 - 通过引脚X/Y获取模拟值
@@ -66,7 +66,7 @@
 -     示例程序
 - ![Pianomodule23.png](sensorbit/Pianomodule23.png)
 - 通过触摸到不同的按键，会产生不同的音乐
-### 10  PH2.0手柄
+### 10.  PH2.0手柄
 - PH2.0手柄默认连接I2C引脚(即P19，P20)，下面代码实现PH2.0的效果
 - 获取手柄按键状态
 - ![PH2.0handle1.png](sensorbit/PH2.0handle1.png)
@@ -78,122 +78,122 @@
 - ![PH2.0handle4.png](sensorbit/PH2.0handle4.png)
 -     示例程序
 - ![PH2.0handle5.png](sensorbit/PH2.0handle5.png) 
-- 获取X/Y轴的值，1秒以后，可以实现判断各个按键的状态的功能，若被按下则显示苦脸，释放状态下则显示笑脸
+- 获取X/Y轴的值，1秒以后，可以实现判断各个按键的状态的功能，若被按下则显示哭脸，释放状态下则显示笑脸
 ## 传感器
-### 1  水蒸气传感器
+### 1.  水蒸气传感器
 - 通过引脚来获取环境中水蒸气浓度
 - ![Watervaporsensor1.png](sensorbit/Watervaporsensor1.png)
 -     示例程序
 - ![Watervaporsensor2.png](sensorbit/Watervaporsensor2.png) 
-- 打印水蒸气浓度数值，每一秒更新一次
-### 2  LM35温度传感器
+- 显示水蒸气浓度数值，每一秒更新一次显示
+### 2.  LM35温度传感器
 - 通过引脚来获取环境温度
 - ![LM35temperaturesensor1.png](sensorbit/LM35temperaturesensor1.png) 
 -     示例程序 
 - ![LM35temperaturesensor2.png](sensorbit/LM35temperaturesensor2.png)
-- 打印环境温度值，每一秒更新一次
-### 3  火焰传感器
+- 显示环境温度值，每一秒更新一次显示
+### 3.  火焰传感器
 - 通过引脚获取的数字值判断周围存在火焰
 - ![Flamesensor1.png](sensorbit/Flamesensor1.png)
 - 通过引脚来获取火焰的模拟值
 - ![Flamesensor2.png](sensorbit/Flamesensor2.png)
 -     示例程序
 - ![Flamesensor3.png](sensorbit/Flamesensor3.png)
-- 判断周围是否有火焰存在，若存在打印火焰的模拟值，不存在则显示笑脸。
-### 4  红外循迹传感器
+- 判断周围是否有火焰存在，若存在显示火焰的模拟值，不存在则显示笑脸。
+### 4.  红外循迹传感器
 - 通过引脚来判断是否存在黑线
 - ![Fourwaytrackingsensor1.png](sensorbit/Fourwaytrackingsensor1.png)
 -     示例程序
 - ![Fourwaytrackingsensor2.png](sensorbit/Fourwaytrackingsensor2.png)
 - 红外循迹传感器若感应到黑线，则显示哭脸，否则显示笑脸
-### 5  倾斜传感器
+### 5.  倾斜传感器
 - 通过引脚来判断是否倾斜     
 - ![Inclinationsensor1.png](sensorbit/Inclinationsensor1.png)
 -     示例程序
 - ![Inclinationsensor2.png](sensorbit/Inclinationsensor2.png)
 - 倾斜传感器感应到倾斜，则显示哭脸，否则显示笑脸
-### 6  光敏传感器
+### 6.  光敏传感器
 - 通过引脚来获取光敏传感器感应到环境中光强的模拟值
 - ![Photosensitivesensor1.png](sensorbit/Photosensitivesensor1.png)
 -     示例程序
 - ![Photosensitivesensor2.png](sensorbit/Photosensitivesensor2.png) 
-- 打印光照强度的模拟值，每一秒更新一次
-### 7  热敏传感器
+- 显示光照强度的模拟值，每一秒更新一次显示
+### 7.  热敏传感器
 - 通过引脚来获取热度值
 - ![Heatsensitivesensor1.png](sensorbit/Heatsensitivesensor1.png) 
 -     示例程序
 - ![Heatsensitivesensor2.png](sensorbit/Heatsensitivesensor2.png) 
-- 打印环境热度值，每一秒更新一次
-### 8  水深传感器
+- 显示环境热度值，每一秒更新一次显示
+### 8.  水深传感器
 - 通过引脚获取水深值
 - ![Waterdepthsensor1.png](sensorbit/Waterdepthsensor1.png)
 -     示例程序    
 - ![Waterdepthsensor2.png](sensorbit/Waterdepthsensor2.png)
-- 打印水深值，每一秒更新一次
-### 9  土壤湿度传感器
+- 显示水深值，每一秒更新一次显示
+### 9.  土壤湿度传感器
 - 通过引脚获取土壤湿度值
 - ![Soilmoisturesensor1.png](sensorbit/Soilmoisturesensor1.png)
 -     示例程序
 - ![Soilmoisturesensor2.png](sensorbit/Soilmoisturesensor2.png)
-- 打印土壤湿度值，每一秒更新一次
-### 10  避障传感器    
+- 显示土壤湿度值，每一秒更新一次显示
+### 10.  避障传感器    
 - 通过引脚获取数字值判断前方是否有障碍物
 - ![Obstacleavoidancesensor1.png](sensorbit/Obstacleavoidancesensor1.png)
     示例程序
 - ![Obstacleavoidancesensor2.png](sensorbit/Obstacleavoidancesensor2.png)
 - 判断前方是否有障碍物，如果有显示哭脸，没有则显示笑脸
-### 11  磁簧开关传感器
+### 11.  磁簧开关传感器
 - 通过引脚获取数字值判断周围是否存在磁场
 - ![Reedswitchsensor1.png](sensorbit/Reedswitchsensor1.png)
 -     示例程序
 - ![Reedswitchsensor2.png](sensorbit/Reedswitchsensor2.png)
 - 磁簧开关传感器感应周围是否有磁场若存在则显示苦脸，不存在则显示笑脸
-### 12  人体热源传感器
+### 12.  人体热源传感器
 - 实现通过引脚来获得人体热源传感器得到的数字值，从而判断周围是否有环境热源的功能
 - ![Humanbodyheatsourcesensor1.png](sensorbit/Humanbodyheatsourcesensor1.png)
 -     示例程序
 - ![Humanbodyheatsourcesensor2.png](sensorbit/Humanbodyheatsourcesensor2.png)
 - 判断周围是否有人体热源，若存在则显示哭脸，若不存在则显示笑脸
-### 13  震动传感器
-- 震动传感器为4Pin传感器，其A连接的Pin口用于检测是否检测到震动(数字值)，D口连接的Pin口用于读取模拟值。
+### 13.  震动传感器
+- 震动传感器为4Pin传感器，连接的D口用于检测是否检测到震动(数字值)，A口连接的Pin口用于读取模拟值。
 - 通过引脚获取震动传感器模拟值
 - ![Vibrationsensor1.png](sensorbit/Vibrationsensor1.png)
 - 通过引脚获取震动传感器数字值
 - ![Vibrationsensor2.png](sensorbit/Vibrationsensor2.png)
 -     示例程序
 - ![Vibrationsensor3.png](sensorbit/Vibrationsensor3.png)
-- 实现检测是否感应到震动的功能，若发生震动打印震动程度值，若未发生则打印笑脸
-### 14  灰度传感器
+- 检测是否感应到震动，若发生震动显示震动强度的模拟值，若未发生则显示笑脸
+### 14.  灰度传感器
 - 初始化引脚并读取颜色深度模拟值
 - ![Grayscalesensor1.png](sensorbit/Grayscalesensor1.png)
 -     示例程序
 - ![Grayscalesensor2.png](sensorbit/Grayscalesensor2.png)    
-- 实现打印颜色深度值的功能
-### 15  声音传感器
+- 实现显示颜色深度值
+### 15.  声音传感器
 - 通过引脚获取声音传感器数字值
 - ![Soundsensor1.png](sensorbit/Soundsensor1.png)
 - 通过引脚获取声音传感器模拟值
 - ![Soundsensor2.png](sensorbit/Soundsensor2.png)
 -     示例程序
 - ![Soundsensor3.png](sensorbit/Soundsensor3.png)
-- 实现检测声音强度的功能，若有声音则打印声音强度值，没有声音则显示笑脸
-### 16  雨滴传感器
+- 实现检测声音强度的功能，若有声音则显示声音强度值，没有声音则显示笑脸
+### 16.  雨滴传感器
 - 通过引脚获取雨滴传感器数字值
 - ![Raindropsensor1.png](sensorbit/Raindropsensor1.png)
 - 通过引脚获取雨滴传感器模拟值
 - ![Raindropsensor2.png](sensorbit/Raindropsensor2.png)
 -     示例程序
 - ![Raindropsensor3.png](sensorbit/Raindropsensor3.png)
-- 实现对雨滴值的检测功能，若下雨则打印雨滴模拟值，没下雨显示笑脸
-### 17  MQ4气体传感器
+- 实现对雨滴值的检测功能，若下雨则显示雨滴模拟值，没下雨显示笑脸
+### 17.  MQ4气体传感器
 - 通过引脚获取MQ4气体传感器的数字值
 - ![gassensor1.png](sensorbit/gassensor1.png)
 - 通过引脚获得MQ4气体传感器的模拟值
 - ![gassensor2.png](sensorbit/gassensor2.png)
 -     示例程序
 - ![gassensor3.png](sensorbit/gassensor3.png)
-- 实现对气体(co,甲烷，天然气等)的检测功能，若有该气体打印其浓度的模拟值，没有则显示笑脸
-### 18  RGB超声波传感器
+- 实现对气体(CO,甲烷，天然气等)的检测功能，若有该气体打印其浓度的模拟值，没有则显示笑脸
+### 18.  RGB超声波传感器
 - 通过引脚获得超声波所测得的距离值
 - ![RGBultrasonicsensor1.png](sensorbit/RGBultrasonicsensor1.png)
 - 通过引脚控制探头RGB颜色和效果
@@ -201,23 +201,23 @@
 -     示例程序
 - ![RGBultrasonicsensor3.png](sensorbit/RGBultrasonicsensor3.png)
 - 实现利用RGB超声波传感器的测距和亮灯的功能
-### 19  普通超声波传感器
+### 19.  普通超声波传感器
 - 通过引脚获取普通超声波传感器测得的距离值
 - ![Ordinaryultrasonicsensor1.png](sensorbit/Ordinaryultrasonicsensor1.png)
 -     示例程序
 - ![Ordinaryultrasonicsensor2.png](sensorbit/Ordinaryultrasonicsensor2.png)
-- 打印测量出的距离值
-### 20  DHT11温湿度传感器
+- 显示测量出的距离值
+### 20.  DHT11温湿度传感器
 - 通过引脚获得环境湿度或温度的值
 - ![DHT11temperatureandhumiditysensor1.png](sensorbit/DHT11temperatureandhumiditysensor1.png)
 -     示例程序
 - ![DHT11temperatureandhumiditysensor2.png](sensorbit/DHT11temperatureandhumiditysensor2.png)
-- 实现用DHT11温湿度传感器测温湿度的功能，分别打印出来
+- 实现用DHT11温湿度传感器测温湿度的功能，分别通过点阵显示出来
 - 对于Micro:bitV2同样有
 - ![DHT11temperatureandhumiditysensorv2.png](sensorbit/DHT11temperatureandhumiditysensorv2.png)
 -     示例程序
 - ![DHT11temperatureandhumiditysensorv22.png](sensorbit/DHT11temperatureandhumiditysensorv22.png)
-### 21  四路循迹传感器
+### 21.  四路循迹传感器
 - 判断周围是否有黑线
 - ![Infraredtrackingsensor1.png](sensorbit/Infraredtrackingsensor1.png)
 - 初始化引脚
@@ -226,15 +226,15 @@
 - ![Infraredtrackingsensor3.png](sensorbit/Infraredtrackingsensor3.png)
 -     示例程序
 - ![Infraredtrackingsensor4.png](sensorbit/Infraredtrackingsensor4.png)
-- 初始化传感器引脚，判断黑线的存在，存在则打印四路循迹传感器值，不存在则显示笑脸
+- 初始化传感器引脚，判断黑线的存在，存在则显示四路循迹传感器值，不存在则显示笑脸
 ## 显示器
-### 1  LED灯
+### 1.  LED灯
 - 通过引脚控制灯的状态（打开或关闭）
 - ![LEDlights1.png](sensorbit/LEDlights1.png)
 -     示例程序
 - ![LEDlights2.png](sensorbit/LEDlights2.png) 
 - 实现对LED灯状态的控制功能,LED灯交替打开和关闭
-### 2  RGB三色灯
+### 2.  RGB三色灯
 - 初始化引脚
 - ![Three-colorlight1.png](sensorbit/Three-colorlight1.png)
 - 对灯进行对灯进行配色
@@ -242,7 +242,7 @@
 -     示例程序
 - ![Three-colorlight3.png](sensorbit/Three-colorlight3.png)
 - 通过配色，实现对RGB三色灯颜色变换的功能
-### 3  交通灯
+### 3.  交通灯
 - 初始化各个灯引脚
 - ![trafficlight1.png](sensorbit/trafficlight1.png)
 - 设置灯的状态（点亮/熄灭）
@@ -250,7 +250,7 @@
 -     示例程序
 - ![trafficlight3.png](sensorbit/trafficlight3.png)   
 - 通过对三个灯的控制实现交通灯的功能，红绿黄三种灯交替点亮和熄灭
-### 4  LCD1602显示屏
+### 4.  LCD1602显示屏
 - 设置LCD1602显示屏的IC2地址，十进制默认为39，十六进制默认为0x27
 - ![LCD1602display1.png](sensorbit/LCD1602display1.png)
 - 使LCD1602显示屏相应位置显示字符
@@ -267,7 +267,7 @@
 - ![LCD1602display7.png](sensorbit/LCD1602display7.png)
 - 设置默认地址，执行循环，打开LCD1602显示屏和背光灯，在1行第一列显示0，第二列显示l，第2行第一列显示字符串“Hello World"
 1s后关闭屏幕和背光灯，1s后循环重新开始
-### 5  TM1637数码管
+### 5.  TM1637数码管
 - 设置数码管引脚显示亮度，显示位数
 - ![TM1637digitaltube1.png](sensorbit/TM1637digitaltube1.png)
 - 使TM1637数码管显示数字
@@ -289,7 +289,7 @@
 -     示例程序
 - ![TM1637digitaltube9.png](sensorbit/TM1637digitaltube9.png)
 - 实现利用TM1637数码管实现计时功能
-### 6  TM1650数码管
+### 6.  TM1650数码管
 - 使TM1650数码管显示数字
 - ![TM1650digitaltube1.png](sensorbit/TM1650digitaltube1.png)
 - 使TM1650数码管显示十六进制数字
@@ -304,44 +304,44 @@
 - ![TM1650digitaltube6.png](sensorbit/TM1650digitaltube6.png)
 - 先显示数字4477，1s之后显示8（16进制）1s后点亮第二位的点，在第二位显示9，持续1s，以此循环
 ## 执行器
-### 1  有源蜂鸣器
+### 1.  有源蜂鸣器
 - 通过引脚控制有源蜂鸣器
 - ![Activebuzzer1.png](sensorbit/Activebuzzer1.png)
 -     示例程序
 - ![Activebuzzer2.png](sensorbit/Activebuzzer2.png)
 - 有源蜂鸣器间接性打开关闭
-### 2  无源蜂鸣器
+### 2.  无源蜂鸣器
 - 通过引脚改变无源蜂鸣器频率
 - ![Passivebuzzer1.png](sensorbit/Passivebuzzer1.png)
 -     示例程序
 - ![Passivebuzzer2.png](sensorbit/Passivebuzzer2.png)
 - 实现无源蜂鸣器在某一特定的频率下工作的功能
-### 3  继电器
+### 3.  继电器
 - 通过控制引脚来控制继电器的打开与关闭
 - ![Relay1.png](sensorbit/Relay1.png)
 -     示例程序
 - ![Relay2.png](sensorbit/Relay2.png)
 - 继电器间接性打开和关闭
-### 4  直流电机
+### 4.  直流电机
 - 通过引脚设置直流电机的运行模式（正转和反转）和速度
 - ![DC1.png](sensorbit/DC1.png)
 -     示例程序
 - ![DC2.png](sensorbit/DC2.png)
 - 直流电机以100的速度先正转再反转
-### 5  舵机
+### 5.  舵机
 - 通过引脚使舵机偏转到一定的角度
 - ![Steeringgear1.png](sensorbit/Steeringgear1.png)
 -     示例程序
 - ![Steeringgear2.png](sensorbit/Steeringgear2.png)
 - 舵机每隔一段时间转动一定角度
-### 6  激光模块
+### 6.  激光模块
 - 通过引脚控制激光模块的打开与关闭
 - ![Lasermodule1.png](sensorbit/Lasermodule1.png)
 -     示例程序
 - ![Lasermodule.png](sensorbit/Lasermodule2.png)
 - 激光模块间接性的打开和关闭
 ## 智能模块
-### 1  语音识别模块
+### 1.  语音识别模块
 - 语音识别模块初始化
 - ![Intelligentvoicemodule1.png](sensorbit/Intelligentvoicemodule1.png)
 - 设置唤醒时间
@@ -357,23 +357,3 @@
 -     示例程序
 - ![Intelligentvoicemodule7.png](sensorbit/Intelligentvoicemodule7.png)
 - 当执行语音识别时，接收信息与词条库匹配，匹配成功时打印词条编号，例如 接收到“xiao yi xiao yi” 打印数字2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
