@@ -383,7 +383,7 @@ namespace sensors {
 
     let _DIO = 0
     let _CLK = 0
-    //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="钢琴模块 V1"
+    //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="触摸钢琴模块 V1"
     //% weight=70
     //% subcategory="基础输入模块"
     export function basic_piano_pin(DIO: DigitalPin, CLK: DigitalPin): void {
@@ -392,7 +392,7 @@ namespace sensors {
         _CLK = CLK
     }
 
-    //% blockId=basic_piano_play block="basic_piano_play"   group="钢琴模块 V1"
+    //% blockId=basic_piano_play block="basic_piano_play"   group="触摸钢琴模块 V1"
     //% weight=69
     //% subcategory="基础输入模块"
     export function basic_piano_play(): void {
@@ -430,7 +430,7 @@ namespace sensors {
     let _pianoDIO = 0
     let _pianoCLK = 0
 
-    //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="钢琴模块 V2"
+    //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块 V2"
     //% weight=61
     //% subcategory="基础输入模块"
     export function piano_v2_init(pianoDIO: DigitalPin, pianoCLK: DigitalPin): void {
@@ -439,7 +439,7 @@ namespace sensors {
         _pianoCLK = pianoCLK
     }
 
-    //% blockId=piano_v2_play block="piano_v2_read"   group="钢琴模块 V2"
+    //% blockId=piano_v2_play block="piano_v2_read"   group="触摸钢琴模块 V2"
     //% weight=60
     //% subcategory="基础输入模块"
     export function piano_v2_play(): void {
