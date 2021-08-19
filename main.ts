@@ -1120,6 +1120,7 @@ namespace sensors {
    //% blockId="readdht11" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
    //% subcategory="传感器"
    //% inlineInputMode=inline
+   //% weight=73
    export function dht11value(dht11pin: DigitalPin, dht11type: DHT11Type): number {
        pins.digitalWritePin(dht11pin, 0)
        basic.pause(18)
@@ -1242,6 +1243,7 @@ namespace sensors {
    //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
    //% subcategory="传感器"
    //% inlineInputMode=inline
+   //% weight=72
    export function dht11value_v2(dht11pin: DigitalPin, dht11type: DHT11Type): number {
        pins.digitalWritePin(dht11pin, 0)
        basic.pause(18)
@@ -1266,7 +1268,7 @@ namespace sensors {
                        }
                    }
                }
-       serial.writeString("DHT11_V2" + "" + dhtvalue1)
+      // serial.writeString("DHT11_V2" + "" + dhtvalue1)
                return ((dhtvalue1 & 0x0000ffff)>> 8);
                break;
 
