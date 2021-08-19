@@ -49,16 +49,24 @@
 - ![Rockermodule3.png](sensorbit/Rockermodule3.png)
 -     示例程序
 - ![Rockermodule4.png](sensorbit/Rockermodule4.png)
-- 当向上/下/左/右推动摇杆时，LED点阵屏会显示出上/下/左/右的图案。当按下摇杆时，LED点阵屏会显示出一个开心的表情。
-### 8.  钢琴模块
+- 当向上/下/左/右推动摇杆时，LED点阵屏会打印出上/下/左/右的图案。当按下摇杆时，LED点阵屏会打印出一个开心的表情。
+### 8  钢琴模块 V1
 - 初始化引脚CLK,DIO
-- ![Pianomodule1.png](sensorbit/Pianomodule1.png)
+- ![Pianomodule11.png](sensorbit/Pianomodule11.png)
 - 实现是否弹奏钢琴
-- ![Pianomodule2.png](sensorbit/Pianomodule2.png)
+- ![Pianomodule12.png](sensorbit/Pianomodule12.png)
 -     示例程序
-- ![Pianomodule3.png](sensorbit/Pianomodule3.png)
+- ![Pianomodule13.png](sensorbit/Pianomodule13.png)
 - 通过触摸到不同的按键，会产生不同的音乐
-### 9.  PH2.0手柄
+### 9  钢琴模块 V2
+- 初始化引脚CLK,DIO
+- ![Pianomodule21.png](sensorbit/Pianomodule21.png)
+- 实现是否弹奏钢琴
+- ![Pianomodule22.png](sensorbit/Pianomodule22.png)
+-     示例程序
+- ![Pianomodule23.png](sensorbit/Pianomodule23.png)
+- 通过触摸到不同的按键，会产生不同的音乐
+### 10.  PH2.0手柄
 - PH2.0手柄默认连接I2C引脚(即P19，P20)，下面代码实现PH2.0的效果
 - 获取手柄按键状态
 - ![PH2.0handle1.png](sensorbit/PH2.0handle1.png)
@@ -257,7 +265,7 @@
 - ![LCD1602display6.png](sensorbit/LCD1602display6.png)
 -     示例程序
 - ![LCD1602display7.png](sensorbit/LCD1602display7.png)
-- 设置默认地址，执行循环，打开LCD1602显示屏和背光灯，在0行第一列显示0，第二列显示l，第一行第一列显示字符串“Hello World"
+- 设置默认地址，执行循环，打开LCD1602显示屏和背光灯，在1行第一列显示0，第二列显示l，第2行第一列显示字符串“Hello World"
 1s后关闭屏幕和背光灯，1s后循环重新开始
 ### 5.  TM1637数码管
 - 设置数码管引脚显示亮度，显示位数
@@ -348,4 +356,4 @@
 - ![Intelligentvoicemodule6.png](sensorbit/Intelligentvoicemodule6.png)
 -     示例程序
 - ![Intelligentvoicemodule7.png](sensorbit/Intelligentvoicemodule7.png)
-- 当执行语音识别时，接收信息与词条库匹配，匹配成功时打印词条编号，例如  接收到“xiao yi xiao yi” 打印数字2
+- 当执行语音识别时，接收信息与词条库匹配，匹配成功时打印词条编号，例如 接收到“xiao yi xiao yi” 打印数字2
