@@ -58,37 +58,37 @@
 ![Matrixkeyboard1.png](sensorbit/Matrixkeyboard1.png)
 - 实现Micro:bit读取显示键盘值  
 ![Matrixkeyboard3.png](sensorbit/Matrixkeyboard3.png)
-- [示例程序](https://makecode.microbit.org/_7TtfV5XKvH50){:target="_blank"}  
+- <a href="https://makecode.microbit.org/_7TtfV5XKvH50" target="_blank">示例程序</a>  
 ![Matrixkeyboard2.png](sensorbit/Matrixkeyboard2.png)
 - 利用两个引脚获取数值，打显示相应的字母或数字
 ### <a id="jump_1_2">2. 触摸模块</a>
 - 通过引脚检测是否被触摸  
 ![Touchkeymodule1.png](sensorbit/Touchkeymodule1.png)
-- [示例程序](https://makecode.microbit.org/_5bXfq63TiM3m){:target="_blank"}  
+- <a href="https://makecode.microbit.org/_5bXfq63TiM3m" target="_blank">示例程序</a>  
 ![Touchkeymodule2.png](sensorbit/Touchkeymodule2.png) 
 - 当模块被触摸，则显示笑脸表情，否则显示难过表情 
 ### <a id="jump_1_3">3. 按键模块</a>
 - 通过引脚检测按键是否被按下  
 ![Keyswitchmodule1.png](sensorbit/Keyswitchmodule1.png)
-- [示例程序](https://makecode.microbit.org/_bHkRLAeXDeMo){:target="_blank"}  
+- <a href="https://makecode.microbit.org/_bHkRLAeXDeMo" target="_blank">示例程序</a>  
 ![Keyswitchmodule2.png](sensorbit/Keyswitchmodule2.png)
 - 当按键按下，显示笑脸表情，否则显示难过表情
 ### <a id="jump_1_4">4. 触碰模块</a>
 - 通过引脚来检测是否发生碰撞  
 ![Touchmodule1.png](sensorbit/Touchmodule1.png)
-- [示例程序](https://makecode.microbit.org/_RDJbzTDUX2RW){:target="_blank"}  
+- <a href="https://makecode.microbit.org/_RDJbzTDUX2RW" target="_blank">示例程序</a>    
 ![Touchmodule2.png](sensorbit/Touchmodule2.png)
 - 发生碰撞则显示开心表情，未发生则显示难过表情
 ### <a id="jump_1_5">5. 滑动变阻器模块</a>
 - 通过引脚来获取变阻器当前的阻值(1~100)  
 ![slide resistor1.png](sensorbit/slideresistor1.png)
-- [示例程序](https://makecode.microbit.org/_HaWXTmVJD6jf){:target="_blank"}  
+- <a href="https://makecode.microbit.org/_HaWXTmVJD6jf" target="_blank">示例程序</a>    
 ![slide resistor2.png](sensorbit/slideresistor2.png)
 - 显示当前滑动变阻器的阻值，每一秒更新一次数值
 ### <a id="jump_1_6">6. 旋转电位器模块</a>
 - 通过引脚来获取旋转电位器当前的电压值  
 ![Rotatingpotentiometer1.png](sensorbit/Rotatingpotentiometer1.png)
-- [示例程序](https://makecode.microbit.org/_70ahCtDUCPtq){:target="_blank"}  
+- <a href="https://makecode.microbit.org/_70ahCtDUCPtq" target="_blank">示例程序</a>    
 ![Rotatingpotentiometer2.png](sensorbit/Rotatingpotentiometer2.png)
 - 显示当前旋转电位器的电压值，每一秒更新一次数值
 ### <a id="jump_1_7">7. 摇杆模块</a>
@@ -98,8 +98,8 @@
 ![Rockermodule2.png](sensorbit/Rockermodule2.png)
 - 判断按键是否被按下  
 ![Rockermodule3.png](sensorbit/Rockermodule3.png)
-- [示例程序](https://makecode.microbit.org/_ahq11cX1E6JT){:target="_blank"}
-- ![Rockermodule4.png](sensorbit/Rockermodule4.png)
+- <a href="https://makecode.microbit.org/_ahq11cX1E6JT" target="_blank">示例程序</a>  
+![Rockermodule4.png](sensorbit/Rockermodule4.png)
 - 当向上/下/左/右推动摇杆时，LED点阵屏会打印出上/下/左/右的图案。当按下摇杆时，LED点阵屏会打印出一个开心的表情。
 ### <a id="jump_1_8">8. 钢琴模块 V1</a>
 - 初始化引脚CLK,DIO
