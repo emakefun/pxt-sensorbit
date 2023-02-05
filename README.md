@@ -3,12 +3,12 @@
 # Sensor:bit模块介绍
 ## 基础输入模块 
 ### 1. 矩阵键盘模块
-- 初始化矩阵键盘引脚SCL,SDO
-- ![Matrixkeyboard1.png](sensorbit/Matrixkeyboard1.png)
-- 实现Micro:bit读取显示键盘值
-- ![Matrixkeyboard3.png](sensorbit/Matrixkeyboard3.png)
--     示例程序
-- ![Matrixkeyboard2.png](sensorbit/Matrixkeyboard2.png)
+- 初始化矩阵键盘引脚SCL,SDO  
+![Matrixkeyboard1.png](sensorbit/Matrixkeyboard1.png)
+- 实现Micro:bit读取显示键盘值  
+![Matrixkeyboard3.png](sensorbit/Matrixkeyboard3.png)
+- [示例程序](https://makecode.microbit.org/_7TtfV5XKvH50)  
+![Matrixkeyboard2.png](sensorbit/Matrixkeyboard2.png)
 - 利用两个引脚获取数值，打显示相应的字母或数字
 ### 2. 触摸模块
 - 通过引脚检测是否被触摸
