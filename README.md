@@ -10,7 +10,7 @@
 -     示例程序
 - ![Matrixkeyboard2.png](sensorbit/Matrixkeyboard2.png)
 - 利用两个引脚获取数值，打显示相应的字母或数字
-### 2. 触摸按键模块
+### 2. 触摸模块
 - 通过引脚检测是否被触摸
 - ![Touchkeymodule1.png](sensorbit/Touchkeymodule1.png)
 -    示例程序
