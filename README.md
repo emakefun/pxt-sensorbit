@@ -358,37 +358,37 @@
 ### <a id="jump_4_1">1. 有源蜂鸣器</a>
 - 通过引脚控制有源蜂鸣器
 - ![Activebuzzer1.png](sensorbit/Activebuzzer1.png)
--     示例程序
+- <a href="https://makecode.microbit.org/_Fs1VH7MrtPAv">示例程序</a>
 - ![Activebuzzer2.png](sensorbit/Activebuzzer2.png)
 - 有源蜂鸣器间接性打开关闭
 ### <a id="jump_4_2">2. 无源蜂鸣器</a>
 - 通过引脚改变无源蜂鸣器频率
 - ![Passivebuzzer1.png](sensorbit/Passivebuzzer1.png)
--     示例程序
+- <a href="https://makecode.microbit.org/_JMyMfiebu8gz">示例程序</a>
 - ![Passivebuzzer2.png](sensorbit/Passivebuzzer2.png)
 - 实现无源蜂鸣器在某一特定的频率下工作的功能
 ### <a id="jump_4_3">3. 继电器</a>
 - 通过控制引脚来控制继电器的打开与关闭
 - ![Relay1.png](sensorbit/Relay1.png)
--     示例程序
+- <a href="https://makecode.microbit.org/_49YhAp1C2f4d">示例程序</a>
 - ![Relay2.png](sensorbit/Relay2.png)
 - 继电器间接性打开和关闭
 ### <a id="jump_4_4">4. 直流电机</a>
 - 通过引脚设置直流电机的运行模式（正转和反转）和速度
 - ![DC1.png](sensorbit/DC1.png)
--     示例程序
+- <a href="https://makecode.microbit.org/_MEu01mFPmEby">示例程序</a>
 - ![DC2.png](sensorbit/DC2.png)
 - 直流电机以100的速度先正转再反转
 ### <a id="jump_4_5">5. 舵机</a>
 - 通过引脚使舵机偏转到一定的角度
 - ![Steeringgear1.png](sensorbit/Steeringgear1.png)
--     示例程序
+- <a href="https://makecode.microbit.org/_KLeAXkRyJgfw">示例程序</a>
 - ![Steeringgear2.png](sensorbit/Steeringgear2.png)
 - 舵机每隔一段时间转动一定角度
 ### <a id="jump_4_6">6. 激光模块</a>
 - 通过引脚控制激光模块的打开与关闭
 - ![Lasermodule1.png](sensorbit/Lasermodule1.png)
--     示例程序
+- <a href="https://makecode.microbit.org/_ga6b3rE3f0i9">示例程序</a>
 - ![Lasermodule.png](sensorbit/Lasermodule2.png)
 - 激光模块间接性的打开和关闭
 ## <a id="jump_5">智能模块</a>
@@ -405,6 +405,6 @@
 - ![Intelligentvoicemodule5.png](sensorbit/Intelligentvoicemodule5.png)
 - 设置语音识别模式
 - ![Intelligentvoicemodule6.png](sensorbit/Intelligentvoicemodule6.png)
--     示例程序
+- <a href="https://makecode.microbit.org/_ga6b3rE3f0i9">示例程序</a>
 - ![Intelligentvoicemodule7.png](sensorbit/Intelligentvoicemodule7.png)
 - 当执行语音识别时，接收信息与词条库匹配，匹配成功时打印词条编号，例如 接收到“xiao yi xiao yi” 打印数字2
