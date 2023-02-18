@@ -405,6 +405,6 @@
 - ![Intelligentvoicemodule5.png](sensorbit/Intelligentvoicemodule5.png)
 - 设置语音识别模式
 - ![Intelligentvoicemodule6.png](sensorbit/Intelligentvoicemodule6.png)
-- <a href="https://makecode.microbit.org/_ga6b3rE3f0i9">示例程序</a>
+- <a href="https://makecode.microbit.org/_4J7WTLfUtWYo">示例程序</a>
 - ![Intelligentvoicemodule7.png](sensorbit/Intelligentvoicemodule7.png)
 - 当执行语音识别时，接收信息与词条库匹配，匹配成功时打印词条编号，例如 接收到“xiao yi xiao yi” 打印数字2
