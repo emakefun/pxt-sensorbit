@@ -260,46 +260,13 @@ namespace sensors {
         let row = pins.analogReadPin(pin)
         return row
     }
-
-    // let _Apin = 0
-    // let _Dpin = 0
-    // let _Bpin = 0
-
-    // //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" group="旋转编码器模块"
-    // //% weight=70
-    // //% subcategory="基础输入模块"
-    // export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
-    //     _Apin = pina
-    //     _Bpin = pinb
-    //     _Dpin = pind
-    // }
-
-    // //% blockId=pinsRead block="select pin %selectpin" group="旋转编码器模块"
-    // //% weight=69
-    // //% subcategory="基础输入模块"
-    // export function pinsRead(selectpin: _selectpin): number {
-    //     let a
-    //     if (selectpin == 0)
-    //         a = _Apin
-    //     else if (selectpin == 1)
-    //         a = _Bpin
-    //     else if (selectpin == 2)
-    //         a = _Dpin
-    //     pins.digitalWritePin(a, 0)
-    //     if (pins.digitalReadPin(a) == 1) {
-    //         return 1;
-    //     } else {
-    //         return 0;
-    //     }
-    //     //return pins.digitalReadPin(a)
-    // }
    
     let _SDO = 0
     let _SCL = 0
     /**
      * 
-     * @param SDO eg: DigitalPin.P13 
-     * @param SCL eg: DigitalPin.P14
+     * @param SDO SDO  eg: DigitalPin.P13 
+     * @param SCL SCL  eg: DigitalPin.P14
      */
     //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="矩阵键盘模块"
     //% weight=71
@@ -447,8 +414,8 @@ namespace sensors {
     let _pianoCLK = 0
     /**
      * 
-     * @param DIO eg: DigitalPin.P13
-     * @param CLK eg: DigitalPin.P14
+     * @param pianoDIO eg: DigitalPin.P13
+     * @param pianoCLK eg: DigitalPin.P14
      */
     //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块 V2"
     //% weight=61
@@ -1150,7 +1117,7 @@ namespace sensors {
    let em_dht11Humidity = 0;
    /**
     * 
-    * @param dht11pin eg: DigitalPin.P13
+    * @param dht11pin  dht11 pin eg:DigitalPin.P13
     * @param dht11type 
     * @returns 
     */
@@ -1280,6 +1247,13 @@ namespace sensors {
      let outPin4 = 0;
      /**
       * 四路循迹传感器初始化
+      */
+     /**
+      * 
+      * @param pin1 pin1 eg:DigitalPin.P12
+      * @param pin2 pin2 eg:DigitalPin.P13
+      * @param pin3 pin3 eg:DigitalPin.P14
+      * @param pin4 pin4 eg:DigitalPin.P16
       */
      //% blockId=four_sensor_tracking block="four_sensor_tracking pin1 |digitalpin %pin1 pin2 |digitalpin %pin2 |pin3 |digitalpin %pin3 |pin4 |digitalpin %pin4"  group="四路循迹传感器"
      //% inlineInputMode=inline
@@ -1414,8 +1388,8 @@ namespace sensors {
 
     /**
      * 
-     * @param _INA eg:DigitalPin.P1
-     * @param _INB eg:DigitalPin.P2
+     * @param _INA  ina eg: AnalogPin.P1
+     * @param _INB  inb eg: AnalogPin.P2
      * @param turn 
      * @param speed 
      */
@@ -1954,6 +1928,14 @@ namespace sensors {
         }
     }
 
+    /**
+     * 
+     * @param clk clk eg: DigitalPin.P13
+     * @param dio DIO eg: DigitalPin.P14
+     * @param intensity  eg：10
+     * @param count  eg: 4
+     * @returns 
+     */
     //% weight=99 
     //% blockId="TM1637_create" block="CLK %clk|DIO %dio|intensity %intensity|LED count %count"  group="TM1637数码管"
     //% inlineInputMode=inline
