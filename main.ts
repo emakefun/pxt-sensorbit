@@ -296,7 +296,12 @@ namespace sensors {
    
     let _SDO = 0
     let _SCL = 0
-
+    /**
+     * 
+     * @param SDO eg: DigitalPin.P13 
+     * @param SCL eg: DigitalPin.P14
+     */
+     */
     //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="矩阵键盘模块"
     //% weight=71
     //% subcategory="基础输入模块"
@@ -349,7 +354,12 @@ namespace sensors {
     let Xpin = 0
     let Ypin = 0
     let Bpin = 0
-
+    /**
+     * 
+     * @param pinx eg: AnalogPin.P0
+     * @param piny eg: AnalogPin.P1
+     * @param pinb eg: DigitalPin.P8
+     */
     //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
     //% weight=70
     //% subcategory="基础输入模块"
@@ -385,6 +395,11 @@ namespace sensors {
 
     let _DIO = 0
     let _CLK = 0
+    /**
+     * 
+     * @param DIO eg: DigitalPin.P13
+     * @param CLK eg: DigitalPin.P14
+     */
     //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="触摸钢琴模块 V1"
     //% weight=70
     //% subcategory="基础输入模块"
@@ -431,7 +446,11 @@ namespace sensors {
     }	
     let _pianoDIO = 0
     let _pianoCLK = 0
-
+    /**
+     * 
+     * @param DIO eg: DigitalPin.P13
+     * @param CLK eg: DigitalPin.P14
+     */
     //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块 V2"
     //% weight=61
     //% subcategory="基础输入模块"
@@ -752,6 +771,14 @@ namespace sensors {
      return pins.analogReadPin(pin)
  }
 
+ /**
+  * get distance
+  * @param trig eg: DigitalPin.P13
+  * @param echo eg: DigitalPin.P14
+  * @param unit 
+  * @param maxCmDistance 
+  * @returns 
+  */
    //% blockId="sensor_ping" block="ping trig %trig|echo %echo|unit %unit" group="普通超声波传感器"
    //% weight=75
    //% inlineInputMode=inline
@@ -887,7 +914,7 @@ namespace sensors {
 
    /**
     * Get RUS04 distance
-    * @param pin Microbit ultrasonic pin; eg: P2
+    * @param pin Microbit ultrasonic pin; eg: DigitalPin.P2
    */
    //% blockId=Ultrasonic block="Read RgbUltrasonic Distance at pin %pin(cm)"  group="RGB超声波传感器"
    //% weight=76
@@ -1017,6 +1044,7 @@ namespace sensors {
        }
    }
    
+  
    export function board_rus04_rgb(pin: DigitalPin, offset: number, index: number, rgb: number, effect: number): void {
        let start = 0, end = 0;
        if (!board_emRGBLight) {
@@ -1103,6 +1131,14 @@ namespace sensors {
        }
 }
 
+  /**
+    * set RUS04 color
+    * @param pin RGB PIN eg:DigitalPin.P16
+    * @param offset 
+    * @param index  index
+    * @param rgb color
+    * @param effect effect
+    */
    //% blockId="sensorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波传感器"
    //% weight=75
    //% inlineInputMode=inline
@@ -1111,6 +1147,12 @@ namespace sensors {
        rus04_rgb(pin, 0, index, rgb, effect);
    }
 
+   /**
+    * 
+    * @param dht11pin DigitalPin.P13
+    * @param dht11type 
+    * @returns 
+    */
    //% blockId="dht11value" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
    //% subcategory="传感器"
    //% inlineInputMode=inline
@@ -1369,11 +1411,17 @@ namespace sensors {
         pins.digitalWritePin(pin,status)
     }
 
-   
+    /**
+     * 
+     * @param _INA eg:DigitalPin.P1
+     * @param _INB eg:DigitalPin.P2
+     * @param turn 
+     * @param speed 
+     */
     //% blockId=actuator_motor_run block="actuator_motor_run INA | %_INA | INB | %_INB | direction | %turn | speed %speed"  group="直流电机"
     //% weight=70
     //% inlineInputMode=inline
-    //% speed.min=0 speed.max=255
+    //% speed.min=0 speed.max=1023
     //% subcategory="执行器"
     export function actuator_motor_run(_INA: AnalogPin, _INB: AnalogPin, turn: run_turn, speed: number): void {
 
@@ -1398,10 +1446,16 @@ namespace sensors {
     let _Gpins = 0
     let _Bpins = 0
 
+    /**
+     * 
+     * @param _GPin eg: AnalogPin.P0
+     * @param _BPin eg: AnalogPin.P1
+     * @param _RPin eg: AnalogPin.P2
+     */
     //% blockId=setrgbpin block="set RGBlight pin|r %_RPin|g %_GPin|b %_BPin"   group="三色灯"
     //% weight=71
     //% subcategory="显示器"
-    export function setRGBpin(_GPin: DigitalPin, _BPin: DigitalPin, _RPin: DigitalPin): void {
+    export function setRGBpin(_GPin: AnalogPin, _BPin: AnalogPin, _RPin: AnalogPin): void {
         _Gpins = _GPin
         _Bpins = _BPin
         _Rpins = _RPin
@@ -1419,12 +1473,15 @@ namespace sensors {
         pins.analogWritePin(_Bpins,b_color)
     }
 
-    /*
-     * traffic light
-     */
     let rpins = 0
     let gpins = 0
     let ypins = 0
+    /**
+     * 
+     * @param GPin eg: DigitalPin.P15
+     * @param YPin eg: DigitalPin.P2
+     * @param RPin eg: DigitalPin.P13
+     */
     //% blockId=setpin block="set light pin|r %RPin|g %GPin|y %YPin"   group="交通灯"
     //% weight=71
     //% subcategory="显示器"
@@ -1590,31 +1647,7 @@ namespace sensors {
         pins.i2cWriteNumber(DISPLAY_I2C_ADDRESS + (bit % 4), d, NumberFormat.Int8BE)
     }
 
-    // //% blockId="TM650_ON" block="turn on display" group="TM1650数码管"
-    // //% weight=50 blockGap=8
-    // //% subcategory="显示器"
-    // export function on() {
-    //     cmd(_intensity * 16 + 1)
-    // }
-
-    // //% blockId="TM650_OFF" block="turn off display" group="TM1650数码管"
-    // //% weight=50 blockGap=8
-    // //% subcategory="显示器"
-    // export function off() {
-    //     _intensity = 0
-    //     cmd(0)
-    // }
-
-    // //% blockId="TM650_CLEAR" block="clear display" group="TM1650数码管"
-    // //% weight=40 blockGap=8
-    // //% subcategory="显示器"
-    // export function clear() {
-    //     dat(0, 0)
-    //     dat(1, 0)
-    //     dat(2, 0)
-    //     dat(3, 0)
-    //     dbuf = [0, 0, 0, 0]
-    // }
+   
     //% blockId="TM650_Control" block="display control" group="TM1650数码管"
     //% weight=40 blockGap=8
     //% subcategory="显示器"
