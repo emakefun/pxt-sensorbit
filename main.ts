@@ -1146,6 +1146,8 @@ namespace sensors {
        rus04_rgb(pin, 0, index, rgb, effect);
    }
 
+   let em_dht11Temperature;
+   let em_dht11Humidity;
    /**
     * 
     * @param dht11pin DigitalPin.P13
@@ -1239,17 +1241,17 @@ namespace sensors {
     }
 
     if (((data[0] + data[1] + data[2] + data[3]) & 0xff) === data[4]) {
-        dht11Humidity = data[0] + data[1] * 0.1
-        dht11Temperature = data[2] + data[3] * 0.1
+        em_dht11Humidity = data[0] + data[1] * 0.1
+        em_dht11Temperature = data[2] + data[3] * 0.1
     }
 
     switch (dht11type) {
-        case DHT11Type.DHT11_temperature_C:
-            return dht11Temperature
-        case EM_DHT11Type.DHT11_temperature_F:
-            return (dht11Temperature * 1.8) + 32
-        case EM_DHT11Type.DHT11_humidity:
-            return dht11Humidity
+        case EM_DHT11Type.EM_DHT11_temperature_C:
+            return em_dht11Temperature
+        case EM_DHT11Type.EM_DHT11_temperature_F:
+            return (em_dht11Temperature * 1.8) + 32
+        case EM_DHT11Type.EM_DHT11_humidity:
+            return em_dht11Humidity
     }
 
 
