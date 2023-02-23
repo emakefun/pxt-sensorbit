@@ -301,7 +301,6 @@ namespace sensors {
      * @param SDO eg: DigitalPin.P13 
      * @param SCL eg: DigitalPin.P14
      */
-     */
     //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="矩阵键盘模块"
     //% weight=71
     //% subcategory="基础输入模块"
