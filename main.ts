@@ -57,11 +57,13 @@ enum rgb_ColorEffect {
     Flash = 0x03
 }
 
-enum DHT11Type {
+enum EM_DHT11Type {
     //% block="temperature(℃)" 
-    DHT11_temperature_C = 0,
+    EM_DHT11_temperature_C = 0,
+    //% block="temperature(℉)"
+    EM_DHT11_temperature_F = 1,
     //% block="humidity(0~100)"
-    DHT11_humidity = 1,
+    EM_DHT11_humidity = 2
 }
 
 enum _selectpin {
@@ -1121,7 +1123,7 @@ namespace sensors {
    //% subcategory="传感器"
    //% inlineInputMode=inline
    //% weight=73
-   export function dht11value(dht11pin: DigitalPin, dht11type: DHT11Type): number {
+   export function dht11value(dht11pin: DigitalPin, dht11type: EM_DHT11Type): number {
        pins.digitalWritePin(dht11pin, 0)
        basic.pause(18)
        let i = pins.digitalReadPin(dht11pin)
@@ -1171,6 +1173,158 @@ namespace sensors {
                return 0;
        }
    }
+
+   //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
+   //% subcategory="传感器"
+   //% inlineInputMode=inline
+   //% weight=72
+   export function dht11value_v2(dht11pin: DigitalPin, dht11type: EM_DHT11Type): number {
+//     pins.digitalWritePin(dht11pin, 0)
+//     basic.pause(18)
+//     let i = pins.digitalReadPin(dht11pin)
+//     pins.setPull(dht11pin, PinPullMode.PullUp);
+//     switch (dht11type) {
+//         case 0:
+//             let dhtvalue1 = 0;
+//             let dhtcounter1 = 0;
+//             while (pins.digitalReadPin(dht11pin) == 1);
+//             while (pins.digitalReadPin(dht11pin) == 0);
+//             while (pins.digitalReadPin(dht11pin) == 1);
+//             for (let i = 0; i <= 32 - 1; i++) {
+//                 while (pins.digitalReadPin(dht11pin) == 0);
+//                 dhtcounter1 = 0
+//                 while (pins.digitalReadPin(dht11pin) == 1) {
+//                     dhtcounter1 += 1;
+//                 }
+//                 if (i > 15) {
+//                     if (dhtcounter1 > 10) {
+//                         dhtvalue1 = dhtvalue1 + (1 << (31 - i));
+//                     }
+//                 }
+//             }
+//    // serial.writeString("DHT11_V2" + "" + dhtvalue1)
+//             return ((dhtvalue1 & 0x0000ffff)>> 8);
+//             break;
+
+//         case 1:
+//             while (pins.digitalReadPin(dht11pin) == 1);
+//             while (pins.digitalReadPin(dht11pin) == 0);
+//             while (pins.digitalReadPin(dht11pin) == 1);
+
+//             let value = 0;
+//             let counter = 0;
+
+//             for (let i = 0; i <= 8 - 1; i++) {
+//                 while (pins.digitalReadPin(dht11pin) == 0);
+//                 counter = 0
+//                 while (pins.digitalReadPin(dht11pin) == 1) {
+//                     counter += 1;
+//                 }
+//                 if (counter > 10) {
+//                     value = value + (1 << (7 - i));
+//                 }
+//             }
+//             return value;
+//         default:
+//             return 0;
+//     }
+    const DHT11_TIMEOUT = 100
+    const buffer = pins.createBuffer(40)
+    const data = [0, 0, 0, 0, 0]
+    let startTime = control.micros()
+
+    if (control.hardwareVersion().slice(0, 1) !== '1') { // V2
+        // TODO: V2 bug
+        pins.digitalReadPin(DigitalPin.P0);
+        pins.digitalReadPin(DigitalPin.P1);
+        pins.digitalReadPin(DigitalPin.P2);
+        pins.digitalReadPin(DigitalPin.P3);
+        pins.digitalReadPin(DigitalPin.P4);
+        pins.digitalReadPin(DigitalPin.P10);
+
+        // 1.start signal
+        pins.digitalWritePin(dht11pin, 0)
+        basic.pause(18)
+
+        // 2.pull up and wait 40us
+        pins.setPull(dht11pin, PinPullMode.PullUp)
+        pins.digitalReadPin(dht11pin)
+        control.waitMicros(40)
+
+        // 3.read data
+        startTime = control.micros()
+        while (pins.digitalReadPin(dht11pin) === 0) {
+            if (control.micros() - startTime > DHT11_TIMEOUT) break
+        }
+        startTime = control.micros()
+        while (pins.digitalReadPin(dht11pin) === 1) {
+            if (control.micros() - startTime > DHT11_TIMEOUT) break
+        }
+
+        for (let dataBits = 0; dataBits < 40; dataBits++) {
+            startTime = control.micros()
+            while (pins.digitalReadPin(dht11pin) === 1) {
+                if (control.micros() - startTime > DHT11_TIMEOUT) break
+            }
+            startTime = control.micros()
+            while (pins.digitalReadPin(dht11pin) === 0) {
+                if (control.micros() - startTime > DHT11_TIMEOUT) break
+            }
+            control.waitMicros(28)
+            if (pins.digitalReadPin(dht11pin) === 1) {
+                buffer[dataBits] = 1
+            }
+        }
+    } else { // V1
+        // 1.start signal
+        pins.digitalWritePin(dht11pin, 0)
+        basic.pause(18)
+
+        // 2.pull up and wait 40us
+        pins.setPull(dht11pin, PinPullMode.PullUp)
+        pins.digitalReadPin(dht11pin)
+        control.waitMicros(40)
+
+        // 3.read data
+        if (pins.digitalReadPin(dht11pin) === 0) {
+            while (pins.digitalReadPin(dht11pin) === 0);
+            while (pins.digitalReadPin(dht11pin) === 1);
+
+            for (let dataBits = 0; dataBits < 40; dataBits++) {
+                while (pins.digitalReadPin(dht11pin) === 1);
+                while (pins.digitalReadPin(dht11pin) === 0);
+                control.waitMicros(28)
+                if (pins.digitalReadPin(dht11pin) === 1) {
+                    buffer[dataBits] = 1
+                }
+            }
+        }
+    }
+
+    for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < 8; j++) {
+            if (buffer[8 * i + j] === 1) {
+                data[i] += 2 ** (7 - j)
+            }
+        }
+    }
+
+    if (((data[0] + data[1] + data[2] + data[3]) & 0xff) === data[4]) {
+        dht11Humidity = data[0] + data[1] * 0.1
+        dht11Temperature = data[2] + data[3] * 0.1
+    }
+
+    switch (dht11type) {
+        case DHT11Type.DHT11_temperature_C:
+            return dht11Temperature
+        case EM_DHT11Type.DHT11_temperature_F:
+            return (dht11Temperature * 1.8) + 32
+        case EM_DHT11Type.DHT11_humidity:
+            return dht11Humidity
+    }
+
+
+}
 
 
 /**
@@ -1239,64 +1393,6 @@ namespace sensors {
        }
        return result;
      }
-
-   //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
-   //% subcategory="传感器"
-   //% inlineInputMode=inline
-   //% weight=72
-   export function dht11value_v2(dht11pin: DigitalPin, dht11type: DHT11Type): number {
-       pins.digitalWritePin(dht11pin, 0)
-       basic.pause(18)
-       let i = pins.digitalReadPin(dht11pin)
-       pins.setPull(dht11pin, PinPullMode.PullUp);
-       switch (dht11type) {
-           case 0:
-               let dhtvalue1 = 0;
-               let dhtcounter1 = 0;
-               while (pins.digitalReadPin(dht11pin) == 1);
-               while (pins.digitalReadPin(dht11pin) == 0);
-               while (pins.digitalReadPin(dht11pin) == 1);
-               for (let i = 0; i <= 32 - 1; i++) {
-                   while (pins.digitalReadPin(dht11pin) == 0);
-                   dhtcounter1 = 0
-                   while (pins.digitalReadPin(dht11pin) == 1) {
-                       dhtcounter1 += 1;
-                   }
-                   if (i > 15) {
-                       if (dhtcounter1 > 10) {
-                           dhtvalue1 = dhtvalue1 + (1 << (31 - i));
-                       }
-                   }
-               }
-      // serial.writeString("DHT11_V2" + "" + dhtvalue1)
-               return ((dhtvalue1 & 0x0000ffff)>> 8);
-               break;
-
-           case 1:
-               while (pins.digitalReadPin(dht11pin) == 1);
-               while (pins.digitalReadPin(dht11pin) == 0);
-               while (pins.digitalReadPin(dht11pin) == 1);
-
-               let value = 0;
-               let counter = 0;
-
-               for (let i = 0; i <= 8 - 1; i++) {
-                   while (pins.digitalReadPin(dht11pin) == 0);
-                   counter = 0
-                   while (pins.digitalReadPin(dht11pin) == 1) {
-                       counter += 1;
-                   }
-                   if (counter > 10) {
-                       value = value + (1 << (7 - i));
-                   }
-               }
-               return value;
-           default:
-               return 0;
-       }
-   }
-
-   
    
    function i2cread(addr: number, reg: number) {
        pins.i2cWriteNumber(addr, reg, NumberFormat.UInt8BE);
