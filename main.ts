@@ -1146,8 +1146,8 @@ namespace sensors {
        rus04_rgb(pin, 0, index, rgb, effect);
    }
 
-   let em_dht11Temperature;
-   let em_dht11Humidity;
+   let em_dht11Temperature = 0;
+   let em_dht11Humidity = 0;
    /**
     * 
     * @param dht11pin DigitalPin.P13
