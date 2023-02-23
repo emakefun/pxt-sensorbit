@@ -1150,7 +1150,7 @@ namespace sensors {
    let em_dht11Humidity = 0;
    /**
     * 
-    * @param dht11pin DigitalPin.P13
+    * @param dht11pin eg: DigitalPin.P13
     * @param dht11type 
     * @returns 
     */
