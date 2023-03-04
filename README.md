@@ -280,10 +280,10 @@
 - 初始化传感器引脚，判断黑线的存在，存在则显示四路循迹传感器值，不存在则显示笑脸
 ## <a id="jump_3">显示器</a>
 ### <a id="jump_3_1">1. LED灯</a>
-- 通过引脚控制灯的状态（打开或关闭）
-- ![LEDlights1.png](sensorbit/LEDlights1.png)
-- <a href="https://makecode.microbit.org/_AH6JqT4trAid">示例程序</a>
-- ![LEDlights2.png](sensorbit/LEDlights2.png) 
+- 通过引脚控制灯的状态（打开或关闭）  
+![LEDlights1.png](sensorbit/LEDlights1.png)
+- <a href="https://makecode.microbit.org/_AH6JqT4trAid">示例程序</a>  
+![LEDlights2.png](sensorbit/LEDlights2.png) 
 - 实现对LED灯状态的控制功能,LED灯交替打开和关闭
 ### <a id="jump_3_2">2. RGB三色灯</a>
 - 初始化引脚
