@@ -57,11 +57,13 @@ enum rgb_ColorEffect {
     Flash = 0x03
 }
 
-enum DHT11Type {
+enum EM_DHT11Type {
     //% block="temperature(℃)" 
-    DHT11_temperature_C = 0,
+    EM_DHT11_temperature_C = 0,
+    //% block="temperature(℉)"
+    EM_DHT11_temperature_F = 1,
     //% block="humidity(0~100)"
-    DHT11_humidity = 1,
+    EM_DHT11_humidity = 2
 }
 
 enum _selectpin {
@@ -258,43 +260,14 @@ namespace sensors {
         let row = pins.analogReadPin(pin)
         return row
     }
-
-    // let _Apin = 0
-    // let _Dpin = 0
-    // let _Bpin = 0
-
-    // //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" group="旋转编码器模块"
-    // //% weight=70
-    // //% subcategory="基础输入模块"
-    // export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
-    //     _Apin = pina
-    //     _Bpin = pinb
-    //     _Dpin = pind
-    // }
-
-    // //% blockId=pinsRead block="select pin %selectpin" group="旋转编码器模块"
-    // //% weight=69
-    // //% subcategory="基础输入模块"
-    // export function pinsRead(selectpin: _selectpin): number {
-    //     let a
-    //     if (selectpin == 0)
-    //         a = _Apin
-    //     else if (selectpin == 1)
-    //         a = _Bpin
-    //     else if (selectpin == 2)
-    //         a = _Dpin
-    //     pins.digitalWritePin(a, 0)
-    //     if (pins.digitalReadPin(a) == 1) {
-    //         return 1;
-    //     } else {
-    //         return 0;
-    //     }
-    //     //return pins.digitalReadPin(a)
-    // }
    
     let _SDO = 0
     let _SCL = 0
-
+    /**
+     * 
+     * @param SDO SDO  eg: DigitalPin.P13 
+     * @param SCL SCL  eg: DigitalPin.P14
+     */
     //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="矩阵键盘模块"
     //% weight=71
     //% subcategory="基础输入模块"
@@ -347,7 +320,12 @@ namespace sensors {
     let Xpin = 0
     let Ypin = 0
     let Bpin = 0
-
+    /**
+     * 
+     * @param pinx eg: AnalogPin.P0
+     * @param piny eg: AnalogPin.P1
+     * @param pinb eg: DigitalPin.P8
+     */
     //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
     //% weight=70
     //% subcategory="基础输入模块"
@@ -383,6 +361,11 @@ namespace sensors {
 
     let _DIO = 0
     let _CLK = 0
+    /**
+     * 
+     * @param DIO eg: DigitalPin.P13
+     * @param CLK eg: DigitalPin.P14
+     */
     //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="触摸钢琴模块 V1"
     //% weight=70
     //% subcategory="基础输入模块"
@@ -429,7 +412,11 @@ namespace sensors {
     }	
     let _pianoDIO = 0
     let _pianoCLK = 0
-
+    /**
+     * 
+     * @param pianoDIO eg: DigitalPin.P13
+     * @param pianoCLK eg: DigitalPin.P14
+     */
     //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块 V2"
     //% weight=61
     //% subcategory="基础输入模块"
@@ -750,6 +737,14 @@ namespace sensors {
      return pins.analogReadPin(pin)
  }
 
+ /**
+  * get distance
+  * @param trig eg: DigitalPin.P13
+  * @param echo eg: DigitalPin.P14
+  * @param unit 
+  * @param maxCmDistance 
+  * @returns 
+  */
    //% blockId="sensor_ping" block="ping trig %trig|echo %echo|unit %unit" group="普通超声波传感器"
    //% weight=75
    //% inlineInputMode=inline
@@ -885,7 +880,7 @@ namespace sensors {
 
    /**
     * Get RUS04 distance
-    * @param pin Microbit ultrasonic pin; eg: P2
+    * @param pin Microbit ultrasonic pin; eg: DigitalPin.P2
    */
    //% blockId=Ultrasonic block="Read RgbUltrasonic Distance at pin %pin(cm)"  group="RGB超声波传感器"
    //% weight=76
@@ -1015,6 +1010,7 @@ namespace sensors {
        }
    }
    
+  
    export function board_rus04_rgb(pin: DigitalPin, offset: number, index: number, rgb: number, effect: number): void {
        let start = 0, end = 0;
        if (!board_emRGBLight) {
@@ -1101,6 +1097,14 @@ namespace sensors {
        }
 }
 
+  /**
+    * set RUS04 color
+    * @param pin RGB PIN eg:DigitalPin.P16
+    * @param offset 
+    * @param index  index
+    * @param rgb color
+    * @param effect effect
+    */
    //% blockId="sensorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波传感器"
    //% weight=75
    //% inlineInputMode=inline
@@ -1109,68 +1113,116 @@ namespace sensors {
        rus04_rgb(pin, 0, index, rgb, effect);
    }
 
+   let em_dht11Temperature = 0;
+   let em_dht11Humidity = 0;
    /**
-    * Send a ping and get the echo time (in microseconds) as a result
-    * @param trig tigger pin
-    * @param echo echo pin
-    * @param unit desired conversion unit
-    * @param maxCmDistance maximum distance in centimeters (default is 500)
+    * 
+    * @param dht11pin  dht11 pin eg:DigitalPin.P13
+    * @param dht11type 
+    * @returns 
     */
- 
-   //% blockId="readdht11" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
+   //% blockId="dht11value" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
    //% subcategory="传感器"
    //% inlineInputMode=inline
-   //% weight=73
-   export function dht11value(dht11pin: DigitalPin, dht11type: DHT11Type): number {
-       pins.digitalWritePin(dht11pin, 0)
-       basic.pause(18)
-       let i = pins.digitalReadPin(dht11pin)
-       pins.setPull(dht11pin, PinPullMode.PullUp);
-       switch (dht11type) {
-           case 0:
-               let dhtvalue1 = 0;
-               let dhtcounter1 = 0;
-               while (pins.digitalReadPin(dht11pin) == 1);
-               while (pins.digitalReadPin(dht11pin) == 0);
-               while (pins.digitalReadPin(dht11pin) == 1);
-               for (let i = 0; i <= 32 - 1; i++) {
-                   while (pins.digitalReadPin(dht11pin) == 0);
-                   dhtcounter1 = 0
-                   while (pins.digitalReadPin(dht11pin) == 1) {
-                       dhtcounter1 += 1;
-                   }
-                   if (i > 15) {
-                       if (dhtcounter1 > 2) {
-                           dhtvalue1 = dhtvalue1 + (1 << (31 - i));
-                       }
-                   }
-               }
-               return ((dhtvalue1 & 0x0000ff00) >> 8);
-               break;
+   //% weight=72
+   export function dht11value(dht11pin: DigitalPin, dht11type: EM_DHT11Type): number {
+    const DHT11_TIMEOUT = 100
+    const buffer = pins.createBuffer(40)
+    const data = [0, 0, 0, 0, 0]
+    let startTime = control.micros()
 
-           case 1:
-               while (pins.digitalReadPin(dht11pin) == 1);
-               while (pins.digitalReadPin(dht11pin) == 0);
-               while (pins.digitalReadPin(dht11pin) == 1);
+    if (control.hardwareVersion().slice(0, 1) !== '1') { // V2
+        // TODO: V2 bug
+        pins.digitalReadPin(DigitalPin.P0);
+        pins.digitalReadPin(DigitalPin.P1);
+        pins.digitalReadPin(DigitalPin.P2);
+        pins.digitalReadPin(DigitalPin.P3);
+        pins.digitalReadPin(DigitalPin.P4);
+        pins.digitalReadPin(DigitalPin.P10);
 
-               let value = 0;
-               let counter = 0;
+        // 1.start signal
+        pins.digitalWritePin(dht11pin, 0)
+        basic.pause(18)
 
-               for (let i = 0; i <= 8 - 1; i++) {
-                   while (pins.digitalReadPin(dht11pin) == 0);
-                   counter = 0
-                   while (pins.digitalReadPin(dht11pin) == 1) {
-                       counter += 1;
-                   }
-                   if (counter > 3) {
-                       value = value + (1 << (7 - i));
-                   }
-               }
-               return value;
-           default:
-               return 0;
-       }
-   }
+        // 2.pull up and wait 40us
+        pins.setPull(dht11pin, PinPullMode.PullUp)
+        pins.digitalReadPin(dht11pin)
+        control.waitMicros(40)
+
+        // 3.read data
+        startTime = control.micros()
+        while (pins.digitalReadPin(dht11pin) === 0) {
+            if (control.micros() - startTime > DHT11_TIMEOUT) break
+        }
+        startTime = control.micros()
+        while (pins.digitalReadPin(dht11pin) === 1) {
+            if (control.micros() - startTime > DHT11_TIMEOUT) break
+        }
+
+        for (let dataBits = 0; dataBits < 40; dataBits++) {
+            startTime = control.micros()
+            while (pins.digitalReadPin(dht11pin) === 1) {
+                if (control.micros() - startTime > DHT11_TIMEOUT) break
+            }
+            startTime = control.micros()
+            while (pins.digitalReadPin(dht11pin) === 0) {
+                if (control.micros() - startTime > DHT11_TIMEOUT) break
+            }
+            control.waitMicros(28)
+            if (pins.digitalReadPin(dht11pin) === 1) {
+                buffer[dataBits] = 1
+            }
+        }
+    } else { // V1
+        // 1.start signal
+        pins.digitalWritePin(dht11pin, 0)
+        basic.pause(18)
+
+        // 2.pull up and wait 40us
+        pins.setPull(dht11pin, PinPullMode.PullUp)
+        pins.digitalReadPin(dht11pin)
+        control.waitMicros(40)
+
+        // 3.read data
+        if (pins.digitalReadPin(dht11pin) === 0) {
+            while (pins.digitalReadPin(dht11pin) === 0);
+            while (pins.digitalReadPin(dht11pin) === 1);
+
+            for (let dataBits = 0; dataBits < 40; dataBits++) {
+                while (pins.digitalReadPin(dht11pin) === 1);
+                while (pins.digitalReadPin(dht11pin) === 0);
+                control.waitMicros(28)
+                if (pins.digitalReadPin(dht11pin) === 1) {
+                    buffer[dataBits] = 1
+                }
+            }
+        }
+    }
+
+    for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < 8; j++) {
+            if (buffer[8 * i + j] === 1) {
+                data[i] += 2 ** (7 - j)
+            }
+        }
+    }
+
+    if (((data[0] + data[1] + data[2] + data[3]) & 0xff) === data[4]) {
+        em_dht11Humidity = data[0] + data[1] * 0.1
+        em_dht11Temperature = data[2] + data[3] * 0.1
+    }
+
+    switch (dht11type) {
+        case EM_DHT11Type.EM_DHT11_temperature_C:
+            return em_dht11Temperature
+        case EM_DHT11Type.EM_DHT11_temperature_F:
+            return (em_dht11Temperature * 1.8) + 32
+        case EM_DHT11Type.EM_DHT11_humidity:
+            return em_dht11Humidity
+    }
+
+
+}
 
 
 /**
@@ -1195,6 +1247,13 @@ namespace sensors {
      let outPin4 = 0;
      /**
       * 四路循迹传感器初始化
+      */
+     /**
+      * 
+      * @param pin1 pin1 eg:DigitalPin.P12
+      * @param pin2 pin2 eg:DigitalPin.P13
+      * @param pin3 pin3 eg:DigitalPin.P14
+      * @param pin4 pin4 eg:DigitalPin.P16
       */
      //% blockId=four_sensor_tracking block="four_sensor_tracking pin1 |digitalpin %pin1 pin2 |digitalpin %pin2 |pin3 |digitalpin %pin3 |pin4 |digitalpin %pin4"  group="四路循迹传感器"
      //% inlineInputMode=inline
@@ -1239,64 +1298,6 @@ namespace sensors {
        }
        return result;
      }
-
-   //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
-   //% subcategory="传感器"
-   //% inlineInputMode=inline
-   //% weight=72
-   export function dht11value_v2(dht11pin: DigitalPin, dht11type: DHT11Type): number {
-       pins.digitalWritePin(dht11pin, 0)
-       basic.pause(18)
-       let i = pins.digitalReadPin(dht11pin)
-       pins.setPull(dht11pin, PinPullMode.PullUp);
-       switch (dht11type) {
-           case 0:
-               let dhtvalue1 = 0;
-               let dhtcounter1 = 0;
-               while (pins.digitalReadPin(dht11pin) == 1);
-               while (pins.digitalReadPin(dht11pin) == 0);
-               while (pins.digitalReadPin(dht11pin) == 1);
-               for (let i = 0; i <= 32 - 1; i++) {
-                   while (pins.digitalReadPin(dht11pin) == 0);
-                   dhtcounter1 = 0
-                   while (pins.digitalReadPin(dht11pin) == 1) {
-                       dhtcounter1 += 1;
-                   }
-                   if (i > 15) {
-                       if (dhtcounter1 > 10) {
-                           dhtvalue1 = dhtvalue1 + (1 << (31 - i));
-                       }
-                   }
-               }
-      // serial.writeString("DHT11_V2" + "" + dhtvalue1)
-               return ((dhtvalue1 & 0x0000ffff)>> 8);
-               break;
-
-           case 1:
-               while (pins.digitalReadPin(dht11pin) == 1);
-               while (pins.digitalReadPin(dht11pin) == 0);
-               while (pins.digitalReadPin(dht11pin) == 1);
-
-               let value = 0;
-               let counter = 0;
-
-               for (let i = 0; i <= 8 - 1; i++) {
-                   while (pins.digitalReadPin(dht11pin) == 0);
-                   counter = 0
-                   while (pins.digitalReadPin(dht11pin) == 1) {
-                       counter += 1;
-                   }
-                   if (counter > 10) {
-                       value = value + (1 << (7 - i));
-                   }
-               }
-               return value;
-           default:
-               return 0;
-       }
-   }
-
-   
    
    function i2cread(addr: number, reg: number) {
        pins.i2cWriteNumber(addr, reg, NumberFormat.UInt8BE);
@@ -1385,11 +1386,17 @@ namespace sensors {
         pins.digitalWritePin(pin,status)
     }
 
-   
+    /**
+     * 
+     * @param _INA  ina eg: AnalogPin.P1
+     * @param _INB  inb eg: AnalogPin.P2
+     * @param turn 
+     * @param speed 
+     */
     //% blockId=actuator_motor_run block="actuator_motor_run INA | %_INA | INB | %_INB | direction | %turn | speed %speed"  group="直流电机"
     //% weight=70
     //% inlineInputMode=inline
-    //% speed.min=0 speed.max=255
+    //% speed.min=0 speed.max=1023
     //% subcategory="执行器"
     export function actuator_motor_run(_INA: AnalogPin, _INB: AnalogPin, turn: run_turn, speed: number): void {
 
@@ -1414,10 +1421,16 @@ namespace sensors {
     let _Gpins = 0
     let _Bpins = 0
 
+    /**
+     * 
+     * @param _GPin eg: AnalogPin.P0
+     * @param _BPin eg: AnalogPin.P1
+     * @param _RPin eg: AnalogPin.P2
+     */
     //% blockId=setrgbpin block="set RGBlight pin|r %_RPin|g %_GPin|b %_BPin"   group="三色灯"
     //% weight=71
     //% subcategory="显示器"
-    export function setRGBpin(_GPin: DigitalPin, _BPin: DigitalPin, _RPin: DigitalPin): void {
+    export function setRGBpin(_GPin: AnalogPin, _BPin: AnalogPin, _RPin: AnalogPin): void {
         _Gpins = _GPin
         _Bpins = _BPin
         _Rpins = _RPin
@@ -1435,12 +1448,15 @@ namespace sensors {
         pins.analogWritePin(_Bpins,b_color)
     }
 
-    /*
-     * traffic light
-     */
     let rpins = 0
     let gpins = 0
     let ypins = 0
+    /**
+     * 
+     * @param GPin eg: DigitalPin.P15
+     * @param YPin eg: DigitalPin.P2
+     * @param RPin eg: DigitalPin.P13
+     */
     //% blockId=setpin block="set light pin|r %RPin|g %GPin|y %YPin"   group="交通灯"
     //% weight=71
     //% subcategory="显示器"
@@ -1606,31 +1622,7 @@ namespace sensors {
         pins.i2cWriteNumber(DISPLAY_I2C_ADDRESS + (bit % 4), d, NumberFormat.Int8BE)
     }
 
-    // //% blockId="TM650_ON" block="turn on display" group="TM1650数码管"
-    // //% weight=50 blockGap=8
-    // //% subcategory="显示器"
-    // export function on() {
-    //     cmd(_intensity * 16 + 1)
-    // }
-
-    // //% blockId="TM650_OFF" block="turn off display" group="TM1650数码管"
-    // //% weight=50 blockGap=8
-    // //% subcategory="显示器"
-    // export function off() {
-    //     _intensity = 0
-    //     cmd(0)
-    // }
-
-    // //% blockId="TM650_CLEAR" block="clear display" group="TM1650数码管"
-    // //% weight=40 blockGap=8
-    // //% subcategory="显示器"
-    // export function clear() {
-    //     dat(0, 0)
-    //     dat(1, 0)
-    //     dat(2, 0)
-    //     dat(3, 0)
-    //     dbuf = [0, 0, 0, 0]
-    // }
+   
     //% blockId="TM650_Control" block="display control" group="TM1650数码管"
     //% weight=40 blockGap=8
     //% subcategory="显示器"
@@ -1936,6 +1928,14 @@ namespace sensors {
         }
     }
 
+    /**
+     * 
+     * @param clk clk eg: DigitalPin.P13
+     * @param dio DIO eg: DigitalPin.P14
+     * @param intensity  eg：10
+     * @param count  eg: 4
+     * @returns 
+     */
     //% weight=99 
     //% blockId="TM1637_create" block="CLK %clk|DIO %dio|intensity %intensity|LED count %count"  group="TM1637数码管"
     //% inlineInputMode=inline
