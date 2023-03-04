@@ -316,7 +316,7 @@
 - ![LCD1602display6.png](sensorbit/LCD1602display6.png)
 - <a href="https://makecode.microbit.org/_f4Mccy84xdcC">示例程序</a>
 - ![LCD1602display7.png](sensorbit/LCD1602display7.png)
-- 设置默认地址，执行循环，打开LCD1602显示屏和背光灯，在1行第一列显示0，第二列显示l，第2行第一列显示字符串“Hello World"
+- 设置默认地址，执行循环，打开LCD1602显示屏和背光灯，在第1行第一列显示0，第二列显示l，第2行第一列显示字符串“Hello World"
 1s后关闭屏幕和背光灯，1s后循环重新开始
 ### <a id="jump_3_5">5. TM1637数码管</a>
 - 设置数码管引脚显示亮度，显示位数
