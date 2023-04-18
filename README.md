@@ -249,7 +249,7 @@
 - ![RGBultrasonicsensor1.png](sensorbit/RGBultrasonicsensor1.png)
 - 通过引脚控制探头RGB颜色和效果
 - ![RGBultrasonicsensor2.png](sensorbit/RGBultrasonicsensor2.png)
-- <a href="https://makecode.microbit.org/_PtqVy7dDj4PJ">示例程序</a>
+- <a href="https://makecode.microbit.org/_Pu0Vuj18R7FL">示例程序</a>
 - ![RGBultrasonicsensor3.png](sensorbit/RGBultrasonicsensor3.png)
 - 实现利用RGB超声波传感器的测距和亮灯的功能
 ### <a id="jump_2_19">19. 普通超声波传感器</a>
